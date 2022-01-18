@@ -1,3 +1,11 @@
+/*
+* Francis Lloyd Colendres
+* flcolendres@myseneca.ca
+* 145498200
+* Jan. 17, 2022
+* I have done all the coding by myself and only copied the code that my professor provided to complete my workshops and assignments.
+*/
+
 #define _CRT_SECURE_NO_WARNINGS
 #include <cstdio>
 #include <iostream>
@@ -7,6 +15,9 @@
 
 using namespace std;
 namespace sdds {
+    const int MAX_NO_OF_WORDS = 500;
+    const int SORT_BY_OCCURANCE = 1;
+    const int SORT_ALPHABETICALLY = 0;
 
     int searchWords(const Word words[], int num, const char word[]) {
         int i;
