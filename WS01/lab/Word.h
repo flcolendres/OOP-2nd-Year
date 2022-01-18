@@ -6,8 +6,8 @@
 * I have done all the coding by myself and only copied the code that my professor provided to complete my workshops and assignments.
 */
 
-#ifndef NAMESPACE_WORD_H 
-#define NAMESPACE_WORD_H
+#ifndef SDDS_WORD_H 
+#define SDDS_WORD_H
 namespace sdds {
 	const int MAX_WORD_LEN = 21;
 
