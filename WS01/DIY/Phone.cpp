@@ -15,7 +15,7 @@ namespace sdds {
 
 	// displays title
 	void title(const char* programTitle) {
-		cout << programTitle << " phone directory search" << endl << "-------------------------------------------------------" << endl;
+		cout << programTitle << " phone direcotry search" << endl << "-------------------------------------------------------" << endl;
 	}
 	// displays thank you message.
 	void thankYou(const char* programTitle) {
