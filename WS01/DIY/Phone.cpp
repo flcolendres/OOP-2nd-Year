@@ -19,7 +19,7 @@ namespace sdds {
 	}
 	// displays thank you message.
 	void thankYou(const char* programTitle) {
-		cout << "Thank you for using " << programTitle << " direcotry." << endl;
+		cout << "Thank you for using " << programTitle << " directory." << endl;
 	}
 	// runs the phone directory appication
 	void phoneDir(const char* programTitle, const char* fileName) {
@@ -27,6 +27,7 @@ namespace sdds {
 		Contacts contacts[MAX_NO_OF_CONTACTS] = { 0 };
 		List contactList = { contacts };
 		FILE* fptr = fopen(fileName, "r");
+		title(programTitle);
 
 		if (fptr) {
 			while (fscanf(fptr, "%[^\t]\t%s\t%s\t%s\n",
@@ -38,7 +39,6 @@ namespace sdds {
 			}
 			fflush(fptr);
 			fclose(fptr);
-			title(programTitle);
 			enterProgram(&contactList);
 		}
 		else {
