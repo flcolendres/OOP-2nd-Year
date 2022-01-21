@@ -1,0 +1,17 @@
+/*
+* Francis Lloyd Colendres
+* flcolendres@myseneca.ca
+* 145498200
+* Jan. 21, 2022
+* I have done all the coding by myself and only copied the code that my professor provided to complete my workshops and assignments.
+*/
+
+Transitioning from C to C++ is not as difficult as I thought it would be. However,I did have some challenges because I spent majority of my winter break doing activities
+other than coding. Knowing basic TortoiseGit actions was one of the main things that I learned in this workshop. I was able to get used to the certain actions because of
+this workshop. In addition, I learned the safeguarding techniques on the header files to prevent multiple inclusions in a module. Fardad has done a great job with making
+our transition from C to C++ easier. One of the syntax that I learned was cout and cin. It was easy to remember because they are the equivalent of printf and scanf in C.
+Testing my program was another factor that I learned in this class. I learned to test my program using the Matrix and Visual Studio. There were coding conventions that I learned
+which maintains the modularity of the program. For example, I learned the kind of #includes to add, the namespace to use, and where to declare my constant values. I think
+the most difficult part of this workshop is Part 2 because I had to refresh my memory on the concept of accessing files using C++. On a brighter note, the cStrTools.cpp
+helper functions saved me some time to finish the workshop. At the end of workshop 1, I learned a lot of new information and refreshed my understanding in C. Hopefully,
+I can easily understand the upcoming topics in the following week.
