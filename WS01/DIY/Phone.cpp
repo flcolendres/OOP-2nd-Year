@@ -19,7 +19,7 @@ namespace sdds {
 	}
 	// displays thank you message.
 	void thankYou(const char* programTitle) {
-		cout << "Thank you for using " << programTitle << " directory." << endl;
+		cout << "Thank you for using " << programTitle << " direcotry." << endl;
 	}
 	// runs the phone directory appication
 	void phoneDir(const char* programTitle, const char* fileName) {
