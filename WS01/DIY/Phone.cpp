@@ -30,10 +30,10 @@ namespace sdds {
 
 		if (fptr) {
 			while (fscanf(fptr, "%[^\t]\t%s\t%s\t%s\n",
-				&contacts[i].name,
-				&contacts[i].area,
-				&contacts[i].prefix,
-				&contacts[i].number) == 4) {
+				contacts[i].name,
+				contacts[i].area,
+				contacts[i].prefix,
+				contacts[i].number) == 4) {
 				i++;
 			}
 			fflush(fptr);
