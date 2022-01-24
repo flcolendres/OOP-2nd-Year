@@ -2,10 +2,9 @@
 * Francis Lloyd Colendres
 * flcolendres@myseneca.ca
 * 145498200
-* Jan. 17, 2022
+* Jan. 23, 2022
 * I have done all the coding by myself and only copied the code that my professor provided to complete my workshops and assignments.
 */
-
 #include "cStrTools.h"
 
 namespace sdds {
@@ -83,5 +82,22 @@ namespace sdds {
         }
         des[j] = 0;
     }
-
+    // reads a cString upto maxSize characters or upto the delimiter character,
+    // whichever comes first (skipping leading white space characters but accpting
+    // spaces in the cString)
+    void read(char* cString, unsigned int maxSize, char delimiter) {
+        char ch = 0;
+        unsigned int i = 0;
+        // skipping leading white space chars
+        do {
+            cin.get(ch); // reads one character from input
+        } while (isSpace(ch));
+        // read char by char util hitting delimiter or maxSize
+        for (i = 0; i < maxSize && ch != delimiter;i++) {
+            cString[i] = ch;
+            // read the cString stopping at the size limit
+            if (i < maxSize - 1) cin.get(ch);
+        }
+        cString[i] = 0; // make sure the cString is null terminated
+    }
 }
