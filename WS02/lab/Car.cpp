@@ -27,5 +27,37 @@ namespace sdds {
 		carArrSize = allSize = allocSize;
 		cars = new Car[allSize];
 	}
+	void deallocate(Car& C) {
+		delete[] C.makeAndModel;
+		C.makeAndModel = nullptr;
+	}
+	bool read(Car& C) {
+		bool valid = false;
+		char cString[60 + 1];
+		read(cString, 60 + 1, ',');
+		if (C.makeAndModel != "X") {
+			valid = true;
+			C.makeAndModel = cString;
+			read(C.licensePlate, 8 + 1, ',');
+			cin >> C.time;
+		}
+		return valid;
+	}
+	void print(const Car& C) {
+		cout << C.time << C.makeAndModel << C.licensePlate << endl;
+	}
+	void record(const Car& C) {
+		int i;
 
+		if (numOfCars == carArrSize) {
+			Car* tempCars = new Car[numOfCars + carArrSize];
+			for (i = 0; i < carArrSize; i++){
+				tempCars[i] = cars[i];
+			}
+			delete cars;
+			cars = nullptr;
+			cars = tempCars;
+		}
+
+	}
 }

@@ -19,7 +19,8 @@ namespace sdds {
 	int isAlpha(char ch);
 	int isSpace(char ch);
 	void trim(char word[]);
-	void toLowerCaseAndCopy(char des[], const char source[]);
+	void toLowerCaseAndCopy(char des[], const char source[]);    
+	void read(char* cString, unsigned int maxSize, char delimiter);
 
 }
 #endif

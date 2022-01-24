@@ -11,7 +11,7 @@
 namespace sdds {
 
 	struct Car {
-		char Car[8 + 1];
+		char licensePlate[8 + 1];
 		char* makeAndModel;
 		int time;
 	};
@@ -20,6 +20,8 @@ namespace sdds {
 	void initialize(int allocSize);
 	void deallocate(Car& C);
 	bool read(Car& C);
+	void print(const Car& C);
+	void record(const Car& C);
 
 }
 #endif
