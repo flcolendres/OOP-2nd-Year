@@ -45,7 +45,7 @@ namespace sdds {
 		return valid;
 	}
 	void print(const Car& C) {
-		cout << C.time << ": " << C.makeAndModel << ", " << C.licensePlate << endl;
+		cout << C.time << ": " << C.makeAndModel << "," << C.licensePlate << endl;
 	}
 	void record(const Car& C) {
 		int i;
