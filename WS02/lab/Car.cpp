@@ -51,13 +51,13 @@ namespace sdds {
 		int i;
 
 		if (numOfCars == carArrSize) {
-			Car* tempCars = new Car[numOfCars + carArrSize];
-			for (i = 0; i < carArrSize; i++) {
+			Car* tempCars = new Car[carArrSize + allSize];
+			for (i = 0; i < numOfCars; i++) {
 				tempCars[i] = cars[i];
 			}
 			delete[] cars;
 			cars = tempCars;
-			carArrSize += numOfCars;
+			carArrSize += allSize;
 		}
 		cars[numOfCars] = C;
 		numOfCars++;
@@ -69,6 +69,7 @@ namespace sdds {
 			print(cars[i]);
 			deallocate(cars[i]);
 		}
+		delete[] cars;
 		cars = nullptr;
 	}
 }
