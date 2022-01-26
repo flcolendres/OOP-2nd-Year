@@ -13,7 +13,7 @@
 using namespace std;
 namespace sdds {
 
-	Car* cars = new Car;
+	Car* cars;
 	int allSize;
 	int numOfCars;
 	int carArrSize;
