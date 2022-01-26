@@ -22,6 +22,7 @@ namespace sdds {
 	bool read(Car& C);
 	void print(const Car& C);
 	void record(const Car& C);
+	void endOfDay();
 
 }
 #endif

@@ -13,14 +13,14 @@
 using namespace std;
 namespace sdds {
 
-	Car* cars;
+	Car* cars = new Car;
 	int allSize;
 	int numOfCars;
 	int carArrSize;
 
 	void VBPLE_Title() {
-		cout << "Vehicle Border Passing Log Entry" << endl << "Enter the data in the following format:" << "Make and model, LicensePlate, MilitaryTime" <<
-			"Exit the program by entering the following:" << endl << "X," << endl;
+		cout << "Vehicle Border Passing Log Entry" << endl << "Enter the data in the following format:" << endl << "Make and model, LicensePlate, MilitaryTime<ENTER>" << endl <<
+			"Exit the program by entering the following:" << endl << "X,<ENTER>" << endl;
 	}
 	void initialize(int allocSize) {
 		numOfCars = 0;
@@ -33,10 +33,11 @@ namespace sdds {
 	}
 	bool read(Car& C) {
 		bool valid = false;
-		char cString[60 + 1];
+		char cString[60 + 1] = { 0 };
 		read(cString, 60 + 1, ',');
-		if (C.makeAndModel != "X") {
+		if (strCmp(cString, "X")) {
 			valid = true;
+			C.makeAndModel = new char[60 + 1];
 			C.makeAndModel = cString;
 			read(C.licensePlate, 8 + 1, ',');
 			cin >> C.time;
@@ -44,20 +45,30 @@ namespace sdds {
 		return valid;
 	}
 	void print(const Car& C) {
-		cout << C.time << C.makeAndModel << C.licensePlate << endl;
+		cout << C.time << ", " << C.makeAndModel << ", " << C.licensePlate << endl;
 	}
 	void record(const Car& C) {
 		int i;
 
 		if (numOfCars == carArrSize) {
 			Car* tempCars = new Car[numOfCars + carArrSize];
-			for (i = 0; i < carArrSize; i++){
+			for (i = 0; i < carArrSize; i++) {
 				tempCars[i] = cars[i];
 			}
-			delete cars;
-			cars = nullptr;
+			delete[] cars;
 			cars = tempCars;
+			carArrSize += numOfCars;
 		}
+		cars[numOfCars] = C;
+		numOfCars++;
 
+	}
+	void endOfDay() {
+		int i;
+		for (i = 0; i < numOfCars; i++) {
+			print(cars[i]);
+			deallocate(cars[i]);
+		}
+		cars = nullptr;
 	}
 }
