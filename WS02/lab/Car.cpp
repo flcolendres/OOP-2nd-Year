@@ -38,14 +38,14 @@ namespace sdds {
 		if (strCmp(cString, "X")) {
 			valid = true;
 			C.makeAndModel = new char[60 + 1];
-			C.makeAndModel = cString;
+			strCpy(C.makeAndModel, cString);
 			read(C.licensePlate, 8 + 1, ',');
 			cin >> C.time;
 		}
 		return valid;
 	}
 	void print(const Car& C) {
-		cout << C.time << ", " << C.makeAndModel << ", " << C.licensePlate << endl;
+		cout << C.time << ": " << C.makeAndModel << ", " << C.licensePlate << endl;
 	}
 	void record(const Car& C) {
 		int i;
