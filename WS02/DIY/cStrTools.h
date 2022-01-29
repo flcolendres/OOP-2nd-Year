@@ -20,7 +20,7 @@ namespace sdds {
 	int isSpace(char ch);
 	void trim(char word[]);
 	void toLowerCaseAndCopy(char des[], const char source[]);    
-	void read(char* cString, unsigned int maxSize, char delimiter);
+	void read(char* cString, unsigned int maxSize, char delimiter = '\n');
 
 }
 #endif
