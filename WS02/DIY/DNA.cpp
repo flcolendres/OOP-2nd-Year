@@ -26,7 +26,10 @@ namespace sdds
 		bool result = false;
 		fp = fopen(filename, "r");
 		if (fp)
+		{
 			result = true;
+			cout << "DNA search program" << endl;
+		}
 
 		return result;
 	}
@@ -89,16 +92,22 @@ namespace sdds
 	void sort()
 	{
 		int i, j;
-		for (i = 0; i < numOfDna - 1; i++) 
+		for (i = 0; i < numOfDna - 1; i++)
 		{
-			for (j = 0; j < numOfDna - i - 1; j++) 
+			for (j = 0; j < numOfDna - i - 1; j++)
 			{
-				if (dnaMatch[j].id > dnaMatch[j + 1].id) 
+				if (dnaMatch[j].id > dnaMatch[j + 1].id)
 				{
 					int a;
+					char b[1000 + 1];
 					a = dnaMatch[j].id;
 					dnaMatch[j].id = dnaMatch[j + 1].id;
 					dnaMatch[j + 1].id = a;
+
+					strCpy(b, dnaMatch[j].dna);
+					strCpy(dnaMatch[j].dna, dnaMatch[j+1].dna);
+					strCpy(dnaMatch[j+1].dna, b);
+
 				}
 			}
 		}
@@ -107,9 +116,12 @@ namespace sdds
 	void displayMatches()
 	{
 		int i;
-		for (i = 0; i < numOfDna; i++) 
-			cout << i + 1 << ") " << dnaMatch[i].id << ": " << endl << dnaMatch[i].dna << endl <<
-				"======================================================================" << endl;
+		
+		cout << numOfDna << " matches found:" << endl;
+
+		for (i = 0; i < numOfDna; i++)
+			cout << i + 1 << ") " << dnaMatch[i].id << ":" << endl << dnaMatch[i].dna << endl <<
+			"======================================================================" << endl;
 
 	}
 	// Deallocates all the dynamic memory within the DNA array elements and the DNA array itself.
@@ -124,8 +136,6 @@ namespace sdds
 		fflush(fp);
 		fclose(fp);
 		fp = NULL;
-		delete[] dnaMatch;
-		dnaMatch = nullptr;
 		cout << "DNA Search Program Closed." << endl;
 	}
 	void initialize(int allocSize)
