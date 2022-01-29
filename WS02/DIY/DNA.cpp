@@ -24,8 +24,8 @@ namespace sdds
 	bool beginSearch(const char* filename)
 	{
 		bool result = false;
-
-		if (fp = fopen(filename, "r"))
+		fp = fopen(filename, "r");
+		if (fp)
 			result = true;
 
 		return result;
@@ -43,7 +43,7 @@ namespace sdds
 		{
 			if (!feof(fp))
 			{
-				fscanf(fp, "%d,%s\n", &id, &dna);
+				fscanf(fp, "%d,%s\n", &id, dna);
 				if (strStr(dna, subDNA))
 				{
 					found = true;
@@ -70,7 +70,7 @@ namespace sdds
 				}
 				if (!feof(fp))
 				{
-					fscanf(fp, "%d,%s\n", &id, &dna);
+					fscanf(fp, "%d,%s\n", &id, dna);
 					if (strStr(dna, subDNA))
 					{
 						dnaMatch[numOfDna].id = id;
