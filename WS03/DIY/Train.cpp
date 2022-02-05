@@ -35,10 +35,10 @@ namespace sdds
 		if (valid != 3)
 		{
 			for (i = 0; i <= MAX_NAME_LEN; i++)
-			m_trainName[i] = 0;
+				m_trainName[i] = 0;
 			// the data values received are invalid and 
-			// therefore requires all variables to be set to safe empty state
-			m_numPeople = -1; 
+			// therefore requires all variables to be set to safe empty state (-1)
+			m_numPeople = -1;
 			m_trainSpeed = -1;
 		}
 
@@ -57,12 +57,10 @@ namespace sdds
 	}
 	bool Train::isSafeEmpty() const
 	{
-		// The OOP244 website suggests to choose one data member to hold the special value that identifies an empty state
-		// Therefore, I only chose the m_numPeople to determine whether the object is a safe empty state
-		// Source: https://ict.senecacollege.ca/~oop244/pages/content/cppst.html#saf
 		bool valid = false;
 
-		if (m_numPeople < 0)
+		// the following conditions defined an object in safe empty state
+		if ((m_numPeople < 0 || m_numPeople > MAX_PEOPLE) && (m_trainSpeed < 0 || m_trainSpeed > MAX_SPEED))
 			valid = true;
 
 		return valid;
@@ -90,13 +88,25 @@ namespace sdds
 	{
 		bool valid = true;
 		int numPeople = getNumberOfPeople() + input;
-		if (numPeople < 0 || numPeople > MAX_PEOPLE)
+		if (isSafeEmpty())
 		{
 			valid = false;
 		}
 		else
 		{
-			m_numPeople = numPeople;
+			if (numPeople > MAX_PEOPLE)
+			{
+				m_numPeople = MAX_PEOPLE;
+			}
+			else if (numPeople < 0)
+			{
+				m_numPeople = 0;
+			}
+			else
+			{
+
+				m_numPeople = numPeople;
+			}
 		}
 
 
@@ -106,27 +116,51 @@ namespace sdds
 	{
 		bool valid = true;
 		double trainSpeed = getSpeed() + input;
-		if (trainSpeed < 0 || trainSpeed > MAX_SPEED) 
+		if (isSafeEmpty())
 		{
 			valid = false;
 		}
 		else
 		{
-			m_trainSpeed = trainSpeed;
+			if (trainSpeed > MAX_SPEED)
+			{
+				m_trainSpeed = MAX_SPEED;
+			}
+			else if (trainSpeed < 0)
+			{
+				m_trainSpeed = 0;
+			}
+			else
+			{
+				m_trainSpeed = trainSpeed;
+			}
 		}
 		return valid;
 	}
 
 	int transfer(Train& trainA, Train& trainB)
 	{
-		int count;
+		int i = -1;
 		int numPeopleA = trainA.getNumberOfPeople();
-		double numPeopleB = trainB.getNumberOfPeople();
-		if (!(numPeopleA < 0 || numPeopleA > MAX_SPEED) && !(numPeopleB < 0 || numPeopleB > MAX_SPEED))
-		{
+		int numPeopleB = trainB.getNumberOfPeople();
+		int totalNumPeople = numPeopleA + numPeopleB;
 
+		if (trainA.isSafeEmpty() || trainB.isSafeEmpty())
+		{
+			i = -1;
 		}
-		return 0;
+		else
+		{
+			for (i = 0; i < numPeopleB && numPeopleA != MAX_PEOPLE && numPeopleA != 0; i++)
+			{
+				trainA.loadPeople(1);
+				trainB.loadPeople(-1);
+				numPeopleA = trainA.getNumberOfPeople();
+				numPeopleB = trainB.getNumberOfPeople();
+			}
+		}
+
+		return i;
 	}
 
 }
