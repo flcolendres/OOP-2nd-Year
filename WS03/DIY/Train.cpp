@@ -32,13 +32,14 @@ namespace sdds
 			valid++;
 		}
 
-		// Sets the objects to a safe empty state
 		if (valid != 3)
 		{
 			for (i = 0; i <= MAX_NAME_LEN; i++)
 			m_trainName[i] = 0;
-			m_numPeople = -1; // safe empty state of numPeople is -1
-			m_trainSpeed = -1; // safe empty state of trainSpeed is -1
+			// the data values received are invalid and 
+			// therefore requires all variables to be set to safe empty state
+			m_numPeople = -1; 
+			m_trainSpeed = -1;
 		}
 
 	}
@@ -87,12 +88,15 @@ namespace sdds
 	}
 	bool Train::loadPeople(int input)
 	{
-		bool valid = false;
+		bool valid = true;
 		int numPeople = getNumberOfPeople() + input;
 		if (numPeople < 0 || numPeople > MAX_PEOPLE)
 		{
+			valid = false;
+		}
+		else
+		{
 			m_numPeople = numPeople;
-			valid = true;
 		}
 
 
@@ -100,14 +104,28 @@ namespace sdds
 	}
 	bool Train::changeSpeed(double input)
 	{
-		bool valid = false;
+		bool valid = true;
 		double trainSpeed = getSpeed() + input;
-		if ()
+		if (trainSpeed < 0 || trainSpeed > MAX_SPEED) 
+		{
+			valid = false;
+		}
+		else
+		{
+			m_trainSpeed = trainSpeed;
+		}
 		return valid;
 	}
 
-	int transfer(Train trainA, Train trainB)
+	int transfer(Train& trainA, Train& trainB)
 	{
+		int count;
+		int numPeopleA = trainA.getNumberOfPeople();
+		double numPeopleB = trainB.getNumberOfPeople();
+		if (!(numPeopleA < 0 || numPeopleA > MAX_SPEED) && !(numPeopleB < 0 || numPeopleB > MAX_SPEED))
+		{
+
+		}
 		return 0;
 	}
 
