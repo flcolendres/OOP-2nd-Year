@@ -138,7 +138,6 @@ namespace sdds
 		}
 		return valid;
 	}
-
 	int transfer(Train& trainA, Train& trainB)
 	{
 		int i;

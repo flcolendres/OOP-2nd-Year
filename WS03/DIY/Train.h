@@ -29,7 +29,7 @@ namespace sdds
 		bool loadPeople(int input);
 		bool changeSpeed(double input);
 	};
-	extern int transfer(Train& trainA, Train& trainB);
+	int transfer(Train& trainA, Train& trainB);
 
 }
 
