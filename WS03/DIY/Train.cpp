@@ -140,7 +140,7 @@ namespace sdds
 
 	int transfer(Train& trainA, Train& trainB)
 	{
-		int i = -1;
+		int i;
 		int numPeopleA = trainA.getNumberOfPeople();
 		int numPeopleB = trainB.getNumberOfPeople();
 		int totalNumPeople = numPeopleA + numPeopleB;
@@ -151,7 +151,7 @@ namespace sdds
 		}
 		else
 		{
-			for (i = 0; i < numPeopleB && numPeopleA != MAX_PEOPLE && numPeopleA != 0; i++)
+			for (i = 0; i < numPeopleB && numPeopleA != MAX_PEOPLE; i++)
 			{
 				trainA.loadPeople(1);
 				trainB.loadPeople(-1);
