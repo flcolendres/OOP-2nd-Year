@@ -32,12 +32,13 @@ namespace sdds
 			valid++;
 		}
 
+		// the data values received are invalid and 
+		// therefore requires all variables to be set to safe empty state (-1)
 		if (valid != 3)
 		{
 			for (i = 0; i <= MAX_NAME_LEN; i++)
 				m_trainName[i] = 0;
-			// the data values received are invalid and 
-			// therefore requires all variables to be set to safe empty state (-1)
+
 			m_numPeople = -1;
 			m_trainSpeed = -1;
 		}
@@ -59,7 +60,7 @@ namespace sdds
 	{
 		bool valid = false;
 
-		// the following conditions defined an object in safe empty state
+		// the following conditions define an object in safe empty state
 		if ((m_numPeople < 0 || m_numPeople > MAX_PEOPLE) && (m_trainSpeed < 0 || m_trainSpeed > MAX_SPEED))
 			valid = true;
 
@@ -143,7 +144,6 @@ namespace sdds
 		int i;
 		int numPeopleA = trainA.getNumberOfPeople();
 		int numPeopleB = trainB.getNumberOfPeople();
-		int totalNumPeople = numPeopleA + numPeopleB;
 
 		if (trainA.isSafeEmpty() || trainB.isSafeEmpty())
 		{
