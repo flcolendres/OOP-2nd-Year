@@ -98,12 +98,27 @@ namespace sdds
 
 	bool CarInventory::isValid() const
 	{
-		return m_type != nullptr && m_brand != nullptr && m_model != nullptr && m_year >= 1990 && m_code > 99 && m_code < 1000 && m_price > 0;
+		bool result = false;
+		if (m_type != nullptr && m_brand != nullptr 
+			&& m_model != nullptr 
+			&& m_year >= 1990 
+			&& m_code > 99 
+			&& m_code < 1000 
+			&& m_price > 0)
+		{
+			result = true;
+		}
+		return result;
 	}
 
 	bool CarInventory::isSimilarTo(const CarInventory& car) const
 	{
-		return m_type == car.m_type && m_brand == car.m_brand && m_model == car.m_model && m_year == car.m_year;
+		bool result = false;
+		if (m_type == car.m_type && m_brand == car.m_brand && m_model == car.m_model && m_year == car.m_year)
+		{
+			result = true;
+		}
+		return result;
 	}
 
 	bool CarInventory::find_similar(CarInventory car[], const int num_cars)
