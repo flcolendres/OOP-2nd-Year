@@ -33,7 +33,7 @@ namespace sdds
 
 	CarInventory::CarInventory(const char* type, const char* brand, const char* model, int year, int code, double price)
 	{
-		m_type = new char[10+1];
+		m_type = new char[10 + 1];
 		strcpy(m_type, type);
 		m_brand = new char[10 + 1];
 		strcpy(m_brand, brand);
@@ -73,18 +73,25 @@ namespace sdds
 
 	void CarInventory::printInfo() const
 	{
-		cout.width(10);
-		cout << "| " << m_type;
-		cout.width(16);
-		cout << "| " << m_brand;
-		cout.width(16);
-		cout << "| " << m_model;
+		cout.setf(ios::left);
+		cout.setf(ios::fixed);
+		cout.precision(2);
+
+		cout << "| ";
+		cout.width(11);
+		cout << m_type << "| ";
+		cout.width(17);
+		cout << m_brand << "| ";
+		cout.width(17);
+		cout << m_model << "| ";
 		cout.width(4);
-		cout << "| " << m_year;
-		cout.width(3);
-		cout << "| " << m_code;
+		cout << m_year << " | ";
+		cout.unsetf(ios::left);
+		cout.width(4);
+		cout << m_code;
+		cout << " | ";
 		cout.width(9);
-		cout << " | " << m_price << " | " << endl;
+		cout << m_price << " | " << endl;
 
 
 	}
@@ -102,9 +109,9 @@ namespace sdds
 	bool CarInventory::find_similar(CarInventory car[], const int num_cars)
 	{
 		bool result = false;
-		for (int i = 0; i < num_cars; i++) 
+		for (int i = 0; i < num_cars; i++)
 		{
-			for (int j = i + 1; j < num_cars; j++) 
+			for (int j = i + 1; j < num_cars; j++)
 			{
 				if (car[i].isSimilarTo(car[j]))
 				{
@@ -115,8 +122,6 @@ namespace sdds
 		return result;
 	}
 
-
-
 	bool find_similar(CarInventory car[], const int num_cars)
 	{
 		bool result = false;
@@ -124,7 +129,7 @@ namespace sdds
 		{
 			for (int j = i + 1; j < num_cars; j++)
 			{
-				if (car[i].isSimilarTo(car[j]))
+				if (car[i].find_similar(&car[j], num_cars))
 				{
 					result = true;
 				}
