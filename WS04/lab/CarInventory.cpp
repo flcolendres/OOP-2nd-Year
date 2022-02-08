@@ -19,7 +19,7 @@ namespace sdds
 		m_year = m_code = 0;
 		m_price = 0;
 	}
-	sdds::CarInventory::CarInventory()
+	CarInventory::CarInventory()
 	{
 		resetInfo();
 	}
