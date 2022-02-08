@@ -91,7 +91,7 @@ namespace sdds
 		cout << m_code;
 		cout << " | ";
 		cout.width(9);
-		cout << m_price << " | " << endl;
+		cout << m_price << " |" << endl;
 
 
 	}
