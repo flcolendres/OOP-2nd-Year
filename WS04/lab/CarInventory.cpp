@@ -29,6 +29,7 @@ namespace sdds
 		delete[] m_type;
 		delete[] m_brand;
 		delete[] m_model;
+		resetInfo();
 	}
 
 	CarInventory::CarInventory(const char* type, const char* brand, const char* model, int year, int code, double price)
@@ -99,11 +100,11 @@ namespace sdds
 	bool CarInventory::isValid() const
 	{
 		bool result = false;
-		if (m_type != nullptr && m_brand != nullptr 
-			&& m_model != nullptr 
-			&& m_year >= 1990 
-			&& m_code > 99 
-			&& m_code < 1000 
+		if (m_type != nullptr && m_brand != nullptr
+			&& m_model != nullptr
+			&& m_year >= 1990
+			&& m_code > 99
+			&& m_code < 1000
 			&& m_price > 0)
 		{
 			result = true;
@@ -114,24 +115,16 @@ namespace sdds
 	bool CarInventory::isSimilarTo(const CarInventory& car) const
 	{
 		bool result = false;
-		if (m_type == car.m_type && m_brand == car.m_brand && m_model == car.m_model && m_year == car.m_year)
+		// check if values are not null before comparing the strings
+		if (m_type != nullptr && m_brand != nullptr
+			&& m_model != nullptr)
 		{
-			result = true;
-		}
-		return result;
-	}
-
-	bool CarInventory::find_similar(CarInventory car[], const int num_cars)
-	{
-		bool result = false;
-		for (int i = 0; i < num_cars; i++)
-		{
-			for (int j = i + 1; j < num_cars; j++)
+			if (!strcmp(m_type, car.m_type) && 
+				!strcmp(m_brand, car.m_brand) && 
+				!strcmp(m_model, car.m_model) && 
+				m_year == car.m_year)
 			{
-				if (car[i].isSimilarTo(car[j]))
-				{
-					result = true;
-				}
+				result = true;
 			}
 		}
 		return result;
@@ -144,7 +137,7 @@ namespace sdds
 		{
 			for (int j = i + 1; j < num_cars; j++)
 			{
-				if (car[i].find_similar(&car[j], num_cars))
+				if (car[i].isSimilarTo(car[j]))
 				{
 					result = true;
 				}

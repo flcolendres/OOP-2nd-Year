@@ -27,9 +27,7 @@ namespace sdds
 		void printInfo() const;
 		bool isValid() const;
 		bool isSimilarTo(const CarInventory& car) const;
-		bool find_similar(CarInventory car[], const int num_cars);
 	};
-
 	bool find_similar(CarInventory car[], const int num_cars);
 
 }
