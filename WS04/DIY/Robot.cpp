@@ -47,7 +47,7 @@ namespace sdds
 		delete[] m_location;
 		m_name = new char[strlen(name) + 1];
 		m_location = new char[strlen(location) + 1];
-		strcpy(m_name, name);
+		strcpy(getName(), name);
 		setLocation(location);
 		m_weight = weight;
 		m_width = width;
@@ -59,7 +59,7 @@ namespace sdds
 
 	Robot& Robot::setLocation(const char* location)
 	{
-		strcpy(m_location, location);
+		strcpy(getLocation(), location);
 		return *this;
 	}
 
