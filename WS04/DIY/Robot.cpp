@@ -47,19 +47,19 @@ namespace sdds
 		delete[] m_location;
 		m_name = new char[strlen(name) + 1];
 		m_location = new char[strlen(location) + 1];
-		strcpy(getName(), name);
-		setLocation(location);
+		strcpy(m_name, name);
+		strcpy(m_location, location);
 		m_weight = weight;
 		m_width = width;
 		m_height = height;
 		m_speed = speed;
-		setDeployed(deployed);
+		m_deployed = deployed;
 		return *this;
 	}
 
 	Robot& Robot::setLocation(const char* location)
 	{
-		strcpy(getLocation(), location);
+		strcpy(m_location, location);
 		return *this;
 	}
 
@@ -137,7 +137,7 @@ namespace sdds
 			else
 				result = i;
 		}
-		if (i == num_robots)
+		if (result == -1)
 		{
 			summary(robot, num_robots, numDeployed(robot, num_robots));
 		}
@@ -155,21 +155,6 @@ namespace sdds
 	}
 	void summary(const Robot robot[], int num_robots, int num_deployed)
 	{
-		int i, fRobot = 0;
-		double speed;
-
-		for (i = 0, speed = 0; i < num_robots; i++)
-		{
-			if (robot[i].isDeployed())
-			{
-				if (robot[i].speed() > speed)
-				{
-					speed = robot[i].speed();
-					fRobot = i;
-				}
-
-			}
-		}
 		border(3);
 		cout.setf(ios::left);
 		cout.width(78);
@@ -182,7 +167,7 @@ namespace sdds
 		cout.width(56);
 		cout << "|" << endl;
 		border(2);
-		robot[fRobot].display();
+		robot[fRobot(robot, num_robots)].display();
 		border(3);
 
 	}
@@ -210,6 +195,24 @@ namespace sdds
 			cout.unsetf(ios::left);
 			break;
 		}
+	}
+	int fRobot(const Robot robot[], int num_robots)
+	{
+		int i, fastest = 0;
+		double speed;
+		for (i = 0, speed = 0; i < num_robots; i++)
+		{
+			if (robot[i].isDeployed())
+			{
+				if (robot[i].speed() > speed)
+				{
+					speed = robot[i].speed();
+					fastest = i;
+				}
+
+			}
+		}
+		return fastest;
 	}
 
 }
