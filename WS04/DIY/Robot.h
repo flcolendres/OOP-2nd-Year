@@ -38,6 +38,7 @@ namespace sdds
 	int conrtolRooomReport(const Robot robot[], int num_robots);
 	int numDeployed(const Robot robot[], int num_robots);
 	void summary(const Robot robot[], int num_robots, int num_deployed);
+	void border(int type);
 
 
 }

@@ -102,7 +102,7 @@ namespace sdds
 	{
 		cout.setf(ios::left);
 		cout.setf(ios::fixed);
-		cout.precision(2);
+		cout.precision(1);
 		cout << "| ";
 		cout.width(11);
 		cout << m_name << "| ";
@@ -128,12 +128,8 @@ namespace sdds
 	int conrtolRooomReport(const Robot robot[], int num_robots)
 	{
 		int i, result = -1;
-		cout.width(57);
-		cout << "------ Robot Control Room -----" << endl;
-		cout.width(59);
-		cout << "---------------------------------------" << endl;
-		cout << "| Robot ID   | Location        | Weight |  Width | Height |  Speed | Deployed |" << endl;
-		cout << "|------------+-----------------+--------+--------+--------+--------+----------|" << endl;
+		border(1);
+		border(2);
 		for (i = 0; i < num_robots && result == -1; i++)
 		{
 			if (robot[i].isValid())
@@ -159,41 +155,65 @@ namespace sdds
 	}
 	void summary(const Robot robot[], int num_robots, int num_deployed)
 	{
-		int i, j, fastest = 0;
+		int i, fRobot = 0;
+		double speed;
 
-		for (i = 0; i < num_robots; i++)
+		for (i = 0, speed = 0; i < num_robots; i++)
 		{
 			if (robot[i].isDeployed())
 			{
-				for (j = i + 1; j < i; j++)
+				if (robot[i].speed() > speed)
 				{
-					if (robot[i].speed() > robot[j].speed())
-					{
-						fastest = i;
-					}
+					speed = robot[i].speed();
+					fRobot = i;
 				}
 
 			}
 		}
 
+		border(3);
 		cout.setf(ios::left);
 		cout.width(78);
-		cout.fill('=');
-		cout << "|" << "|" << endl;
-		cout.fill(' ');
-		cout.width(80);
-		cout << "| SUMMARY:" << endl;
-		cout << "|" << endl;
-		cout.width(80);
+		cout << "| SUMMARY:"<< "|" << endl;
 		cout << "| " << num_deployed << "  robots are deployed.";
+		cout.unsetf(ios::left);
+		cout.width(54);
 		cout << "|" << endl;
-		cout.width(80);
-		cout << "| The fastest robot is:" << endl;
-		robot[fastest].display();
+		cout << "| The fastest robot is:";
+		cout.width(56);
+		cout << "|" << endl;
+		border(2);
+		robot[fRobot].display();
+		border(3);
 
 
 
 
+	}
+
+	void border(int type)
+	{
+		switch (type)
+		{
+		case 1:
+			cout.width(57);
+			cout << "------ Robot Control Room -----" << endl;
+			cout.width(59);
+			cout << "---------------------------------------" << endl;
+			break;
+		case 2:
+			cout << "| Robot ID   | Location        | Weight |  Width | Height |  Speed | Deployed |" << endl;
+			cout << "|------------+-----------------+--------+--------+--------+--------+----------|" << endl;
+			break;
+		case 3:
+			cout.setf(ios::left);
+			cout.width(78);
+			cout.fill('=');
+			cout << "|" << "|" << endl;
+			cout.fill(' ');
+			cout.unsetf(ios::left);
+			break;
+		}
 	}
 
 }
