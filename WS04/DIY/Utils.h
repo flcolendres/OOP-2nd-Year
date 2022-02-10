@@ -3,7 +3,7 @@
 
 #include "Robot.h"
 namespace sdds {
-	void resetVal(char* name, char* location, double* weight, double* width, double* height, double* speed, bool* deployed);
+	void resetVal(double* weight, double* width, double* height, double* speed, bool* deployed);
 	void dealloc(char* name, char* location);
 }
 

@@ -16,7 +16,9 @@ namespace sdds
 
 	Robot::Robot()
 	{
-		resetVal(m_name, m_location, &m_weight, &m_width, &m_height, &m_speed, &m_deployed);
+		m_name = nullptr;
+		m_location = nullptr;
+		resetVal(&m_weight, &m_width, &m_height, &m_speed, &m_deployed);
 	}
 
 	Robot::Robot(const char* name, const char* location, double weight, double width, double height, double speed, bool deployed)
@@ -34,13 +36,17 @@ namespace sdds
 
 	Robot::~Robot()
 	{
-		dealloc(m_name, m_location);
-		resetVal(m_name, m_location, &m_weight, &m_width, &m_height, &m_speed, &m_deployed);
+		delete[] m_name;
+		delete[] m_location;
+		resetVal(&m_weight, &m_width, &m_height, &m_speed, &m_deployed);
 	}
 
 	Robot& Robot::set(const char* name, const char* location, double weight, double width, double height, double speed, bool deployed)
 	{
-		dealloc(m_name, m_location);
+		delete[] m_name;
+		delete[] m_location;
+		m_name = new char[strlen(name) + 1];
+		m_location = new char[strlen(location) + 1];
 		strcpy(m_name, name);
 		setLocation(location);
 		m_weight = weight;
@@ -81,7 +87,7 @@ namespace sdds
 	bool Robot::isValid() const
 	{
 		bool result = true;
-		if (m_name == nullptr || m_location == nullptr || m_weight <= 0 || m_width <= 0 || m_height <= 0)
+		if (m_name == nullptr || m_location == nullptr || m_weight <= 0 || m_width <= 0 || m_height <= 0 || m_speed <= 0)
 			result = false;
 
 		return result;
@@ -97,35 +103,37 @@ namespace sdds
 		cout.setf(ios::left);
 		cout.setf(ios::fixed);
 		cout.precision(2);
-		cout << "| Robot ID   | Location        | Weight |  Width | Height |  Speed | Deployed |" << endl;
 		cout << "| ";
-		cout.width(12);
-		cout << m_name;
-		cout.width(12);
-		cout << "| " << m_location << " | ";
+		cout.width(11);
+		cout << m_name << "| ";
+		cout.width(16);
+		cout << m_location << "| ";
 		cout.unsetf(ios::left);
-		cout.width(10);
+		cout.width(6);
 		cout << m_weight << " |";
-		cout.width(10);
+		cout.width(7);
 		cout << m_width << " |";
-		cout.width(10);
+		cout.width(7);
 		cout << m_height << " |";
-		cout.width(10);
+		cout.width(7);
 		cout << m_speed << " | ";
 		cout.setf(ios::left);
-		cout.width(10);
-		cout << m_deployed;
+		cout.width(9);
+		cout << (m_deployed == true ? "YES" : "NO");
 		cout << "|" << endl;
-		cout.width(80);
-		cout.fill('=');
-		cout << "|" << endl;
-		cout << "|";
+		cout.unsetf(ios::left);
 		return cout;
 	}
 
 	int conrtolRooomReport(const Robot robot[], int num_robots)
 	{
 		int i, result = -1;
+		cout.width(57);
+		cout << "------ Robot Control Room -----" << endl;
+		cout.width(59);
+		cout << "---------------------------------------" << endl;
+		cout << "| Robot ID   | Location        | Weight |  Width | Height |  Speed | Deployed |" << endl;
+		cout << "|------------+-----------------+--------+--------+--------+--------+----------|" << endl;
 		for (i = 0; i < num_robots && result == -1; i++)
 		{
 			if (robot[i].isValid())
@@ -151,7 +159,7 @@ namespace sdds
 	}
 	void summary(const Robot robot[], int num_robots, int num_deployed)
 	{
-		int i, j, fastest;
+		int i, j, fastest = 0;
 
 		for (i = 0; i < num_robots; i++)
 		{
@@ -169,6 +177,10 @@ namespace sdds
 		}
 
 		cout.setf(ios::left);
+		cout.width(78);
+		cout.fill('=');
+		cout << "|" << "|" << endl;
+		cout.fill(' ');
 		cout.width(80);
 		cout << "| SUMMARY:" << endl;
 		cout << "|" << endl;
