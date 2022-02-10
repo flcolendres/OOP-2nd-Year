@@ -89,8 +89,7 @@ namespace sdds
 		cout << m_year << " | ";
 		cout.unsetf(ios::left);
 		cout.width(4);
-		cout << m_code;
-		cout << " | ";
+		cout << m_code << " | ";
 		cout.width(9);
 		cout << m_price << " |" << endl;
 
