@@ -8,10 +8,11 @@
 
 #ifndef SDDS_ROBOT_H
 #define SDDS_ROBOT_H
-
+#include <iostream>
 namespace sdds
 {
-	class Robots
+	const int MAX_CHAR = 8;
+	class Robot
 	{
 		char* m_name;
 		char* m_location;
@@ -22,16 +23,17 @@ namespace sdds
 		bool m_deployed;
 	
 	public:
-		Robots();
-		Robots(char& name, char& location, double weight, double width, double height, double speed, bool deployed);
-		~Robots();
-		Robots& set(char& name, char& location, double weight, double width, double height, double speed, bool deployed);
-		Robots& setLocation();
-		Robots& setDeployed();
+		Robot();
+		Robot(const char* name, const char* location, double weight, double width, double height, double speed, bool deployed);
+		~Robot();
+		Robot& set(char& name, char& location, double weight, double width, double height, double speed, bool deployed);
+		Robot& setLocation();
+		Robot& setDeployed();
 		void getName()const;
 		void getLocation()const;
 		bool isDeployed()const;
 		bool isValid()const;
+		std::ostream& display();
 
 
 	};
