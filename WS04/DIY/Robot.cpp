@@ -170,7 +170,6 @@ namespace sdds
 
 			}
 		}
-
 		border(3);
 		cout.setf(ios::left);
 		cout.width(78);
@@ -185,9 +184,6 @@ namespace sdds
 		border(2);
 		robot[fRobot].display();
 		border(3);
-
-
-
 
 	}
 
