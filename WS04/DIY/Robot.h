@@ -11,7 +11,6 @@
 #include <iostream>
 namespace sdds
 {
-	const int MAX_CHAR = 8;
 	class Robot
 	{
 		char* m_name;
@@ -26,18 +25,19 @@ namespace sdds
 		Robot();
 		Robot(const char* name, const char* location, double weight, double width, double height, double speed, bool deployed);
 		~Robot();
-		Robot& set(char name, char location, double weight, double width, double height, double speed, bool deployed);
-		Robot& setLocation();
-		Robot& setDeployed();
-		void getName()const;
-		void getLocation()const;
+		Robot& set(const char* name, const char* location, double weight, double width, double height, double speed, bool deployed);
+		Robot& setLocation(const char* location);
+		Robot& setDeployed(const bool deployed);
+		char* getName()const;
+		char* getLocation()const;
 		bool isDeployed()const;
 		bool isValid()const;
-		std::ostream& display();
-
-
+		double speed()const;
+		std::ostream& display()const;
 	};
-
+	int conrtolRooomReport(const Robot robot[], int num_robots);
+	int numDeployed(const Robot robot[], int num_robots);
+	void summary(const Robot robot[], int num_robots, int num_deployed);
 
 
 }
