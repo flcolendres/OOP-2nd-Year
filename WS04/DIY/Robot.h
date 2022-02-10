@@ -26,7 +26,7 @@ namespace sdds
 		Robot();
 		Robot(const char* name, const char* location, double weight, double width, double height, double speed, bool deployed);
 		~Robot();
-		Robot& set(char& name, char& location, double weight, double width, double height, double speed, bool deployed);
+		Robot& set(char name, char location, double weight, double width, double height, double speed, bool deployed);
 		Robot& setLocation();
 		Robot& setDeployed();
 		void getName()const;

@@ -9,6 +9,11 @@ namespace sdds
 		weight = width = height = speed = 0;
 		deployed = 0;
 	}
+	void dealloc(char* name, char* location)
+	{
+		delete[] name;
+		delete[] location;
+	}
 
 }
 

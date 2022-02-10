@@ -35,13 +35,13 @@ namespace sdds
 
 	Robot::~Robot()
 	{
-		delete[] m_name;
-		delete[] m_location;
+		dealloc(m_name, m_location);
 		resetVal(m_name, m_location, &m_weight, &m_width, &m_height, &m_speed, &m_deployed);
 	}
 
-	Robot& Robot::set(char& name, char& location, double weight, double width, double height, double speed, bool deployed)
+	Robot& Robot::set(char name, char location, double weight, double width, double height, double speed, bool deployed)
 	{
+		dealloc(m_name, m_location);
 
 		return *this;
 	}
