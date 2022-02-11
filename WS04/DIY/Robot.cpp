@@ -171,13 +171,12 @@ namespace sdds
 		border(3);
 
 	}
-
 	void border(int type)
 	{
 		switch (type)
 		{
 		case 1:
-			cout.width(57);
+			cout.width(55);
 			cout << "------ Robot Control Room -----" << endl;
 			cout.width(59);
 			cout << "---------------------------------------" << endl;
