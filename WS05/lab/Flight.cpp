@@ -127,10 +127,17 @@ namespace sdds {
 	}
 	Flight& Flight::operator+=(double d)
 	{
+		double currentCapacity = 0;
 		while (d > 0 && m_fuel < FuelTankCapacity)
 		{
 			d--;
 			m_fuel++;
+			currentCapacity = m_fuel;
+			// example: if d is between 0 and 1 and current fuel capacity is not full if the remaining fuel were added, add the remaining fuel
+			if (d > 0 && d < 1 && (currentCapacity += d) < FuelTankCapacity) 
+			{
+				m_fuel += d;
+			}
 		}
 		return *this;
 	}
@@ -146,10 +153,17 @@ namespace sdds {
 
 	Flight& Flight::operator-=(double d)
 	{
+		double currentCapacity = 0;
 		while (d > 0 && m_fuel > 0)
 		{
 			d--;
 			m_fuel--;
+			currentCapacity = m_fuel;
+			// example: if d is between 0 and 1 and current fuel capacity is not negative if it were subtracted by "d", subtract the fuel tank by "d"
+			if (d > 0 && d < 1 && (currentCapacity -= d) > 0 )
+			{
+				m_fuel -= d;
+			}
 		}
 		return *this;
 	}
@@ -159,11 +173,10 @@ namespace sdds {
 		while (i > 0 && m_passengers > 0)
 		{
 			i--;
-			m_passengers++;
+			m_passengers--;
 		}
 		return *this;
 	}
-
 
 
 
