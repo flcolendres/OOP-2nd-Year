@@ -114,27 +114,35 @@ namespace sdds {
 		return *this;
 	}
 
-	Flight& Flight::operator=(Flight& i)
+	Flight& Flight::operator=(int i)
 	{
-		if (i.m_passengers > 0 && i.m_passengers <= Boen747Capacity)
-			m_passengers = i.m_passengers;
+		if (i > 0 && i <= Boen747Capacity)
+			m_passengers = i;
 		return *this;
 	}
-	Flight& Flight::operator=(Flight& d)
+	Flight& Flight::operator=(double d)
 	{
-		if (d.m_fuel > 0 && d.m_fuel < FuelTankCapacity)
-			m_fuel = d.m_fuel;
+		if (d > 0 && d < FuelTankCapacity)
+			m_fuel = d;
 	}
-	Flight& Flight::operator+=(Flight& d)
+	Flight& Flight::operator+=(double d)
 	{
-		while (d.m_fuel > 0 && m_fuel < FuelTankCapacity)
+		while (d > 0 && m_fuel < FuelTankCapacity)
 		{
+			d--;
 			m_fuel++;
-			d.m_fuel--;
 		}
 		return *this;
 	}
-
+	Flight& Flight::operator+=(int i)
+	{
+		while (i > 0 && m_passengers < Boen747Capacity)
+		{
+			i--;
+			m_passengers++;
+		}
+		return *this;
+	}
 
 
 

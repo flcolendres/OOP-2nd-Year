@@ -31,9 +31,10 @@ namespace sdds {
 		operator std::string()const;
 		bool operator ~() const;
 		Flight& operator=(Flight& f);
-		Flight& operator=(Flight& i);
-		Flight& operator=(Flight& d);
-		Flight& operator+=(Flight& d);
+		Flight& operator=(int i);
+		Flight& operator=(double d);
+		Flight& operator+=(double d);
+		Flight& operator+=(int i);
 
 
 	};
