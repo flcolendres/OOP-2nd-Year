@@ -37,8 +37,9 @@ namespace sdds {
 		Flight& operator+=(int i);
 		Flight& operator-=(double d);
 		Flight& operator-=(int i);
-		Flight
+		Flight& operator<<(Flight& f);
+		Flight& operator>>(Flight& f);
 	};
-
+	const Flight& operator+(const Flight& f);
 }
 #endif // SDDS_FLIGHT_H

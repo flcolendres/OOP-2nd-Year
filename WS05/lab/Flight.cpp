@@ -178,6 +178,13 @@ namespace sdds {
 		return *this;
 	}
 
+	Flight& Flight::operator<<(Flight& f)
+	{
+		m_passengers += f.m_passengers;
+		return *this;
+	}
+
+
 
 
 }
