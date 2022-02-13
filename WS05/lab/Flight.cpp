@@ -81,4 +81,53 @@ namespace sdds {
         return cout;
     }
 
+    Flight::operator bool() const
+    {
+        return m_passengers > 0 && m_fuel >= m_passengers * 600;
+    }
+
+    Flight::operator int() const
+    {
+        return m_passengers;
+    }
+
+    Flight::operator double() const
+    {
+        return m_fuel;
+    }
+
+    Flight::operator string () const
+    {
+        return m_title;
+    }
+    bool Flight::operator~() const
+    {
+        return m_passengers == 0;
+    }
+
+    Flight& Flight::operator=(Flight& f)
+    {
+        m_passengers = f.m_passengers;
+        m_fuel = f.m_passengers;
+        strcpy(m_title, f.m_title);
+        f.emptyPlane();
+        return *this;
+    }
+
+    Flight& Flight::operator=(Flight& i)
+    {
+        if (i.m_passengers > 0 && i.m_passengers <= Boen747Capacity)
+            m_passengers = i.m_passengers;
+        return *this;
+    }
+    Flight& Flight::operator=(Flight& d)
+    {
+        if (d.m_fuel > 0 && d.m_fuel < FuelTankCapacity)
+            m_fuel = d.m_fuel;
+    }
+    
+
+
+
+
 }
