@@ -35,6 +35,7 @@ namespace sdds {
 		Flight& operator=(Flight& d);
 		Flight& operator+=(Flight& d);
 
+
 	};
 
 }
