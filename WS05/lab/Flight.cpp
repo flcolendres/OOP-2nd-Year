@@ -144,6 +144,27 @@ namespace sdds {
 		return *this;
 	}
 
+	Flight& Flight::operator-=(double d)
+	{
+		while (d > 0 && m_fuel > 0)
+		{
+			d--;
+			m_fuel--;
+		}
+		return *this;
+	}
+
+	Flight& Flight::operator-=(int i)
+	{
+		while (i > 0 && m_passengers > 0)
+		{
+			i--;
+			m_passengers++;
+		}
+		return *this;
+	}
+
+
 
 
 }

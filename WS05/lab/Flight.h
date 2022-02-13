@@ -35,8 +35,9 @@ namespace sdds {
 		Flight& operator=(double d);
 		Flight& operator+=(double d);
 		Flight& operator+=(int i);
-
-
+		Flight& operator-=(double d);
+		Flight& operator-=(int i);
+		Flight
 	};
 
 }
