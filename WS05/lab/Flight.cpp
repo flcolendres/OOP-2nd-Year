@@ -108,7 +108,7 @@ namespace sdds {
 	Flight& Flight::operator=(Flight& f)
 	{
 		m_passengers = f.m_passengers;
-		m_fuel = f.m_passengers;
+		m_fuel = f.m_fuel;
 		strcpy(m_title, f.m_title);
 		f.emptyPlane();
 		return *this;
@@ -126,7 +126,7 @@ namespace sdds {
 			m_fuel = d;
 		return *this;
 	}
-	Flight& Flight::operator+=(double& d)
+	Flight& Flight::operator+=(double d)
 	{
 		double currentCapacity = 0;
 		while (d > 0 && m_fuel < FuelTankCapacity)
@@ -142,7 +142,7 @@ namespace sdds {
 		}
 		return *this;
 	}
-	Flight& Flight::operator+=(int& i)
+	Flight& Flight::operator+=(int i)
 	{
 		while (i > 0 && m_passengers < Boen747Capacity)
 		{
@@ -152,7 +152,7 @@ namespace sdds {
 		return *this;
 	}
 
-	Flight& Flight::operator-=(double& d)
+	Flight& Flight::operator-=(double d)
 	{
 		double currentCapacity = 0;
 		while (d > 0 && m_fuel > 0)
@@ -169,7 +169,7 @@ namespace sdds {
 		return *this;
 	}
 
-	Flight& Flight::operator-=(int& i)
+	Flight& Flight::operator-=(int i)
 	{
 		while (i > 0 && m_passengers > 0)
 		{
@@ -187,7 +187,11 @@ namespace sdds {
 
 	Flight& Flight::operator>>(Flight& f)
 	{
-		f.operator+=(m_passengers);
+		while (m_passengers > 0 && f.m_passengers < Boen747Capacity)
+		{
+			m_passengers--;
+			f.m_passengers++;
+		}
 		return *this;
 	}
 	int operator+(const Flight& left, const Flight& right)
