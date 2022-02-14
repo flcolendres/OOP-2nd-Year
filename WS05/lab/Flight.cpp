@@ -96,7 +96,7 @@ namespace sdds {
 		return m_fuel;
 	}
 
-	Flight::operator std::string() const
+	Flight::operator const char*() const
 	{
 		return m_title;
 	}
@@ -124,6 +124,7 @@ namespace sdds {
 	{
 		if (d > 0 && d < FuelTankCapacity)
 			m_fuel = d;
+		return *this;
 	}
 	Flight& Flight::operator+=(double d)
 	{
@@ -134,7 +135,7 @@ namespace sdds {
 			m_fuel++;
 			currentCapacity = m_fuel;
 			// example: if d is between 0 and 1 and current fuel capacity is not full if the remaining fuel were added, add the remaining fuel
-			if (d > 0 && d < 1 && (currentCapacity += d) < FuelTankCapacity) 
+			if (d > 0 && d < 1 && (currentCapacity += d) < FuelTankCapacity)
 			{
 				m_fuel += d;
 			}
@@ -160,7 +161,7 @@ namespace sdds {
 			m_fuel--;
 			currentCapacity = m_fuel;
 			// example: if d is between 0 and 1 and current fuel capacity is not negative if it were subtracted by "d", subtract the fuel tank by "d"
-			if (d > 0 && d < 1 && (currentCapacity -= d) > 0 )
+			if (d > 0 && d < 1 && (currentCapacity -= d) > 0)
 			{
 				m_fuel -= d;
 			}
@@ -180,11 +181,27 @@ namespace sdds {
 
 	Flight& Flight::operator<<(Flight& f)
 	{
-		m_passengers += f.m_passengers;
+		operator+=(f.m_passengers);
 		return *this;
 	}
 
+	Flight& Flight::operator>>(Flight& f)
+	{
+		f.operator+=(m_passengers);
+		return *this;
+	}
+	int operator+(const Flight& left, const Flight& right)
+	{
+		int result = 0;
+		if (left.operator bool() && right.operator bool())
+			result = left.operator int() + right.operator int();
+		return result;
+	}
 
+	int operator+=(int& left, const Flight& right)
+	{
+		return left += right.operator int();
+	}
 
 
 }
