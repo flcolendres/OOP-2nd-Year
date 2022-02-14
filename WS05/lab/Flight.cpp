@@ -126,7 +126,7 @@ namespace sdds {
 			m_fuel = d;
 		return *this;
 	}
-	Flight& Flight::operator+=(double d)
+	Flight& Flight::operator+=(double& d)
 	{
 		double currentCapacity = 0;
 		while (d > 0 && m_fuel < FuelTankCapacity)
@@ -142,7 +142,7 @@ namespace sdds {
 		}
 		return *this;
 	}
-	Flight& Flight::operator+=(int i)
+	Flight& Flight::operator+=(int& i)
 	{
 		while (i > 0 && m_passengers < Boen747Capacity)
 		{
@@ -152,7 +152,7 @@ namespace sdds {
 		return *this;
 	}
 
-	Flight& Flight::operator-=(double d)
+	Flight& Flight::operator-=(double& d)
 	{
 		double currentCapacity = 0;
 		while (d > 0 && m_fuel > 0)
@@ -169,7 +169,7 @@ namespace sdds {
 		return *this;
 	}
 
-	Flight& Flight::operator-=(int i)
+	Flight& Flight::operator-=(int& i)
 	{
 		while (i > 0 && m_passengers > 0)
 		{
