@@ -39,8 +39,8 @@ namespace sdds {
 		operator const char* ()const;
 		operator char() const;
 		operator bool() const;
-		Portfolio& operator+=(const Portfolio& p);
-		Portfolio& operator-=(const Portfolio& p);
+		Portfolio& operator+=(const double right);
+		Portfolio& operator-=(const double right);
 		bool operator~()const;
 		Portfolio& operator<<(Portfolio& right);
 		Portfolio& operator>>(Portfolio& right);

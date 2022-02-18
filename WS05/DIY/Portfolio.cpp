@@ -95,20 +95,20 @@ namespace sdds {
 		return m_type == 'G' || m_type == 'V' || m_type == 'I';
 	}
 
-	Portfolio& Portfolio::operator+=(const Portfolio& p)
+	Portfolio& Portfolio::operator+=(const double right)
 	{
-		if (bool(this) || !p.operator~())
+		if (*this && right > 0)
 		{
-			m_value += p.m_value;
+			m_value += right;
 		}
 		return *this;
 	}
 
-	Portfolio& Portfolio::operator-=(const Portfolio& p)
+	Portfolio& Portfolio::operator-=(const double right)
 	{
-		if (bool(this) || !p.operator~())
+		if (*this && right > 0)
 		{
-			m_value -= p.m_value;
+			m_value -= right;
 		}
 		return *this;
 	}
@@ -120,7 +120,7 @@ namespace sdds {
 
 	Portfolio& Portfolio::operator<<(Portfolio& right)
 	{
-		if (bool(this) || bool(right))
+		if (*this && right)
 		{
 			m_value += right.m_value;
 			right.emptyPortfolio();
