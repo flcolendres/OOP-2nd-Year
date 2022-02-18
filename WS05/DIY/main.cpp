@@ -11,13 +11,6 @@ Revision History
 Initials    Date           Reason
 F.S.        07/02/2022     Peer Review
 -----------------------------------------------------------*/
-/**
-* Francis Lloyd Colendres
-* flcolendres@myseneca.ca
-* 145498200
-* Feb. 17, 2022
-* I have done all the coding by myself and only copied the code that my professor provided to complete my workshops and assignments.
-*/
 #include <iostream>
 #include "Portfolio.h"
 using namespace std;
