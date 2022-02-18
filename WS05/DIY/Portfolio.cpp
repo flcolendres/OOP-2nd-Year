@@ -97,7 +97,7 @@ namespace sdds {
 
 	Portfolio& Portfolio::operator+=(const double right)
 	{
-		if (*this && right > 0)
+		if ((*this && !~*this) && right > 0)
 		{
 			m_value += right;
 		}
@@ -106,7 +106,7 @@ namespace sdds {
 
 	Portfolio& Portfolio::operator-=(const double right)
 	{
-		if (*this && right > 0)
+		if ((*this && !~*this) && right > 0)
 		{
 			m_value -= right;
 		}
@@ -120,7 +120,7 @@ namespace sdds {
 
 	Portfolio& Portfolio::operator<<(Portfolio& right)
 	{
-		if (*this && right)
+		if ((*this && !~*this) && (right && !~right))
 		{
 			m_value += right.m_value;
 			right.emptyPortfolio();
@@ -130,7 +130,7 @@ namespace sdds {
 
 	Portfolio& Portfolio::operator>>(Portfolio& right)
 	{
-		if (bool(this) || bool(right))
+		if ((*this && !~*this) && (right && !~right))
 		{
 			right.m_value += m_value;
 			this->emptyPortfolio();
@@ -141,7 +141,10 @@ namespace sdds {
 
 	double operator+(const Portfolio& left, const Portfolio& right)
 	{
-		return (double)left + (double)right;
+		double result = 0;
+		if ((left && !~left) && (right && !~right))
+			result = (double)left + (double)right;
+		return result;
 	}
 
 	double operator+=(double& left, const Portfolio& right)
