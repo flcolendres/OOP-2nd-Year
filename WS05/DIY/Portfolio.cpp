@@ -95,11 +95,25 @@ namespace sdds {
         return m_type == 'G' || m_type == 'V' || m_type == 'I';
     }
 
+    bool Portfolio::operator~() const
+    {
+        return m_value < 0;
+    }
+
     Portfolio& Portfolio::operator+=(const Portfolio& p)
     {
         if (!~*this || p.m_value > 0)
         {
+            m_value += p.m_value;
+        }
+        return *this;
+    }
 
+    Portfolio& Portfolio::operator-=(const Portfolio& p)
+    {
+        if (!~*this || p.m_value > 0)
+        {
+            m_value -= p.m_value;
         }
         return *this;
     }

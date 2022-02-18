@@ -38,6 +38,7 @@ namespace sdds {
 		operator double() const;
 		operator const char* ()const;
 		operator char() const;
+		operator bool() const;
 		bool operator~()const;
 		Portfolio& operator+=(const Portfolio& p);
 		Portfolio& operator-=(const Portfolio& p);
