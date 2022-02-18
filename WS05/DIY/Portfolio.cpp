@@ -75,6 +75,35 @@ namespace sdds {
         return cout;
     }
 
+    Portfolio::operator double() const
+    {
+        return (double)m_value;
+    }
+
+    Portfolio::operator const char*() const
+    {
+        return (const char*)m_stock;
+    }
+
+    Portfolio::operator char() const
+    {
+        return (char)m_type;
+    }
+
+    Portfolio::operator bool() const
+    {
+        return m_type == 'G' || m_type == 'V' || m_type == 'I';
+    }
+
+    Portfolio& Portfolio::operator+=(const Portfolio& p)
+    {
+        if (!~*this || p.m_value > 0)
+        {
+
+        }
+        return *this;
+    }
+
 
 
 

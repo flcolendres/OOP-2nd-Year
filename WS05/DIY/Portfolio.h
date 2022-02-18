@@ -25,13 +25,27 @@ F.S.        07/02/2022     Peer Review
 
 namespace sdds {
 
-   class Portfolio {
-      double m_value = 0;
-      char m_stock[16];
-      char m_type;
-
-   public:
-
-   };
+	class Portfolio {
+		double m_value = 0;
+		char m_stock[16];
+		char m_type;
+	public:
+		Portfolio();
+		void emptyPortfolio();
+		Portfolio(double value, const char* stock, char type);
+		void dispPortfolio()const;
+		std::ostream& display() const;
+		operator double() const;
+		operator const char* ()const;
+		operator char() const;
+		bool operator~()const;
+		Portfolio& operator+=(const Portfolio& p);
+		Portfolio& operator-=(const Portfolio& p);
+		bool operator ~()const;
+		Portfolio& operator<<(Portfolio& right);
+		Portfolio& operator>>(Portfolio& right);
+	};
+	double operator+(const Portfolio& left, const Portfolio& right);
+	double operator+=(double& left, const Portfolio& right);
 }
 #endif // SDDS_Portfolio_H_
