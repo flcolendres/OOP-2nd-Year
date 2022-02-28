@@ -11,13 +11,13 @@
 #include "HealthCard.h"
 using namespace std;
 
-namespace sdds 
+namespace sdds
 {
    bool HealthCard::validID(const char* name, long long number, const char vCode[], const char sNumber[]) const
    {
-      return name != nullptr && strlen(name) > 0 && 
+      return name != nullptr && strlen(name) > 0 &&
          number > 999999999 && number < 9999999999 &&
-        strlen(vCode) == 2 && strlen(sNumber) == 9;
+         strlen(vCode) == 2 + 1 && strlen(sNumber) == 9 + 1; // +1 for null terminator 
    }
    void HealthCard::setEmpty()
    {
@@ -31,27 +31,24 @@ namespace sdds
    }
    ostream& HealthCard::printIDInfo(ostream& ostr) const
    {
-
+      ostr << m_name << "-" << m_vCode << ", " << m_sNumber;
       return ostr;
    }
    void HealthCard::extractChar(std::istream& istr, char ch) const
    {
       char next;
-      //"peek()" and see if the next character in the keyboard buffer is the same as the ch argument
       next = istr.peek();
       if (next == ch)
          istr.ignore();
       else
+      {
          istr.ignore(1000, ch);
-      istr.setstate(ios::failbit);
-      //   If it is the same, Remove it from the keyboard and throw it away!(i.e.istr.ignore())
-      //   If not:
-      //Ignore all the remaining characters(up to 1000 characters) or the value of ch(use istr.ignore(int n, char c))
-      //   Set the istream into a fail state(use istr.setstate(iso::failbit))
-
+         istr.setstate(ios::failbit);
+      }
    }
    void HealthCard::set(const char* name, long long number, const char vCode[], const char sNumber[])
    {
+
    }
    HealthCard::HealthCard()
    {
