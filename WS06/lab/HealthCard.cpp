@@ -31,10 +31,10 @@ namespace sdds
    }
    ostream& HealthCard::printIDInfo(ostream& ostr) const
    {
-      ostr << m_name << "-" << m_vCode << ", " << m_sNumber;
+      ostr << m_name << "-" << m_vCode << ", " << m_sNumber << endl;
       return ostr;
    }
-   void HealthCard::extractChar(std::istream& istr, char ch) const
+   void HealthCard::extractChar(istream& istr, char ch) const
    {
       char next;
       next = istr.peek();
@@ -48,38 +48,99 @@ namespace sdds
    }
    void HealthCard::set(const char* name, long long number, const char vCode[], const char sNumber[])
    {
-
-   }
-   HealthCard::HealthCard()
-   {
+      if (validID(name, number, vCode, sNumber))
+      {
+         allocateAndCopy(name);
+         m_number = number;
+         strcpy(m_vCode, vCode);
+         strcpy(m_sNumber, sNumber);
+      }
+      else
+      {
+         delete[] m_name;
+         setEmpty();
+      }
    }
    HealthCard::HealthCard(const HealthCard& hc)
    {
+      if (validID(hc.m_name, hc.m_number, hc.m_vCode, hc.m_sNumber))
+      {
+         allocateAndCopy(hc.m_name);
+         m_number = hc.m_number;
+         strcpy(m_vCode, hc.m_vCode);
+         strcpy(m_sNumber, hc.m_sNumber);
+      }
    }
    HealthCard& HealthCard::operator=(const HealthCard& hc)
    {
+      if (this != &hc)
+      {
+         allocateAndCopy(hc.m_name);
+         m_number = hc.m_number;
+         strcpy(m_vCode, hc.m_vCode);
+         strcpy(m_sNumber, hc.m_sNumber);
+      }
       return *this;
    }
    HealthCard::~HealthCard()
    {
+      delete[] m_name;
    }
    HealthCard::operator bool()
    {
-      return false;
+      return m_name != nullptr;
    }
    ostream& HealthCard::print(ostream& ostr, bool toFile) const
    {
+      if (validID(m_name, m_number, m_vCode, m_sNumber))
+      {
+         if (toFile)
+         {
+            ostr << m_name << "," << printIDInfo(ostr);
+         }
+         else
+         {
+            ostr.setf(ios::left);
+            ostr.fill('.');
+            ostr.width(50);
+            ostr << m_name << "," << printIDInfo(ostr);
+         }
+      }
       return ostr;
    }
    istream& HealthCard::read(istream& istr)
    {
+      char name[MaxNameLength + 1];
+      long long number;
+      char vCode[3];
+      char sNumber[10];
+
+      istr.get(name, MaxNameLength, ',');
+      extractChar(istr, ',');
+      istr >> number;
+      extractChar(istr, '-');
+      istr.get(vCode, 3, ',');
+      extractChar(istr, ',');
+      istr.get(sNumber, 10, '\n');
+      if (!istr.fail())
+      {
+         set(name,number,vCode,sNumber);
+      }
+      istr.clear();
       return istr;
    }
-   ostream& operator<<(ostream& ostr, const Contact& hc)
+   ostream& operator<<(ostream& ostr, const HealthCard& hc)
    {
+      //if hc is valid it will print it using the print function on the screen and not on File, 
+      // (i.e.onFile is false).Otherwise, it will print "Invalid Card Number".
+      //   In the end, it will return the ostr reference.
+      if (bool())
+      {
+
+      }
       return ostr;
    }
-   istream& operator>>(istream& istr, Contact& hc)
+   istream& operator>>(istream& istr, HealthCard& hc)
    {
       return istr;
    }
