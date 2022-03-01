@@ -31,7 +31,7 @@ namespace sdds
    }
    ostream& HealthCard::printIDInfo(ostream& ostr) const
    {
-      ostr << m_name << "-" << m_vCode << ", " << m_sNumber << endl;
+      ostr << m_name << "-" << m_vCode << ", " << m_sNumber;
       return ostr;
    }
    void HealthCard::extractChar(istream& istr, char ch) const
@@ -45,6 +45,10 @@ namespace sdds
          istr.ignore(1000, ch);
          istr.setstate(ios::failbit);
       }
+   }
+   HealthCard::HealthCard(const char* name, long long number, const char vCode[], const char sNumber[])
+   {
+      set(name, number, vCode, sNumber);
    }
    void HealthCard::set(const char* name, long long number, const char vCode[], const char sNumber[])
    {
@@ -96,7 +100,7 @@ namespace sdds
       {
          if (toFile)
          {
-            ostr << m_name << "," << endl;
+            ostr << m_name << ",";
             printIDInfo(ostr);
          }
          else
@@ -104,7 +108,7 @@ namespace sdds
             ostr.setf(ios::left);
             ostr.fill('.');
             ostr.width(50);
-            ostr << m_name << "," << endl;
+            ostr << m_name << ",";
             printIDInfo(ostr);
          }
       }
@@ -133,17 +137,18 @@ namespace sdds
    }
    ostream& operator<<(ostream& ostr, const HealthCard& hc)
    {
-      //if hc is valid it will print it using the print function on the screen and not on File, 
-      // (i.e.onFile is false).Otherwise, it will print "Invalid Card Number".
-      //   In the end, it will return the ostr reference.
       if (bool(hc))
       {
          hc.print(ostr);
+      }
+      else
+      {
+         ostr << "Invalid Card Number";
       }
       return ostr;
    }
    istream& operator>>(istream& istr, HealthCard& hc)
    {
-      return istr;
+      return hc.read(istr);
    }
 }
