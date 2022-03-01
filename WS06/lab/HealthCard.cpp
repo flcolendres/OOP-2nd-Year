@@ -86,7 +86,7 @@ namespace sdds
    {
       return m_name != nullptr;
    }
-   ostream& HealthCard::print(ostream& ostr, bool toFile) const
+   ostream& HealthCard::print(ostream& ostr, bool toFile) const // issue: records not being saved to goodInfo.csv
    {
       if (validID(m_name, m_number, m_vCode, m_sNumber))
       {
