@@ -67,25 +67,13 @@ namespace sdds
    }
    HealthCard::HealthCard(const HealthCard& hc)
    {
-      if (validID(hc.m_name, hc.m_number, hc.m_vCode, hc.m_sNumber))
-      {
-         allocateAndCopy(hc.m_name);
-         m_number = hc.m_number;
-         strcpy(m_vCode, hc.m_vCode);
-         strcpy(m_sNumber, hc.m_sNumber);
-      }
+      set(hc.m_name, hc.m_number, hc.m_vCode, hc.m_sNumber);
    }
    HealthCard& HealthCard::operator=(const HealthCard& hc)
    {
       if (this != &hc)
       {
-         if (validID(hc.m_name, hc.m_number, hc.m_vCode, hc.m_sNumber))
-         {
-            allocateAndCopy(hc.m_name);
-            m_number = hc.m_number;
-            strcpy(m_vCode, hc.m_vCode);
-            strcpy(m_sNumber, hc.m_sNumber);
-         }
+         set(hc.m_name, hc.m_number, hc.m_vCode, hc.m_sNumber);
       }
       return *this;
    }
