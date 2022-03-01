@@ -17,7 +17,7 @@ namespace sdds
    {
       return name != nullptr && strlen(name) > 0 &&
          number > 999999999 && number < 9999999999 &&
-         strlen(vCode) == 2 + 1 && strlen(sNumber) == 9 + 1; // +1 for null terminator 
+         strlen(vCode) == 2 && strlen(sNumber) == 9;
    }
    void HealthCard::setEmpty()
    {
