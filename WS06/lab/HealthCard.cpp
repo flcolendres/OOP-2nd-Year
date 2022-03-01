@@ -94,6 +94,7 @@ namespace sdds
          {
             ostr << m_name << ",";
             printIDInfo(ostr);
+            ostr << endl;
          }
          else
          {
