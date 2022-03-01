@@ -86,7 +86,7 @@ namespace sdds
    {
       delete[] m_name;
    }
-   HealthCard::operator bool()
+   HealthCard::operator bool() const
    {
       return m_name != nullptr;
    }
@@ -96,14 +96,16 @@ namespace sdds
       {
          if (toFile)
          {
-            ostr << m_name << "," << printIDInfo(ostr);
+            ostr << m_name << "," << endl;
+            printIDInfo(ostr);
          }
          else
          {
             ostr.setf(ios::left);
             ostr.fill('.');
             ostr.width(50);
-            ostr << m_name << "," << printIDInfo(ostr);
+            ostr << m_name << "," << endl;
+            printIDInfo(ostr);
          }
       }
       return ostr;
@@ -134,9 +136,9 @@ namespace sdds
       //if hc is valid it will print it using the print function on the screen and not on File, 
       // (i.e.onFile is false).Otherwise, it will print "Invalid Card Number".
       //   In the end, it will return the ostr reference.
-      if (bool())
+      if (bool(hc))
       {
-
+         hc.print(ostr);
       }
       return ostr;
    }
