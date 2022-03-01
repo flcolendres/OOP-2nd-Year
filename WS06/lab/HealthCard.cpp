@@ -92,6 +92,7 @@ namespace sdds
    HealthCard::~HealthCard()
    {
       delete[] m_name;
+      m_name = nullptr;
    }
    HealthCard::operator bool() const
    {
@@ -133,7 +134,7 @@ namespace sdds
       istr.get(sNumber, 10, '\n');
       if (!istr.fail())
       {
-         set(name,number,vCode,sNumber);
+         set(name, number, vCode, sNumber);
       }
       istr.clear();
       istr.ignore(1000, '\n');
