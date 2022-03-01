@@ -147,7 +147,7 @@ namespace sdds
       }
       else
       {
-         ostr << "Invalid Card Number";
+         ostr << "Invalid Health Card Record";
       }
       return ostr;
    }
