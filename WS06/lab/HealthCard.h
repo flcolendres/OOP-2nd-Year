@@ -26,7 +26,7 @@ namespace sdds {
       HealthCard& operator=(const HealthCard& hc);
       ~HealthCard();
       operator bool() const;
-      std::ostream& print(std::ostream& ostr, bool toFile = true) const;
+      std::ostream& print(std::ostream& ostr, bool toFile = false) const;
       std::istream& read(std::istream& istr);
    };
       std::ostream& operator<<(std::ostream& ostr, const HealthCard& hc);

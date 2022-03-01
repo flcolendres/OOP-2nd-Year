@@ -31,7 +31,7 @@ namespace sdds
    }
    ostream& HealthCard::printIDInfo(ostream& ostr) const
    {
-      ostr << m_name << "-" << m_vCode << ", " << m_sNumber;
+      ostr << m_number << "-" << m_vCode << ", " << m_sNumber;
       return ostr;
    }
    void HealthCard::extractChar(istream& istr, char ch) const
@@ -79,10 +79,13 @@ namespace sdds
    {
       if (this != &hc)
       {
-         allocateAndCopy(hc.m_name);
-         m_number = hc.m_number;
-         strcpy(m_vCode, hc.m_vCode);
-         strcpy(m_sNumber, hc.m_sNumber);
+         if (validID(hc.m_name, hc.m_number, hc.m_vCode, hc.m_sNumber))
+         {
+            allocateAndCopy(hc.m_name);
+            m_number = hc.m_number;
+            strcpy(m_vCode, hc.m_vCode);
+            strcpy(m_sNumber, hc.m_sNumber);
+         }
       }
       return *this;
    }
@@ -108,7 +111,7 @@ namespace sdds
             ostr.setf(ios::left);
             ostr.fill('.');
             ostr.width(50);
-            ostr << m_name << ",";
+            ostr << m_name;
             printIDInfo(ostr);
          }
       }
@@ -133,6 +136,7 @@ namespace sdds
          set(name,number,vCode,sNumber);
       }
       istr.clear();
+      istr.ignore(1000, '\n');
       return istr;
    }
    ostream& operator<<(ostream& ostr, const HealthCard& hc)
