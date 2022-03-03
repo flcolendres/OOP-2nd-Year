@@ -16,7 +16,8 @@ namespace sdds
       char* m_nameMiddle;
       char* m_nameLast;
    public:
-      Name(char* first = nullptr, char* middle = nullptr, char* last = nullptr);
+      Name();
+      Name(char* first, char* middle, char* last);
       Name(char* first);
       Name(char* first, char* last);
       Name(const Name& n);
