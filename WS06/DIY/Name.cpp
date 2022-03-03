@@ -8,17 +8,21 @@
 #include <iostream>
 #include <cstring>
 #include "Name.h"
-
+using namespace std;
 namespace sdds
 {
-   Name::Name()
+
+   Name::Name(char* first, char* middle, char* last)
    {
-      m_nameFirst = m_nameMiddle = m_nameLast = nullptr;
+      if (true)
+      {
+         
+      }
    }
 
    Name::Name(char* first)
    {
-      if (!strcmp(first, " "))
+      if (!strcmp(first, " ") || )
       {
          m_nameFirst = nullptr;
       }
@@ -27,11 +31,12 @@ namespace sdds
          m_nameFirst = new char[strlen(first) + 1];
          strcpy(m_nameFirst, first);
       }
+
    }
 
    Name::Name(char* first, char* last)
    {
-      if (!strcmp(first, " ") || !strcmp(last, " ") )
+      if (!strcmp(first, " ") || !strcmp(last, " ") || first == nullptr || last == nullptr)
       {
          m_nameFirst = nullptr;
       }
@@ -42,20 +47,37 @@ namespace sdds
       }
    }
 
-   Name::Name(char* first, char* middle, char* last)
-   {
-   }
-
    Name::Name(const Name& n)
    {
-   }
 
-   Name& Name::operator=(const Name& n)
-   {
-      // TODO: insert return statement here
    }
 
   Name::~Name()
    {
    }
+
+   Name& Name::operator=(const Name& n)
+   {
+      return *this;
+   }
+
+  void Name::setShort(bool valid)
+  {
+  }
+  Name& Name::operator+=(const Name& n)
+  {
+     // TODO: insert return statement here
+  }
+  Name::operator bool() const
+  {
+
+  }
+  std::istream& operator>>(std::istream istr, Name& n)
+  {
+     // TODO: insert return statement here
+  }
+  std::ostream& operator<<(std::ostream ostr, const Name& n)
+  {
+     // TODO: insert return statement here
+  }
 }

@@ -7,6 +7,7 @@
 */
 #ifndef SDDS_NAME_H
 #define SDDS_NAME_H
+#include <iostream>
 namespace sdds
 {
    class Name
@@ -15,13 +16,18 @@ namespace sdds
       char* m_nameMiddle;
       char* m_nameLast;
    public:
-      Name();
+      Name(char* first = nullptr, char* middle = nullptr, char* last = nullptr);
       Name(char* first);
       Name(char* first, char* last);
-      Name(char* first, char* middle, char* last);
       Name(const Name& n);
-      Name& operator=(const Name& n);
       ~Name();
+      Name& operator=(const Name& n);
+      void setShort(bool valid);
+      Name& operator+=(const Name& n);
+      operator bool() const;
    };
+      std::istream& operator>>(std::istream istr, Name& n);
+      std::ostream& operator<<(std::ostream ostr, const Name& n);
+
 }
 #endif
