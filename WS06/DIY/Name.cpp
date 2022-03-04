@@ -2,7 +2,7 @@
 * Francis Lloyd Colendres
 * flcolendres@myseneca.ca
 * 145498200
-* Feb. 27, 2022
+* Mar. 3, 2022
 * I have done all the coding by myself and only copied the code that my professor provided to complete my workshops and assignments.
 */
 #include <iostream>
@@ -11,8 +11,6 @@
 using namespace std;
 namespace sdds
 {
-
-
    Name::Name(char* first)
    {
       if (!strcmp(first, " ") || !strcmp(first, ""))
@@ -33,7 +31,7 @@ namespace sdds
          !strcmp(first, "") || !strcmp(last, "") ||
          first == nullptr || last == nullptr)
       {
-         m_nameFirst = nullptr;
+         m_nameFirst = m_nameMiddle = m_nameLast = nullptr;
       }
       else
       {
@@ -53,7 +51,7 @@ namespace sdds
          !strcmp(first, "") || !strcmp(middle, "") || !strcmp(last, "") ||
          first == nullptr || middle == nullptr || last == nullptr)
       {
-         m_nameFirst = nullptr;
+         m_nameFirst = m_nameMiddle = m_nameLast = nullptr;
       }
       else
       {
@@ -90,9 +88,7 @@ namespace sdds
    }
    Name::operator bool() const
    {
-      return !strcmp(m_nameFirst, " ") || !strcmp(m_nameMiddle, " ") || !strcmp(m_nameLast, " ") ||
-         !strcmp(m_nameFirst, "") || !strcmp(m_nameMiddle, "") || !strcmp(m_nameLast, "") ||
-         m_nameFirst == nullptr || m_nameMiddle == nullptr || m_nameLast == nullptr;
+      return m_nameFirst != nullptr;
    }
    std::istream& operator>>(std::istream istr, Name& n)
    {
