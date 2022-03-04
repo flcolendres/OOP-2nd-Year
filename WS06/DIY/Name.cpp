@@ -8,6 +8,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <cstring>
+#include <string>
 #include "Name.h"
 #include "Utils.h"
 using namespace std;
@@ -20,9 +21,9 @@ namespace sdds
 
    Name::Name(char* first)
    {
-      if (!strcmp(first, " ") || !strcmp(first, ""))
+      if (isEmpty(first))
       {
-         m_nameFirst = nullptr;
+         m_nameFirst = m_nameMiddle = m_nameLast = nullptr;
       }
       else
       {
@@ -33,11 +34,10 @@ namespace sdds
 
    Name::Name(char* first, char* last)
    {
-      if (!strcmp(first, " ") || !strcmp(last, " ") ||
-         !strcmp(first, "") || !strcmp(last, "") ||
+      if (isEmpty(first) || isEmpty(last) ||
          first == nullptr || last == nullptr)
       {
-         m_nameFirst = m_nameLast = nullptr;
+         m_nameFirst = m_nameMiddle = m_nameLast = nullptr;
       }
       else
       {
@@ -50,11 +50,10 @@ namespace sdds
 
    Name::Name(char* first, char* middle, char* last)
    {
-      if (!strcmp(first, " ") || !strcmp(middle, " ") || !strcmp(last, " ") ||
-         !strcmp(first, "") || !strcmp(middle, "") || !strcmp(last, "") ||
+      if (isEmpty(first) || isEmpty(middle) || isEmpty(last) ||
          first == nullptr || middle == nullptr || last == nullptr)
       {
-         m_nameFirst = nullptr;
+         m_nameFirst = m_nameMiddle = m_nameLast = nullptr;
       }
       else
       {
@@ -114,7 +113,7 @@ namespace sdds
 
    Name& Name::operator+=(const char* input)
    {
-      if (!strcmp(input, "") || !strcmp(input, " ") || input == nullptr)
+      if (!isEmpty(input) && input != nullptr)
       {
          if (m_nameFirst == nullptr)
          {
@@ -135,7 +134,7 @@ namespace sdds
          {
             m_nameFirst = m_nameMiddle = m_nameLast = nullptr;
          }
-         else if (strstr(input, " "))
+         else if (strchr(input, ' '))
          {
             m_nameFirst = m_nameMiddle = m_nameLast = nullptr;
          }
@@ -149,6 +148,10 @@ namespace sdds
    }
    istream& Name::operator>>(istream istr)
    {
+      string str;
+      getline(istr, str, '\n');
+
+
       return istr;
    }
    ostream& Name::operator<<(ostream ostr) const
@@ -166,5 +169,9 @@ namespace sdds
          }
       }
       return ostr;
+   }
+   std::istream& getline(std::istream& istr, std::string& str, char c)
+   {
+      return istr;
    }
 }

@@ -10,6 +10,6 @@
 #include "Name.h"
 namespace sdds
 {
-   bool isEmpty(char* input);
+   bool isEmpty(const char* input);
 }
 #endif SDDS_UTILS_H

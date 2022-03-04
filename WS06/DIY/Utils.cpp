@@ -9,7 +9,7 @@
 
 namespace sdds
 {
-    bool isEmpty(char* input)
+    bool isEmpty(const char* input)
     {
         return !strcmp(input, "") || !strcmp(input, " ");
     }

@@ -8,6 +8,7 @@
 #ifndef SDDS_NAME_H
 #define SDDS_NAME_H
 #include <iostream>
+#include <string>
 namespace sdds
 {
    class Name
@@ -29,6 +30,7 @@ namespace sdds
       std::istream& operator>>(std::istream istr);
       std::ostream& operator<<(std::ostream ostr) const;
    };
+   std::istream& getline(std::istream&, std::string&, char);
 
 }
 #endif
