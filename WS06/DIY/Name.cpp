@@ -5,12 +5,18 @@
 * Mar. 3, 2022
 * I have done all the coding by myself and only copied the code that my professor provided to complete my workshops and assignments.
 */
+#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <cstring>
 #include "Name.h"
 using namespace std;
 namespace sdds
 {
+   Name::Name()
+   {
+      m_nameFirst = m_nameMiddle = m_nameLast = nullptr;
+   }
+
    Name::Name(char* first)
    {
       if (!strcmp(first, " ") || !strcmp(first, ""))
@@ -22,7 +28,6 @@ namespace sdds
          m_nameFirst = new char[strlen(first) + 1];
          strcpy(m_nameFirst, first);
       }
-
    }
 
    Name::Name(char* first, char* last)
@@ -31,18 +36,15 @@ namespace sdds
          !strcmp(first, "") || !strcmp(last, "") ||
          first == nullptr || last == nullptr)
       {
-         m_nameFirst = m_nameMiddle = m_nameLast = nullptr;
+         m_nameFirst = nullptr;
       }
       else
       {
          m_nameFirst = new char[strlen(first) + 1];
+         m_nameLast = new char[strlen(last) + 1];
          strcpy(m_nameFirst, first);
+         strcpy(m_nameLast, last);
       }
-   }
-
-   Name::Name()
-   {
-      m_nameFirst = m_nameMiddle = m_nameLast = nullptr;
    }
 
    Name::Name(char* first, char* middle, char* last)
@@ -51,17 +53,16 @@ namespace sdds
          !strcmp(first, "") || !strcmp(middle, "") || !strcmp(last, "") ||
          first == nullptr || middle == nullptr || last == nullptr)
       {
-         m_nameFirst = m_nameMiddle = m_nameLast = nullptr;
+         m_nameFirst = nullptr;
       }
       else
       {
          m_nameFirst = new char[strlen(first) + 1];
-         strcpy(m_nameFirst, first);
          m_nameMiddle = new char[strlen(middle) + 1];
-         strcpy(m_nameMiddle, middle);
          m_nameLast = new char[strlen(last) + 1];
+         strcpy(m_nameFirst, first);
+         strcpy(m_nameMiddle, middle);
          strcpy(m_nameLast, last);
-
       }
    }
 
@@ -70,10 +71,10 @@ namespace sdds
       if (bool(n))
       {
          m_nameFirst = new char[strlen(n.m_nameFirst) + 1];
-         strcpy(m_nameFirst, n.m_nameFirst);
          m_nameMiddle = new char[strlen(n.m_nameMiddle) + 1];
-         strcpy(m_nameMiddle, n.m_nameMiddle);
          m_nameLast = new char[strlen(n.m_nameLast) + 1];
+         strcpy(m_nameFirst, n.m_nameFirst);
+         strcpy(m_nameMiddle, n.m_nameMiddle);
          strcpy(m_nameLast, n.m_nameLast);
       }
    }
@@ -85,10 +86,10 @@ namespace sdds
          if (bool(n))
          {
             m_nameFirst = new char[strlen(n.m_nameFirst) + 1];
-            strcpy(m_nameFirst, n.m_nameFirst);
             m_nameMiddle = new char[strlen(n.m_nameMiddle) + 1];
-            strcpy(m_nameMiddle, n.m_nameMiddle);
             m_nameLast = new char[strlen(n.m_nameLast) + 1];
+            strcpy(m_nameFirst, n.m_nameFirst);
+            strcpy(m_nameMiddle, n.m_nameMiddle);
             strcpy(m_nameLast, n.m_nameLast);
          }
       }
@@ -97,25 +98,31 @@ namespace sdds
 
    Name::~Name()
    {
+
    }
 
    void Name::setShort(bool valid)
    {
+      if (valid)
+      {
+         strcpy(m_nameMiddle, m_nameMiddle[0] + ".");
+      }
    }
+
    Name& Name::operator+=(const Name& n)
    {
       // TODO: insert return statement here
    }
    Name::operator bool() const
    {
-      return m_nameFirst != nullptr;
+      return m_nameFirst != nullptr && (m_nameMiddle != nullptr || m_nameLast != nullptr);
    }
    std::istream& operator>>(std::istream istr, Name& n)
    {
-      // TODO: insert return statement here
+      return istr;
    }
    std::ostream& operator<<(std::ostream ostr, const Name& n)
    {
-      // TODO: insert return statement here
+      return ostr;
    }
 }
