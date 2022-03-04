@@ -9,6 +9,7 @@
 #include <iostream>
 #include <cstring>
 #include "Name.h"
+#include "Utils.h"
 using namespace std;
 namespace sdds
 {
@@ -113,7 +114,7 @@ namespace sdds
 
    Name& Name::operator+=(const char* input)
    {
-      if (!strcmp(input, "") || input == nullptr)
+      if (!strcmp(input, "") || !strcmp(input, " ") || input == nullptr)
       {
          if (m_nameFirst == nullptr)
          {

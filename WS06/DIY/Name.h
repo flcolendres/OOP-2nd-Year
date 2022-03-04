@@ -24,7 +24,7 @@ namespace sdds
       Name& operator=(const Name& n);
       ~Name();
       void setShort(bool valid);
-      Name& operator+=(const Name& n);
+      Name& operator+=(const char* input);
       operator bool() const;
       std::istream& operator>>(std::istream istr);
       std::ostream& operator<<(std::ostream ostr) const;
