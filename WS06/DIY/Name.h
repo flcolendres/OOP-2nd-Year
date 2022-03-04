@@ -27,10 +27,9 @@ namespace sdds
       void setShort(bool valid);
       Name& operator+=(const char* input);
       operator bool() const;
-      std::istream& operator>>(std::istream istr);
       std::ostream& operator<<(std::ostream ostr) const;
    };
-   std::istream& getline(std::istream&, std::string&, char);
+   std::istream& operator>>(std::istream istr, Name n);
 
 }
 #endif

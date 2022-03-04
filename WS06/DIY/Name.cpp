@@ -146,14 +146,7 @@ namespace sdds
    {
       return m_nameFirst != nullptr;
    }
-   istream& Name::operator>>(istream istr)
-   {
-      string str;
-      getline(istr, str, '\n');
 
-
-      return istr;
-   }
    ostream& Name::operator<<(ostream ostr) const
    {
       if (bool(*this))
@@ -170,8 +163,17 @@ namespace sdds
       }
       return ostr;
    }
-   std::istream& getline(std::istream& istr, std::string& str, char c)
+
+   istream& operator>>(istream istr, Name n)
    {
+      char* cstr, * tkn;
+      string str;
+      getline(istr, str, '\n');
+      cstr = new char[str.length() + 1];
+      strcpy(cstr, str.c_str());
+      // insert the rest of the code here 
+
+      delete[] cstr;
       return istr;
    }
 }
