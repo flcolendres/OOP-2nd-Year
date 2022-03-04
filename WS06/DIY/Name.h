@@ -21,8 +21,8 @@ namespace sdds
       Name(char* first, char* last);
       Name(char* first, char* middle, char* last);
       Name(const Name& n);
-      ~Name();
       Name& operator=(const Name& n);
+      ~Name();
       void setShort(bool valid);
       Name& operator+=(const Name& n);
       operator bool() const;

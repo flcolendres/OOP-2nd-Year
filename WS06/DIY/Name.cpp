@@ -67,16 +67,36 @@ namespace sdds
 
    Name::Name(const Name& n)
    {
-
-   }
-
-   Name::~Name()
-   {
+      if (bool(n))
+      {
+         m_nameFirst = new char[strlen(n.m_nameFirst) + 1];
+         strcpy(m_nameFirst, n.m_nameFirst);
+         m_nameMiddle = new char[strlen(n.m_nameMiddle) + 1];
+         strcpy(m_nameMiddle, n.m_nameMiddle);
+         m_nameLast = new char[strlen(n.m_nameLast) + 1];
+         strcpy(m_nameLast, n.m_nameLast);
+      }
    }
 
    Name& Name::operator=(const Name& n)
    {
+      if (this != &n)
+      {
+         if (bool(n))
+         {
+            m_nameFirst = new char[strlen(n.m_nameFirst) + 1];
+            strcpy(m_nameFirst, n.m_nameFirst);
+            m_nameMiddle = new char[strlen(n.m_nameMiddle) + 1];
+            strcpy(m_nameMiddle, n.m_nameMiddle);
+            m_nameLast = new char[strlen(n.m_nameLast) + 1];
+            strcpy(m_nameLast, n.m_nameLast);
+         }
+      }
       return *this;
+   }
+
+   Name::~Name()
+   {
    }
 
    void Name::setShort(bool valid)
