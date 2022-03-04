@@ -26,9 +26,9 @@ namespace sdds
       void setShort(bool valid);
       Name& operator+=(const Name& n);
       operator bool() const;
+      std::istream& operator>>(std::istream istr);
+      std::ostream& operator<<(std::ostream ostr) const;
    };
-      std::istream& operator>>(std::istream istr, Name& n);
-      std::ostream& operator<<(std::ostream ostr, const Name& n);
 
 }
 #endif

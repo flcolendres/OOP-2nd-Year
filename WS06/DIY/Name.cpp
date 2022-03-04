@@ -36,7 +36,7 @@ namespace sdds
          !strcmp(first, "") || !strcmp(last, "") ||
          first == nullptr || last == nullptr)
       {
-         m_nameFirst = nullptr;
+         m_nameFirst = m_nameLast = nullptr;
       }
       else
       {
@@ -98,7 +98,9 @@ namespace sdds
 
    Name::~Name()
    {
-
+      delete[] m_nameFirst;
+      delete[] m_nameMiddle;
+      delete[] m_nameLast;
    }
 
    void Name::setShort(bool valid)
@@ -109,20 +111,59 @@ namespace sdds
       }
    }
 
-   Name& Name::operator+=(const Name& n)
+   Name& Name::operator+=(const char* input)
    {
-      // TODO: insert return statement here
+      if (!strcmp(input, "") || input == nullptr)
+      {
+         if (m_nameFirst == nullptr)
+         {
+            m_nameFirst = new char[strlen(input) + 1];
+            strcpy(m_nameFirst, input);
+         }
+         else if (m_nameMiddle == nullptr)
+         {
+            m_nameMiddle = new char[strlen(input) + 1];
+            strcpy(m_nameMiddle, input);
+         }
+         else if (m_nameLast == nullptr)
+         {
+            m_nameLast = new char[strlen(input) + 1];
+            strcpy(m_nameLast, input);
+         }
+         if (m_nameFirst != nullptr && m_nameMiddle != nullptr && m_nameLast != nullptr)
+         {
+            m_nameFirst = m_nameMiddle = m_nameLast = nullptr;
+         }
+         else if (strstr(input, " "))
+         {
+            m_nameFirst = m_nameMiddle = m_nameLast = nullptr;
+         }
+      }
+
+      return *this;
    }
    Name::operator bool() const
    {
-      return m_nameFirst != nullptr && (m_nameMiddle != nullptr || m_nameLast != nullptr);
+      return m_nameFirst != nullptr;
    }
-   std::istream& operator>>(std::istream istr, Name& n)
+   istream& Name::operator>>(istream istr)
    {
       return istr;
    }
-   std::ostream& operator<<(std::ostream ostr, const Name& n)
+   ostream& Name::operator<<(ostream ostr) const
    {
+      if (bool(*this))
+      {
+         ostr << m_nameFirst << " ";
+         if (m_nameMiddle != nullptr)
+         {
+            ostr << m_nameMiddle << " ";
+         }
+         if (m_nameLast != nullptr)
+         {
+            ostr << m_nameLast;
+         }
+      }
       return ostr;
    }
 }
