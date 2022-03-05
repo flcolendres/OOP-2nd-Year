@@ -18,18 +18,18 @@ namespace sdds
       char* m_nameLast;
    public:
       Name();
-      Name(char* first);
-      Name(char* first, char* last);
-      Name(char* first, char* middle, char* last);
+      Name(const char* first);
+      Name(const char* first, const char* last);
+      Name(const char* first, const char* middle, const char* last);
       Name(const Name& n);
       Name& operator=(const Name& n);
       ~Name();
       void setShort(bool valid);
       Name& operator+=(const char* input);
       operator bool() const;
-      std::ostream& operator<<(std::ostream ostr) const;
+      std::ostream& operator<<(std::ostream& ostr) const;
    };
-   std::istream& operator>>(std::istream istr, Name n);
+      std::istream& operator>>(std::istream& istr, Name& n);
 
 }
 #endif

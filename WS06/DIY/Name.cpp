@@ -19,7 +19,7 @@ namespace sdds
       m_nameFirst = m_nameMiddle = m_nameLast = nullptr;
    }
 
-   Name::Name(char* first)
+   Name::Name(const char* first)
    {
       if (isEmpty(first))
       {
@@ -32,7 +32,7 @@ namespace sdds
       }
    }
 
-   Name::Name(char* first, char* last)
+   Name::Name(const char* first, const char* last)
    {
       if (isEmpty(first) || isEmpty(last) ||
          first == nullptr || last == nullptr)
@@ -48,7 +48,7 @@ namespace sdds
       }
    }
 
-   Name::Name(char* first, char* middle, char* last)
+   Name::Name(const char* first, const char* middle, const char* last)
    {
       if (isEmpty(first) || isEmpty(middle) || isEmpty(last) ||
          first == nullptr || middle == nullptr || last == nullptr)
@@ -130,11 +130,8 @@ namespace sdds
             m_nameLast = new char[strlen(input) + 1];
             strcpy(m_nameLast, input);
          }
-         if (m_nameFirst != nullptr && m_nameMiddle != nullptr && m_nameLast != nullptr)
-         {
-            m_nameFirst = m_nameMiddle = m_nameLast = nullptr;
-         }
-         else if (strchr(input, ' '))
+         if (m_nameFirst != nullptr && m_nameMiddle != nullptr && m_nameLast != nullptr || 
+            strchr(input, ' '))
          {
             m_nameFirst = m_nameMiddle = m_nameLast = nullptr;
          }
@@ -147,7 +144,7 @@ namespace sdds
       return m_nameFirst != nullptr;
    }
 
-   ostream& Name::operator<<(ostream ostr) const
+   ostream& Name::operator<<(ostream& ostr) const
    {
       if (bool(*this))
       {
@@ -164,14 +161,31 @@ namespace sdds
       return ostr;
    }
 
-   istream& operator>>(istream istr, Name n)
+   istream& operator>>(std::istream& istr, Name& N)
    {
+      Name n;
+      bool valid = true;
+      int i;
       char* cstr, * tkn;
       string str;
       getline(istr, str, '\n');
       cstr = new char[str.length() + 1];
       strcpy(cstr, str.c_str());
-      // insert the rest of the code here 
+      tkn = strtok(cstr, " ");
+      for (i = 0; i < 3 && valid == true; i++)
+      {
+         if (i > 2)
+            valid = false;
+         tkn = strtok(NULL, " ");
+      }
+      if (valid)
+      {
+         for (tkn = strtok(cstr, " "); tkn != NULL;)
+         {
+            n += tkn;
+            tkn = strtok(NULL, " ");
+         }
+      }
 
       delete[] cstr;
       return istr;
