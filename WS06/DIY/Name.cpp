@@ -127,30 +127,29 @@ namespace sdds
 
    Name& Name::operator+=(const char* input)
    {
-      if (m_nameFirst != nullptr && m_nameMiddle != nullptr && m_nameLast != nullptr && isEmpty(m_nameFirst))
+
+      if (!isEmpty(input) && input != nullptr)
       {
-         m_nameFirst = m_nameMiddle = m_nameLast = nullptr;
-      }
-      else if (!isEmpty(input) || input != nullptr)
-      {
-         if (m_nameFirst == nullptr || isEmpty(m_nameFirst))
+         if (m_nameFirst != nullptr && m_nameMiddle != nullptr && m_nameLast != nullptr)
+         {
+            m_nameFirst = m_nameMiddle = m_nameLast = nullptr;
+         }
+         else if (m_nameFirst == nullptr)
          {
             m_nameFirst = new char[strlen(input) + 1];
             strcpy(m_nameFirst, input);
          }
-         else if (m_nameMiddle == nullptr || isEmpty(m_nameMiddle))
+         else if (m_nameMiddle == nullptr)
          {
             m_nameMiddle = new char[strlen(input) + 1];
             strcpy(m_nameMiddle, input);
          }
-         else if (m_nameLast == nullptr || isEmpty(m_nameLast))
+         else if (m_nameLast == nullptr)
          {
             m_nameLast = new char[strlen(input) + 1];
             strcpy(m_nameLast, input);
          }
       }
-
-
       return *this;
    }
    Name::operator bool() const
@@ -190,33 +189,38 @@ namespace sdds
          }
       }
       tkn = strtok(cstr, " ");
-      switch (spaces)
-      {
-      case 0:
-         m_nameFirst = new char[strlen(tkn) + 1];
-         strcpy(m_nameFirst, tkn);
-         break;
-      case 1:
-         m_nameFirst = new char[strlen(tkn) + 1];
-         strcpy(m_nameFirst, tkn);
-         tkn = strtok(NULL, " ");
-         m_nameLast = new char[strlen(tkn) + 1];
-         strcpy(m_nameLast, tkn);
-         break;
-      case 2:
-         m_nameFirst = new char[strlen(tkn) + 1];
-         strcpy(m_nameFirst, tkn);
-         tkn = strtok(NULL, " ");
-         m_nameMiddle = new char[strlen(tkn) + 1];
-         strcpy(m_nameMiddle, tkn);
-         tkn = strtok(NULL, " ");
-         m_nameLast = new char[strlen(tkn) + 1];
-         strcpy(m_nameLast, tkn);
-         break;
-      default:
-         m_nameFirst = m_nameMiddle = m_nameLast = nullptr;
-         break;
-      }
+      if (tkn != NULL)
+         switch (spaces)
+         {
+         case 0:
+            m_nameFirst = new char[strlen(tkn) + 1];
+            strcpy(m_nameFirst, tkn);
+            m_nameMiddle = nullptr;
+            m_nameLast = nullptr;
+            break;
+         case 1:
+            m_nameFirst = new char[strlen(tkn) + 1];
+            strcpy(m_nameFirst, tkn);
+            tkn = strtok(NULL, " ");
+            m_nameLast = new char[strlen(tkn) + 1];
+            strcpy(m_nameLast, tkn);
+            m_nameMiddle = nullptr;
+            break;
+         case 2:
+            m_nameFirst = new char[strlen(tkn) + 1];
+            strcpy(m_nameFirst, tkn);
+            tkn = strtok(NULL, " ");
+            m_nameMiddle = new char[strlen(tkn) + 1];
+            strcpy(m_nameMiddle, tkn);
+            tkn = strtok(NULL, " ");
+            m_nameLast = new char[strlen(tkn) + 1];
+            strcpy(m_nameLast, tkn);
+            break;
+         default:
+            m_nameFirst = m_nameMiddle = m_nameLast = nullptr;
+            istr.putback('\n');
+            break;
+         }
       delete[] cstr;
       return istr;
    }

@@ -12,7 +12,7 @@ namespace sdds
     bool isEmpty(const char* input)
     {
        bool result = false;
-       if (!strcmp(input, "") || !strcmp(input, " "))
+       if (!strcmp(input, "") || !strcmp(input, " ") || !strcmp(input, "   "))
           result = true;
         return result;
     }
