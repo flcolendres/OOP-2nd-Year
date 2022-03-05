@@ -7,6 +7,7 @@
 */
 #ifndef SDDS_UTILS_H
 #define SDDS_UTILS_H
+#include <iostream>
 #include "Name.h"
 namespace sdds
 {

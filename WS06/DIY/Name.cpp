@@ -71,11 +71,18 @@ namespace sdds
       if (bool(n))
       {
          m_nameFirst = new char[strlen(n.m_nameFirst) + 1];
-         m_nameMiddle = new char[strlen(n.m_nameMiddle) + 1];
-         m_nameLast = new char[strlen(n.m_nameLast) + 1];
+         m_nameFirst = new char[strlen(n.m_nameFirst) + 1];
          strcpy(m_nameFirst, n.m_nameFirst);
-         strcpy(m_nameMiddle, n.m_nameMiddle);
-         strcpy(m_nameLast, n.m_nameLast);
+         if (n.m_nameMiddle != nullptr)
+         {
+            m_nameMiddle = new char[strlen(n.m_nameMiddle) + 1];
+            strcpy(m_nameMiddle, n.m_nameMiddle);
+         }
+         if (n.m_nameLast != nullptr)
+         {
+            m_nameLast = new char[strlen(n.m_nameLast) + 1];
+            strcpy(m_nameLast, n.m_nameLast);
+         }
       }
    }
 
@@ -86,11 +93,17 @@ namespace sdds
          if (bool(n))
          {
             m_nameFirst = new char[strlen(n.m_nameFirst) + 1];
-            m_nameMiddle = new char[strlen(n.m_nameMiddle) + 1];
-            m_nameLast = new char[strlen(n.m_nameLast) + 1];
             strcpy(m_nameFirst, n.m_nameFirst);
-            strcpy(m_nameMiddle, n.m_nameMiddle);
-            strcpy(m_nameLast, n.m_nameLast);
+            if (n.m_nameMiddle != nullptr)
+            {
+               m_nameMiddle = new char[strlen(n.m_nameMiddle) + 1];
+               strcpy(m_nameMiddle, n.m_nameMiddle);
+            }
+            if (n.m_nameLast != nullptr)
+            {
+               m_nameLast = new char[strlen(n.m_nameLast) + 1];
+               strcpy(m_nameLast, n.m_nameLast);
+            }
          }
       }
       return *this;
@@ -105,37 +118,38 @@ namespace sdds
 
    void Name::setShort(bool valid)
    {
-      if (valid)
+      if (valid && m_nameMiddle != nullptr)
       {
-         strcpy(m_nameMiddle, m_nameMiddle[0] + ".");
+         const char abbrv[3] = { m_nameMiddle[0], '.', '\0' };
+         strcpy(m_nameMiddle, abbrv);
       }
    }
 
    Name& Name::operator+=(const char* input)
    {
-      if (!isEmpty(input) && input != nullptr)
+      if (m_nameFirst != nullptr && m_nameMiddle != nullptr && m_nameLast != nullptr && isEmpty(m_nameFirst))
       {
-         if (m_nameFirst == nullptr)
+         m_nameFirst = m_nameMiddle = m_nameLast = nullptr;
+      }
+      else if (!isEmpty(input) || input != nullptr)
+      {
+         if (m_nameFirst == nullptr || isEmpty(m_nameFirst))
          {
             m_nameFirst = new char[strlen(input) + 1];
             strcpy(m_nameFirst, input);
          }
-         else if (m_nameMiddle == nullptr)
+         else if (m_nameMiddle == nullptr || isEmpty(m_nameMiddle))
          {
             m_nameMiddle = new char[strlen(input) + 1];
             strcpy(m_nameMiddle, input);
          }
-         else if (m_nameLast == nullptr)
+         else if (m_nameLast == nullptr || isEmpty(m_nameLast))
          {
             m_nameLast = new char[strlen(input) + 1];
             strcpy(m_nameLast, input);
          }
-         if (m_nameFirst != nullptr && m_nameMiddle != nullptr && m_nameLast != nullptr ||
-            strchr(input, ' '))
-         {
-            m_nameFirst = m_nameMiddle = m_nameLast = nullptr;
-         }
       }
+
 
       return *this;
    }
@@ -149,6 +163,7 @@ namespace sdds
       ostr << m_nameFirst << " ";
       if (m_nameMiddle != nullptr)
       {
+
          ostr << m_nameMiddle << " ";
       }
       if (m_nameLast != nullptr)
@@ -156,6 +171,54 @@ namespace sdds
          ostr << m_nameLast;
       }
       return ostr;
+   }
+
+   std::istream& Name::read(std::istream& istr)
+   {
+      string str;
+      int i, spaces;
+      bool valid = true;
+      char* cstr, * tkn;
+      getline(istr, str, '\n');
+      cstr = new char[str.length() + 1];
+      strcpy(cstr, str.c_str());
+      for (i = 0, spaces = 0; i < strlen(cstr); i++)
+      {
+         if (cstr[i] == ' ')
+         {
+            spaces++;
+         }
+      }
+      tkn = strtok(cstr, " ");
+      switch (spaces)
+      {
+      case 0:
+         m_nameFirst = new char[strlen(tkn) + 1];
+         strcpy(m_nameFirst, tkn);
+         break;
+      case 1:
+         m_nameFirst = new char[strlen(tkn) + 1];
+         strcpy(m_nameFirst, tkn);
+         tkn = strtok(NULL, " ");
+         m_nameLast = new char[strlen(tkn) + 1];
+         strcpy(m_nameLast, tkn);
+         break;
+      case 2:
+         m_nameFirst = new char[strlen(tkn) + 1];
+         strcpy(m_nameFirst, tkn);
+         tkn = strtok(NULL, " ");
+         m_nameMiddle = new char[strlen(tkn) + 1];
+         strcpy(m_nameMiddle, tkn);
+         tkn = strtok(NULL, " ");
+         m_nameLast = new char[strlen(tkn) + 1];
+         strcpy(m_nameLast, tkn);
+         break;
+      default:
+         m_nameFirst = m_nameMiddle = m_nameLast = nullptr;
+         break;
+      }
+      delete[] cstr;
+      return istr;
    }
 
    std::ostream& operator<<(std::ostream& ostr, const Name& n)
@@ -173,31 +236,7 @@ namespace sdds
 
    istream& operator>>(std::istream& istr, Name& N)
    {
-      Name n;
-      bool valid = true;
-      int i;
-      char* cstr, * tkn;
-      string str;
-      getline(istr, str, '\n');
-      cstr = new char[str.length() + 1];
-      strcpy(cstr, str.c_str());
-      tkn = strtok(cstr, " ");
-      for (i = 0; tkn != NULL && valid == true; i++)
-      {
-         if (i > 2)
-            valid = false;
-         tkn = strtok(NULL, " ");
-      }
-      if (valid)
-      {
-         for (tkn = strtok(cstr, " "); ;)
-         {
-            n += tkn;
-            tkn = strtok(NULL, " ");
-         }
-      }
-
-      delete[] cstr;
-      return istr;
+      return N.read(istr);
    }
+
 }

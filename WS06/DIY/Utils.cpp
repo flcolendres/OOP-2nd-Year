@@ -11,6 +11,9 @@ namespace sdds
 {
     bool isEmpty(const char* input)
     {
-        return !strcmp(input, "") || !strcmp(input, " ");
+       bool result = false;
+       if (!strcmp(input, "") || !strcmp(input, " "))
+          result = true;
+        return result;
     }
 }

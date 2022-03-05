@@ -28,6 +28,7 @@ namespace sdds
       Name& operator+=(const char* input);
       operator bool() const;
       std::ostream& print(std::ostream& ostr) const;
+      std::istream& read(std::istream& istr);
    };
    std::ostream& operator<<(std::ostream& ostr, const Name& n);
    std::istream& operator>>(std::istream& istr, Name& n);
