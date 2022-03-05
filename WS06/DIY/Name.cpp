@@ -130,7 +130,7 @@ namespace sdds
             m_nameLast = new char[strlen(input) + 1];
             strcpy(m_nameLast, input);
          }
-         if (m_nameFirst != nullptr && m_nameMiddle != nullptr && m_nameLast != nullptr || 
+         if (m_nameFirst != nullptr && m_nameMiddle != nullptr && m_nameLast != nullptr ||
             strchr(input, ' '))
          {
             m_nameFirst = m_nameMiddle = m_nameLast = nullptr;
@@ -144,19 +144,29 @@ namespace sdds
       return m_nameFirst != nullptr;
    }
 
-   ostream& Name::operator<<(ostream& ostr) const
+   std::ostream& Name::print(std::ostream& ostr) const
    {
-      if (bool(*this))
+      ostr << m_nameFirst << " ";
+      if (m_nameMiddle != nullptr)
       {
-         ostr << m_nameFirst << " ";
-         if (m_nameMiddle != nullptr)
-         {
-            ostr << m_nameMiddle << " ";
-         }
-         if (m_nameLast != nullptr)
-         {
-            ostr << m_nameLast;
-         }
+         ostr << m_nameMiddle << " ";
+      }
+      if (m_nameLast != nullptr)
+      {
+         ostr << m_nameLast;
+      }
+      return ostr;
+   }
+
+   std::ostream& operator<<(std::ostream& ostr, const Name& n)
+   {
+      if (bool(n))
+      {
+         n.print(ostr);
+      }
+      else
+      {
+         ostr << "Bad Name";
       }
       return ostr;
    }
@@ -172,7 +182,7 @@ namespace sdds
       cstr = new char[str.length() + 1];
       strcpy(cstr, str.c_str());
       tkn = strtok(cstr, " ");
-      for (i = 0; i < 3 && valid == true; i++)
+      for (i = 0; tkn != NULL && valid == true; i++)
       {
          if (i > 2)
             valid = false;
@@ -180,7 +190,7 @@ namespace sdds
       }
       if (valid)
       {
-         for (tkn = strtok(cstr, " "); tkn != NULL;)
+         for (tkn = strtok(cstr, " "); ;)
          {
             n += tkn;
             tkn = strtok(NULL, " ");

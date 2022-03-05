@@ -13,9 +13,9 @@ namespace sdds
 {
    class Name
    {
-      char* m_nameFirst;
-      char* m_nameMiddle;
-      char* m_nameLast;
+      char* m_nameFirst{};
+      char* m_nameMiddle{};
+      char* m_nameLast{};
    public:
       Name();
       Name(const char* first);
@@ -27,9 +27,10 @@ namespace sdds
       void setShort(bool valid);
       Name& operator+=(const char* input);
       operator bool() const;
-      std::ostream& operator<<(std::ostream& ostr) const;
+      std::ostream& print(std::ostream& ostr) const;
    };
-      std::istream& operator>>(std::istream& istr, Name& n);
+   std::ostream& operator<<(std::ostream& ostr, const Name& n);
+   std::istream& operator>>(std::istream& istr, Name& n);
 
 }
 #endif
