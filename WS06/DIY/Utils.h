@@ -7,10 +7,9 @@
 */
 #ifndef SDDS_UTILS_H
 #define SDDS_UTILS_H
-#include <iostream>
 #include "Name.h"
 namespace sdds
 {
    bool isEmpty(const char* input);
 }
-#endif SDDS_UTILS_H
+#endif

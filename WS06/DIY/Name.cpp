@@ -159,15 +159,14 @@ namespace sdds
 
    std::ostream& Name::print(std::ostream& ostr) const
    {
-      ostr << m_nameFirst << " ";
+      ostr << m_nameFirst;
       if (m_nameMiddle != nullptr)
       {
-
-         ostr << m_nameMiddle << " ";
+         ostr << " " << m_nameMiddle;
       }
       if (m_nameLast != nullptr)
       {
-         ostr << m_nameLast;
+         ostr << " " << m_nameLast;
       }
       return ostr;
    }
@@ -176,12 +175,11 @@ namespace sdds
    {
       string str;
       int i, spaces;
-      bool valid = true;
       char* cstr, * tkn;
       getline(istr, str, '\n');
       cstr = new char[str.length() + 1];
       strcpy(cstr, str.c_str());
-      for (i = 0, spaces = 0; i < strlen(cstr); i++)
+      for (i = 0, spaces = 0; i < (int)strlen(cstr); i++)
       {
          if (cstr[i] == ' ')
          {
