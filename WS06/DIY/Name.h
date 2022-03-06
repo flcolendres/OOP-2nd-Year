@@ -29,6 +29,7 @@ namespace sdds
       operator bool() const;
       std::ostream& print(std::ostream& ostr) const;
       std::istream& read(std::istream& istr);
+      void dealloc();
    };
    std::ostream& operator<<(std::ostream& ostr, const Name& n);
    std::istream& operator>>(std::istream& istr, Name& n);

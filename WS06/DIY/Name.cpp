@@ -34,12 +34,7 @@ namespace sdds
 
    Name::Name(const char* first, const char* last)
    {
-      if (isEmpty(first) || isEmpty(last) ||
-         first == nullptr || last == nullptr)
-      {
-         m_nameFirst = m_nameMiddle = m_nameLast = nullptr;
-      }
-      else
+      if (!isEmpty(first) && !isEmpty(last) && first != nullptr && last != nullptr)
       {
          m_nameFirst = new char[strlen(first) + 1];
          m_nameLast = new char[strlen(last) + 1];
@@ -50,12 +45,8 @@ namespace sdds
 
    Name::Name(const char* first, const char* middle, const char* last)
    {
-      if (isEmpty(first) || isEmpty(middle) || isEmpty(last) ||
-         first == nullptr || middle == nullptr || last == nullptr)
-      {
-         m_nameFirst = m_nameMiddle = m_nameLast = nullptr;
-      }
-      else
+      if (!isEmpty(first) && !isEmpty(middle) && !isEmpty(last) &&
+         first != nullptr && middle != nullptr && last != nullptr)
       {
          m_nameFirst = new char[strlen(first) + 1];
          m_nameMiddle = new char[strlen(middle) + 1];
@@ -68,9 +59,9 @@ namespace sdds
 
    Name::Name(const Name& n)
    {
+      dealloc();
       if (bool(n))
       {
-         m_nameFirst = new char[strlen(n.m_nameFirst) + 1];
          m_nameFirst = new char[strlen(n.m_nameFirst) + 1];
          strcpy(m_nameFirst, n.m_nameFirst);
          if (n.m_nameMiddle != nullptr)
@@ -88,6 +79,7 @@ namespace sdds
 
    Name& Name::operator=(const Name& n)
    {
+      dealloc();
       if (this != &n)
       {
          if (bool(n))
@@ -111,9 +103,7 @@ namespace sdds
 
    Name::~Name()
    {
-      delete[] m_nameFirst;
-      delete[] m_nameMiddle;
-      delete[] m_nameLast;
+      dealloc();
    }
 
    void Name::setShort(bool valid)
@@ -127,12 +117,11 @@ namespace sdds
 
    Name& Name::operator+=(const char* input)
    {
-
       if (!isEmpty(input) && input != nullptr)
       {
          if (m_nameFirst != nullptr && m_nameMiddle != nullptr && m_nameLast != nullptr)
          {
-            m_nameFirst = m_nameMiddle = m_nameLast = nullptr;
+            dealloc();
          }
          else if (m_nameFirst == nullptr)
          {
@@ -176,6 +165,7 @@ namespace sdds
       string str;
       int i, spaces;
       char* cstr, * tkn;
+      dealloc();
       getline(istr, str, '\n');
       cstr = new char[str.length() + 1];
       strcpy(cstr, str.c_str());
@@ -221,6 +211,14 @@ namespace sdds
          }
       delete[] cstr;
       return istr;
+   }
+
+   void Name::dealloc()
+   {
+      delete[] m_nameFirst;
+      delete[] m_nameMiddle;
+      delete[] m_nameLast;
+      m_nameFirst = m_nameMiddle = m_nameLast = nullptr;
    }
 
    std::ostream& operator<<(std::ostream& ostr, const Name& n)
