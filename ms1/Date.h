@@ -31,6 +31,7 @@ namespace sdds
       int uniqueDateVal();
    public:
       Date(const int year = 0, const int month = 0, const int date = 0);
+      Date& operator=(const Date& d);
       bool operator==(Date& d);
       bool operator!=(Date& d);
       bool operator<(Date& d);
@@ -38,7 +39,8 @@ namespace sdds
       bool operator<=(Date& d);
       bool operator>=(Date& d);
       const Status& state()const;
-      Date& formatted();
+      Date& formatted(bool set);
+      operator bool()const;
       std::ostream& write(std::ostream& ostr);
       std::istream& read(std::istream& istr);
    };

@@ -14,13 +14,14 @@ that my professor provided to complete my workshops and assignments.
 -----------------------------------------------------------*/
 #include "Date.h"
 #include "Utils.h"
+using namespace std;
 namespace sdds
 {
    bool Date::validate()
    {
       bool result = false;
       int year;
-      ut.getSystemDate(&year, nullptr, nullptr);
+      ut.getSystemDate(&year);
       if (m_year < year || m_year > m_maxyear)
       {
          m_state = "Invalid year in date";
@@ -48,7 +49,7 @@ namespace sdds
    }
    Date::Date(const int year, const int month, const int date)
    {
-      if (year == month == date)
+      if (year == month && month == date)
       {
          ut.getSystemDate(&m_year, &m_month, &m_day);
       }
@@ -59,6 +60,19 @@ namespace sdds
          m_day = date;
          validate();
       }
+   }
+
+   Date& Date::operator=(const Date& d)
+   {
+      if (this != &d)
+      {
+         m_year = d.m_year;
+         m_month = d.m_month;
+         m_day = d.m_month;
+         m_state = d.m_state;
+         m_format = d.m_format;
+      }
+      return *this;
    }
 
    bool Date::operator==(Date& d)
@@ -94,6 +108,67 @@ namespace sdds
    const Status& Date::state() const
    {
       return m_state;
+   }
+
+   Date& Date::formatted(bool set)
+   {
+      m_format = set;
+      return *this;
+   }
+
+   Date::operator bool()const
+   {
+      return state();
+   }
+
+   ostream& Date::write(ostream& ostr)
+   {
+      if (m_format)
+      {
+         ostr.width(2);
+         ostr.fill(0);
+         ostr << m_year << "/" << m_month << "/" << m_day;
+      }
+      else
+      {
+         ostr.width(2);
+         ostr.fill(0);
+         ostr << m_year << m_month << m_day;
+      }
+      return ostr;
+   }
+
+   istream& Date::read(istream& istr)
+   {
+      int input;
+      istr >> input;
+      if (input > 999 && input < 10000)
+      {
+         m_day = input % 100;
+         m_month = (input - input % 100) / 100;
+         ut.getSystemDate(&m_year);
+      }
+      else
+      {
+         m_day = input % 100;
+         m_month = int(input % 10000 / 100); 
+         m_year = (input - input % 10000) / 10000;
+      }
+      if (!validate())
+      {
+         istr.setstate(ios::badbit);
+      }
+      return istr;
+   }
+
+   ostream& operator<<(ostream& ostr, Date& d) // issue: not entering this operator.
+   {
+      return d.write(ostr); 
+   }
+
+   istream& operator>>(istream& istr, Date& d)
+   {
+      return d.read(istr);
    }
 
 }
