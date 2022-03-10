@@ -20,7 +20,7 @@ namespace sdds
    class Status
    {
       char* m_errDesc{};
-      int m_errCode{};
+      int m_errCode;
    public:
       Status(const char* c = nullptr);
       Status(const Status& s);
@@ -33,6 +33,6 @@ namespace sdds
       operator bool()const;
       Status& clear();
    };
-   std::ostream& operator<< (std::ostream& ostr, const Status s);
+   std::ostream& operator<< (std::ostream& ostr, const Status& s);
 }
 #endif

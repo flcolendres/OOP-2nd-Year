@@ -85,13 +85,17 @@ namespace sdds {
       return *this;
    }
 
-   ostream& operator<<(ostream& ostr, const Status s)
+   ostream& operator<<(ostream& ostr, const Status& s)
    {
-      if (s)
+      if (!s)
       {
          if (int(s) != 0)
          {
-            ostr << "ERR#" << int(s) << ": ";
+            ostr << "ERR#" << int(s) << ": " << (const char*)s;
+         }
+         else
+         {
+            ostr << "Invalid Integer";
          }
       }
       return ostr;

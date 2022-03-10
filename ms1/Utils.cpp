@@ -33,8 +33,7 @@ namespace sdds {
          strcpy(destination, source);
       }
    }
-   int Utils::getint(const char* prompt = nullptr)
-   {
+   int Utils::getint(const char* prompt) {
       bool valid = false;
       int input = 0;
       if (prompt != nullptr)
