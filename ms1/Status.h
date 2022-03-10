@@ -15,6 +15,7 @@ that my professor provided to complete my workshops and assignments.
 
 #ifndef SDDS_STATUS_H
 #define SDDS_STATUS_H
+#include <iostream>
 namespace sdds
 {
    class Status
