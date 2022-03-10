@@ -15,6 +15,7 @@ that my professor provided to complete my workshops and assignments.
 #include <cstring>
 #include "Status.h"
 #include "Utils.h"
+using namespace std;
 namespace sdds {
    Status::Status(const char* c)
    {
@@ -46,7 +47,7 @@ namespace sdds {
 
    Status::~Status()
    {
-      delete[] m_errDesc;
+      clear();
    }
 
    Status& Status::operator=(int num)
@@ -58,6 +59,7 @@ namespace sdds {
    Status& Status::operator=(const char* str)
    {
       ut.alocpy(m_errDesc, str);
+      return *this;
    }
 
    Status::operator int()const
@@ -74,6 +76,25 @@ namespace sdds {
    {
       return m_errDesc == nullptr;
    }
-   
+
+   Status& Status::clear()
+   {
+      delete[] m_errDesc;
+      m_errDesc = nullptr;
+      m_errCode = 0;
+      return *this;
+   }
+
+   ostream& operator<<(ostream& ostr, const Status s)
+   {
+      if (s)
+      {
+         if (int(s) != 0)
+         {
+            ostr << "ERR#" << int(s) << ": ";
+         }
+      }
+      return ostr;
+   }
 
 }

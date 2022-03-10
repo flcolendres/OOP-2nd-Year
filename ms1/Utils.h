@@ -14,6 +14,7 @@ that my professor provided to complete my workshops and assignments.
 -----------------------------------------------------------*/
 #ifndef SDDS_UTILS_H
 #define SDDS_UTILS_H
+#include <iostream>
 namespace sdds {
    const int sdds_testYear = 2022;
    const int sdds_testMon = 03;
@@ -30,5 +31,6 @@ namespace sdds {
    };
    extern Utils ut;
 }
+
 
 #endif // !SDDS_UTILS_H

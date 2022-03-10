@@ -31,7 +31,8 @@ namespace sdds
       operator int()const;
       operator const char* ()const;
       operator bool()const;
+      Status& clear();
    };
-
+   std::ostream& operator<< (std::ostream& ostr, const Status s);
 }
 #endif
