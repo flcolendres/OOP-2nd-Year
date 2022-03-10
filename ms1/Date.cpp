@@ -60,4 +60,40 @@ namespace sdds
          validate();
       }
    }
+
+   bool Date::operator==(Date& d)
+   {
+      return uniqueDateVal() == d.uniqueDateVal();
+   }
+
+   bool Date::operator!=(Date& d)
+   {
+      return uniqueDateVal() != d.uniqueDateVal();
+   }
+
+   bool Date::operator<(Date& d)
+   {
+      return uniqueDateVal() < d.uniqueDateVal();
+   }
+
+   bool Date::operator>(Date& d)
+   {
+      return uniqueDateVal() > d.uniqueDateVal();
+   }
+
+   bool Date::operator<=(Date& d)
+   {
+      return uniqueDateVal() <= d.uniqueDateVal();
+   }
+
+   bool Date::operator>=(Date& d)
+   {
+      return uniqueDateVal() >= d.uniqueDateVal();
+   }
+
+   const Status& Date::state() const
+   {
+      return m_state;
+   }
+
 }

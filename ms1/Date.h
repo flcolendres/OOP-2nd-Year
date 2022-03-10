@@ -19,7 +19,7 @@ that my professor provided to complete my workshops and assignments.
 #include "Status.h"
 namespace sdds
 {
-   class Date 
+   class Date
    {
       const int m_maxyear = 2030;
       int m_year;
@@ -31,12 +31,12 @@ namespace sdds
       int uniqueDateVal();
    public:
       Date(const int year = 0, const int month = 0, const int date = 0);
-      Date& operator==(const Date& d)const;
-      Date& operator!=(const Date& d)const;
-      Date& operator<(const Date& d)const;
-      Date& operator>(const Date& d)const;
-      Date& operator<=(const Date& d)const;
-      Date& operator>=(const Date& d)const;
+      bool operator==(Date& d);
+      bool operator!=(Date& d);
+      bool operator<(Date& d);
+      bool operator>(Date& d);
+      bool operator<=(Date& d);
+      bool operator>=(Date& d);
       const Status& state()const;
       Date& formatted();
       std::ostream& write(std::ostream& ostr);
