@@ -18,7 +18,7 @@ that my professor provided to complete my workshops and assignments.
 namespace sdds
 {
    class Status {
-      char* m_errDesc;
+      char* m_errDesc{};
       int m_errCode;
    };
 }

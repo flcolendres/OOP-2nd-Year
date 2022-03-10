@@ -22,7 +22,7 @@ namespace sdds
       char* m_errDesc;
       int m_errCode;
    public:
-      Status();
+      Status(const char* c = nullptr);
       Status(const Status& s);
       Status& operator=(const Status& s);
    };
