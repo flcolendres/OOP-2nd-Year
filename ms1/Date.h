@@ -21,7 +21,7 @@ namespace sdds
 {
    class Date 
    {
-      const int m_max_year = 2030;
+      const int m_maxyear = 2030;
       int m_year;
       int m_month;
       int m_day;
