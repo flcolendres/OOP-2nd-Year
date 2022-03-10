@@ -19,12 +19,18 @@ namespace sdds
 {
    class Status
    {
-      char* m_errDesc;
-      int m_errCode;
+      char* m_errDesc{};
+      int m_errCode{};
    public:
       Status(const char* c = nullptr);
       Status(const Status& s);
       Status& operator=(const Status& s);
+      ~Status();
+      Status& operator=(int num);
+      Status& operator=(const char* str);
+      operator int()const;
+      operator const char* ()const;
+      operator bool()const;
    };
 
 }

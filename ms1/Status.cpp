@@ -7,7 +7,6 @@ Author: Francis Lloyd Colendres  2022-03-08
 Revision History
 -----------------------------------------------------------
 Date          Reason
-
 -----------------------------------------------------------
 I have done all the coding by myself and only copied the code
 that my professor provided to complete my workshops and assignments.
@@ -49,5 +48,32 @@ namespace sdds {
    {
       delete[] m_errDesc;
    }
+
+   Status& Status::operator=(int num)
+   {
+      m_errCode = num;
+      return *this;
+   }
+
+   Status& Status::operator=(const char* str)
+   {
+      ut.alocpy(m_errDesc, str);
+   }
+
+   Status::operator int()const
+   {
+      return m_errCode;
+   }
+
+   Status::operator const char* () const
+   {
+      return m_errDesc;
+   }
+
+   Status::operator bool() const
+   {
+      return m_errDesc == nullptr;
+   }
+   
 
 }
