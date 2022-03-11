@@ -41,10 +41,10 @@ namespace sdds
       const Status& state()const;
       Date& formatted(bool set);
       operator bool()const;
-      std::ostream& write(std::ostream& ostr);
+      std::ostream& write(std::ostream& ostr) const;
       std::istream& read(std::istream& istr);
    };
-   std::ostream& operator<<(std::ostream& ostr, Date& d);
+   std::ostream& operator<<(std::ostream& ostr, const Date& d);
    std::istream& operator>>(std::istream& istr, Date& d);
 
 }

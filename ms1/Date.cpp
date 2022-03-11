@@ -12,6 +12,7 @@ Date          Reason
 I have done all the coding by myself and only copied the code
 that my professor provided to complete my workshops and assignments.
 -----------------------------------------------------------*/
+#include <iostream>
 #include "Date.h"
 #include "Utils.h"
 using namespace std;
@@ -121,7 +122,7 @@ namespace sdds
       return state();
    }
 
-   ostream& Date::write(ostream& ostr)
+   ostream& Date::write(ostream& ostr) const
    {
       if (m_format)
       {
@@ -137,7 +138,6 @@ namespace sdds
       }
       return ostr;
    }
-
    istream& Date::read(istream& istr)
    {
       int input;
@@ -161,7 +161,7 @@ namespace sdds
       return istr;
    }
 
-   ostream& operator<<(ostream& ostr, Date& d) // issue: not entering this operator.
+   ostream& operator<<(ostream& ostr, const Date& d) 
    {
       return d.write(ostr); 
    }
