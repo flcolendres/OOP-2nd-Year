@@ -7,7 +7,6 @@ Author: Francis Lloyd Colendres  2022-03-08
 Revision History
 -----------------------------------------------------------
 Date          Reason
-
 -----------------------------------------------------------
 I have done all the coding by myself and only copied the code
 that my professor provided to complete my workshops and assignments.
@@ -26,7 +25,7 @@ namespace sdds
       int m_month;
       int m_day;
       Status m_state;
-      bool m_format;
+      bool m_format = true;
       bool validate();
       int uniqueDateVal();
    public:

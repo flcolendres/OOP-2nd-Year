@@ -7,7 +7,6 @@ Author: Francis Lloyd Colendres  2022-03-08
 Revision History
 -----------------------------------------------------------
 Date          Reason
-
 -----------------------------------------------------------
 I have done all the coding by myself and only copied the code
 that my professor provided to complete my workshops and assignments.
@@ -23,16 +22,17 @@ namespace sdds
       bool result = false;
       int year;
       ut.getSystemDate(&year);
-      if (m_year < year || m_year > m_maxyear)
+      if (m_month < 1 || m_month > 12)
+      {
+         m_state = "Invalid month in date";
+         m_state = 2;
+      }
+      else if (m_year < year || m_year > m_maxyear)
       {
          m_state = "Invalid year in date";
          m_state = 1;
       }
-      else if(m_month < 1 || m_month > 12)
-      {
-         m_state = "Invalid month in date";
-         m_state = 2;   
-      }
+
       else if (m_day < 1 || m_day > ut.daysOfMon(m_month, m_year))
       {
          m_state = "Invalid day in date";
@@ -59,8 +59,8 @@ namespace sdds
          m_year = year;
          m_month = month;
          m_day = date;
-         validate();
       }
+      validate();
    }
 
    Date& Date::operator=(const Date& d)
@@ -127,14 +127,22 @@ namespace sdds
       if (m_format)
       {
          ostr.width(2);
-         ostr.fill(0);
-         ostr << m_year << "/" << m_month << "/" << m_day;
+         ostr << m_year << "/";
+         ostr.width(2);
+         ostr.fill('0');
+         ostr << m_month << "/";
+         ostr.width(2);
+         ostr << m_day;
       }
       else
       {
          ostr.width(2);
-         ostr.fill(0);
-         ostr << m_year << m_month << m_day;
+         ostr << m_year % 100;
+         ostr.width(2);
+         ostr.fill('0');
+         ostr << m_month;
+         ostr.width(2);
+         ostr << m_day;
       }
       return ostr;
    }
@@ -142,28 +150,36 @@ namespace sdds
    {
       int input;
       istr >> input;
-      if (input > 999 && input < 10000)
+      if (istr)
       {
-         m_day = input % 100;
-         m_month = (input - input % 100) / 100;
-         ut.getSystemDate(&m_year);
+         if (input > 999 && input < 10000)
+         {
+            m_day = input % 100;
+            m_month = (input - input % 100) / 100;
+            ut.getSystemDate(&m_year);
+         }
+         else
+         {
+            m_day = input % 100;
+            m_month = int(input % 10000 / 100);
+            m_year = ((input - input % 10000) / 10000) + 2000;
+         }
+         if (!validate())
+         {
+            istr.setstate(ios::badbit);
+         }
       }
       else
       {
-         m_day = input % 100;
-         m_month = int(input % 10000 / 100); 
-         m_year = (input - input % 10000) / 10000;
+         m_state = "Invalid date value";
       }
-      if (!validate())
-      {
-         istr.setstate(ios::badbit);
-      }
+
       return istr;
    }
 
-   ostream& operator<<(ostream& ostr, const Date& d) 
+   ostream& operator<<(ostream& ostr, const Date& d)
    {
-      return d.write(ostr); 
+      return d.write(ostr);
    }
 
    istream& operator>>(istream& istr, Date& d)
