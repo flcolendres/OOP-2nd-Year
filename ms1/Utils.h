@@ -28,6 +28,8 @@ namespace sdds {
       void alocpy(char*& destination, const char* source);
       int getint(const char* prompt = nullptr);
       int getint(int min, int max, const char* prompt = nullptr, const char* errMes = nullptr);
+      void strcpy(char* des, const char* src);
+      int strlen(const char* str);
    };
    extern Utils ut;
 }

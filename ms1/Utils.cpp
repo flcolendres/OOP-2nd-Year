@@ -97,5 +97,15 @@ namespace sdds {
       int mon = (month >= 1 && month <= 12 ? month : 13) - 1;
       return days[mon] + int((mon == 1) * ((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0));
    }
+   void Utils::strcpy(char* des, const char* src) {
+      int i;
+      for (i = 0; src[i]; i++) des[i] = src[i];
+      des[i] = 0;
+   }
+   int Utils::strlen(const char* str) {
+      int len;
+      for (len = 0; str[len]; len++);
+      return len;
+   }
 
 }

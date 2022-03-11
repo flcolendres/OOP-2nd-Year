@@ -69,7 +69,7 @@ namespace sdds
       {
          m_year = d.m_year;
          m_month = d.m_month;
-         m_day = d.m_month;
+         m_day = d.m_day;
          m_state = d.m_state;
          m_format = d.m_format;
       }
