@@ -95,7 +95,7 @@ namespace sdds {
          }
          else
          {
-            ostr << "Invalid Integer";
+            ostr << (const char*)s;
          }
       }
       return ostr;
