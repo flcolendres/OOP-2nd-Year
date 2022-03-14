@@ -7,8 +7,30 @@
 */
 #ifndef SDDS_CONTAINER_H
 #define SDDS_CONTAINER_H
-namespace sdds {
+#include <iostream>
+namespace sdds 
+{
+   class Container
+   {
+      char m_content[50];
+      int m_capacity;
+      int m_containerVol;
+   public:
+      Container(const char* content, int capacity, int containerVol = 0);
+      int operator+=(int val);
+      int operator-=(int val);
+      operator bool();
+      Container& clear(int capacity, const char* content);
+      std::ostream& print(std::ostream& ostr) const;
+      std::istream& read(std::istream& istr);
 
+   protected:
+      Container& setEmpty();
+      int capacity();
+      int volume();
+   };
+   std::ostream& operator<<(std::ostream& ostr, Container& c);
+   std::ostream& operator<<(std::ostream& ostr, Container& c);
 }
 
 #endif
