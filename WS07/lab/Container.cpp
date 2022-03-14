@@ -11,11 +11,24 @@
 using namespace std;
 namespace sdds
 {
+   Container::Container()
+   {
+      m_capacity = 0;
+      m_containerVol = 0;
+   }
    Container::Container(const char* content, int capacity, int containerVol)
    {
-      strcpy(m_content, content);
-      m_capacity = capacity;
-      m_containerVol = containerVol;
+      if (!strcmp(content, "\0") || containerVol > capacity)
+      {
+         m_capacity = 0;
+         m_containerVol = 0;
+      }
+      else
+      {
+         strcpy(m_content, content);
+         m_capacity = capacity;
+         m_containerVol = containerVol;
+      }
    }
    int Container::operator+=(int val)
    {

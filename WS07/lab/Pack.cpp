@@ -10,4 +10,14 @@
 
 namespace sdds
 {
+   Pack::Pack(const char* content, int size, int unitSize, int numUnits) : Container(content, size * unitSize, numUnits * unitSize)
+   {
+      if (unitSize > 0)
+         m_unitSize = unitSize;
+      else
+      {
+         setEmpty();
+         m_unitSize = 0;
+      }
+   }
 }

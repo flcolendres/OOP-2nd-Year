@@ -10,12 +10,12 @@
 #include "Container.h"
 namespace sdds 
 {
-   class Pack : Container 
+   class Pack : public Container 
    {
       int m_unitSize;
    public:
       Pack(const char* content, int size, int unitSize = 330, int numUnits = 0);
-
+      int operator+=(int val);
    };
 }
 
