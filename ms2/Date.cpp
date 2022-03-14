@@ -1,9 +1,9 @@
 /* ------------------------------------------------------
-Final project Milestone 1
+Final project Milestone 2
 Module: Date
 Filename: Date.cpp
 Version 1.0
-Author: Francis Lloyd Colendres  2022-03-08
+Author: Francis Lloyd Colendres  2022-03-12
 Revision History
 -----------------------------------------------------------
 Date          Reason
