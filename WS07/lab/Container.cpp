@@ -74,10 +74,31 @@ namespace sdds
             {
                cout << "Invalid Integer, retry: ";
             }
-            else if ("Value out of range[1<= val<=999]: ");
+            else if ("Value out of range[1<=val<=999]: ");
          } while (val > 0 && val < 999);
          cout << "Added " << (*this += val) << "CCs" << endl;
       }
       return istr;
+   }
+   Container& Container::setEmpty()
+   {
+      m_capacity = m_containerVol = 0;
+      return *this;
+   }
+   int Container::capacity()
+   {
+      return m_capacity;
+   }
+   int Container::volume()
+   {
+      return m_containerVol;
+   }
+   std::ostream& operator<<(std::ostream& ostr, Container& c)
+   {
+      return c.print(ostr);
+   }
+   std::istream& operator>>(std::istream& istr, Container& c)
+   {
+      return c.read(istr);
    }
 }

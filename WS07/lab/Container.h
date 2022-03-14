@@ -8,7 +8,7 @@
 #ifndef SDDS_CONTAINER_H
 #define SDDS_CONTAINER_H
 #include <iostream>
-namespace sdds 
+namespace sdds
 {
    class Container
    {
@@ -30,7 +30,6 @@ namespace sdds
       int volume();
    };
    std::ostream& operator<<(std::ostream& ostr, Container& c);
-   std::ostream& operator<<(std::ostream& ostr, Container& c);
+   std::istream& operator>>(std::istream& istr, Container& c);
 }
-
 #endif
