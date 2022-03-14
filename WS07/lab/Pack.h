@@ -7,6 +7,7 @@
 */
 #ifndef SDDS_PACK_H
 #define SDDS_PACK_H
+#include <iostream>
 #include "Container.h"
 namespace sdds 
 {
@@ -17,8 +18,14 @@ namespace sdds
       Pack(const char* content, int size, int unitSize = 330, int numUnits = 0);
       int operator+=(int val);
       int operator-=(int val);
+      int unit();
+      int noOfUnits();
+      int size();
+      Pack& clear(int packSize, int unitSize, const char* content);
+      std::ostream& print(std::ostream& ostr);
 
    };
+
 }
 
 #endif

@@ -10,7 +10,7 @@
 
 namespace sdds
 {
-   Pack::Pack(const char* content, int size, int unitSize, int numUnits) : Container(content, size * unitSize, numUnits * unitSize)
+   Pack::Pack(const char* content, int size, int unitSize, int numUnits) : Container(content, size* unitSize, numUnits* unitSize)
    {
       if (unitSize > 0)
          m_unitSize = unitSize;
@@ -37,12 +37,12 @@ namespace sdds
 
    int Pack::noOfUnits()
    {
-      return volume() / m_unitSize;
+      return Container::volume() / m_unitSize;
    }
 
    int Pack::size()
    {
-      return capacity() / m_unitSize;
+      return Container::capacity() / m_unitSize;
    }
 
    Pack& Pack::clear(int packSize, int unitSize, const char* content)
@@ -53,6 +53,16 @@ namespace sdds
          m_unitSize = unitSize;
       }
       return *this;
+   }
+
+   std::ostream& Pack::print(std::ostream& ostr)
+   {
+      Container::print(ostr);
+      if (*this)
+      {
+         ostr << ", " << Container::capacity() << " in a pack of " << m_unitSize;
+      }
+      return ostr;
    }
 
 }
