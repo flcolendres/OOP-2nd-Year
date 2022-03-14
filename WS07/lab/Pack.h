@@ -7,9 +7,16 @@
 */
 #ifndef SDDS_PACK_H
 #define SDDS_PACK_H
+#include "Container.h"
 namespace sdds 
 {
+   class Pack : Container 
+   {
+      int m_unitSize;
+   public:
+      Pack(const char* content, int size, int unitSize = 330, int numUnits = 0);
 
+   };
 }
 
 #endif

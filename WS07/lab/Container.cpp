@@ -74,7 +74,10 @@ namespace sdds
             {
                cout << "Invalid Integer, retry: ";
             }
-            else if ("Value out of range[1<=val<=999]: ");
+            else
+            {
+               cout << "Value out of range[1<=val<=999]: ";
+            }
          } while (val > 0 && val < 999);
          cout << "Added " << (*this += val) << "CCs" << endl;
       }

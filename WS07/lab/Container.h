@@ -23,7 +23,6 @@ namespace sdds
       Container& clear(int capacity, const char* content);
       std::ostream& print(std::ostream& ostr) const;
       std::istream& read(std::istream& istr);
-
    protected:
       Container& setEmpty();
       int capacity();
