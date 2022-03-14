@@ -18,7 +18,7 @@ namespace sdds
    public:
       Container();
       Container(const char* content, int capacity, int containerVol = 0);
-      virtual int operator+=(int val);
+      int operator+=(int val);
       int operator-=(int val);
       operator bool();
       Container& clear(int capacity, const char* content);

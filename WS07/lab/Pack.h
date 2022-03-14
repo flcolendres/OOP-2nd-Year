@@ -16,6 +16,8 @@ namespace sdds
    public:
       Pack(const char* content, int size, int unitSize = 330, int numUnits = 0);
       int operator+=(int val);
+      int operator-=(int val);
+
    };
 }
 

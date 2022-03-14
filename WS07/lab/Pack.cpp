@@ -20,4 +20,39 @@ namespace sdds
          m_unitSize = 0;
       }
    }
+   int Pack::operator+=(int val)
+   {
+      return Container::operator+=(val * m_unitSize) / m_unitSize;
+   }
+
+   int Pack::operator-=(int val)
+   {
+      return Container::operator-=(val * m_unitSize) / m_unitSize;
+   }
+
+   int Pack::unit()
+   {
+      return m_unitSize;
+   }
+
+   int Pack::noOfUnits()
+   {
+      return volume() / m_unitSize;
+   }
+
+   int Pack::size()
+   {
+      return capacity() / m_unitSize;
+   }
+
+   Pack& Pack::clear(int packSize, int unitSize, const char* content)
+   {
+      if (unitSize > 0)
+      {
+         Container::clear(packSize, content);
+         m_unitSize = unitSize;
+      }
+      return *this;
+   }
+
 }
