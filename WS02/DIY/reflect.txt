@@ -1,0 +1,17 @@
+/**
+* Francis Lloyd Colendres
+* flcolendres@myseneca.ca
+* 145498200
+* Jan. 28, 2022
+*/
+
+	This week's topic talks about Static and Dynamic Memory allocation. I learned that memory leaks occur when a memory obtained from an application is not deallocated. 
+According to my professor, it is a common occurrence in software development.
+I was fascinated to find out that memory leak is one of the reasons why internet speed is slow. 
+I struggled in this workshop because I was frustrated on where the memory was leaking. In the first part of the workshop, I realized that I did not 
+deallocate the dynamic memory array; instead, I set it to nullptr. 
+I learned that an array has to be deallocated before being set to nullptr, or else it would have a memory leftover before exiting the program. 
+In addition, I also learned about the types of scopes. Certain variables are visible within a scope depending on where they are declared.
+A function can have the same identifier as long as the signature different. Based on what I learned, a function signature makes a function unique
+depending on the identifier, types of parameter, and the order of the parameter. Overall, this week's lesson was slightly complicated, and it took some time
+to fully understand the meaning of these keywords.

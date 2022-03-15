@@ -1,0 +1,18 @@
+/**
+* Francis Lloyd Colendres
+* flcolendres@myseneca.ca
+* 145498200
+* Mar. 3, 2022
+* I have done all the coding by myself and only copied the code that my professor provided to complete my workshops and assignments.
+*/
+
+This workshop was definitely a challenge. I was able to practice the use of operator << and >>. At first, the use of fstream was confusing; however, as I am developing my program, it became easier to understand. 
+The use of fstream is similar to FILE in C, which is essentially to read and write on a file stream. I also learned that the proper way to code header file is to include system header files before custom header files,
+insert namespace directives after including header files, and resolve the scope of the identifer in a header file. This prevents any conflicts between names that are similar when including multiple header files. The string
+class was beneficial to my program because I was able to write a set of characters without worrying about the maximum size allowed in a variable. Back in IPC144, I was taught to create a local char array with a 1000 elements
+to reduce the risk of overloading the array. At that time, I thought to myself "What if the user enters 2000 characters?". With the introduction of string class in C++ I realized that such occurrence will not be possible because
+the memory is dynamically allocated during the input process; therefore, it eliminates the risk of run-time error due to overloaded char array. As I previously mentioned, this workshop was challenging; I think it is because the expected output
+does not match the implementation instruction. For example, the ostream& print(ostream& ostr, bool toFile = true) const; in part 1 should have the toFile function defaulted to false because the contents of the file would be printed in a 
+different format. In addition, there were cases when the word invalid and empty are interchangeably used. It got me confused because I thought there was a difference between the two words. The use of string class was pretty complicated to me the
+first time I used it. On a brighter note, the moment that everything was put together, I was starting to understand the basics of the input and output operators. I am looking forward to improve my knowledge in this topic in the following weeks because
+it still takes time for me to implement them.

@@ -1,0 +1,17 @@
+/**
+* Francis Lloyd Colendres
+* flcolendres@myseneca.ca
+* 145498200
+* Feb. 10, 2022
+* I have done all the coding by myself and only copied the code that my professor provided to complete my workshops and assignments.
+*/
+
+On workshop 4, I was able to practice and test my knowledge on constructors, destructors, and the current object. It was pretty confusing
+at first because I was having difficulties understanding the current object specifically. It was quite complex to my understanding.
+However, I was able to slowly understood the basics of the *this keyword. I was having some troubles using it because I was unsure when to use 
+the "*this" keyword. As I analyzed the main functions of workshop 4, I realized that the keyword simplified the code because it allows member functions
+to access the object's instance variables and its data. I was also able to practice the use of constructors and destructors and the way that both procedures are used in a program. 
+Constructor is a special member procedure automatically invoked at creation, while Destructors are procedures invoked before going out of scope.
+My professor told me not to call constructors and destructors a function because it cannot be invoked like a normal function.
+I think it is easy to identify which is a constructor and a destructor because it has the same name as the class. In addition,
+it is also easy to differentiate constructors and destructors by checking which has the tilde "~" symbol. 

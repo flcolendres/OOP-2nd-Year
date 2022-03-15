@@ -1,0 +1,19 @@
+/**
+* Francis Lloyd Colendres
+* flcolendres@myseneca.ca
+* 145498200
+* Feb. 17, 2022
+* I have done all the coding by myself and only copied the code that my professor provided to complete my workshops and assignments.
+*/
+
+For this workshop, I applied what I learned about overloading operators. When I did an advanced-reading on the topic, I was pretty confused because I had no idea about the purpose behind it.
+When my professor demonstrated the use of overloaded operators, it made much more sense. I learned a lot of details about this topic. Firstly, I learned that I cannot copy an object to another
+because it would result to a run-time error if a destructor is invoked. If I want to copy an object to another, I have to manually copy the object onto another to avoid run-time error. In addition,
+I also learned about friend and helper functions. Both functions support a class, but the difference is that helper functions typically do not change the values of the members of a class while a friend 
+is able to do so. My professor told me that friend functions are "knife in the back" because they are able to modify the member variables of a class even if it is not supposed to do so. Furthermore,
+my professor also mentioned that if a friend function is used in a program, that means the design of the program is bad. I also learned to always use a method when overloading a function. The
+reason that I find the operator functions easy to understand is because my professor indicated that the left operand is the current object while the right operand is the parameter.
+I struggled on the first workshop, specifically the += operator and the -= operator, because I realized that I should not go beyond the capacity limit. It took me hours to apply the proper logic.
+In addition, I was still getting used to typing the operator functions so I had to use the class notes as a guide when creating an operator function. Thankfully, the DIY part of the workshop was
+not as difficult because I got used to implementing operator functions. However, I still tried modifying the main.cpp function to see if my functions meet the criteria. To conclude, this topic was
+fun to learn. I have a basic understanding of the operator functions and I am looking forward to improve my understanding in this topic.

@@ -1,0 +1,14 @@
+/**
+* Francis Lloyd Colendres
+* flcolendres@myseneca.ca
+* 145498200
+* Feb. 1, 2022
+* I have done all the coding by myself and only copied the code that my professor provided to complete my workshops and assignments.
+*/
+
+This week, I learned about the different types of functions. The basic concept of class was easy to understand because they are identical to structs, which was introduced
+to me back in first semester. I learned that class and struct are identical, but the only difference is struct is public by default and class is private by default.
+The first part of the workshop was easy because I was able to quickly learn the accessibility of different members. However, the moment that I step into workshop part two,
+I realized that I had mistakes which I did not notice. Firstly, I incorrectly defined an object's safe empty state. As a result, I was open to potential semantic errors.
+In addition, I made a mistake by placing constant values as private members of a class; this resulted to my inability to access the constant values which was used by a global
+function. In the end, I was able to resolve these problems and hopefully I do not make the same mistake of not identifying any semantic errors before submitting my work. 

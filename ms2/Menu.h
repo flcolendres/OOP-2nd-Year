@@ -18,7 +18,13 @@ that my professor provided to complete my workshops and assignments.
 #include <iostream>
 
 namespace sdds {
+   class Menu {
+      char* m_options;
+      unsigned int m_numOptions;
+   public:
+      Menu(unsigned int numOptions, const char* options);
 
+   };
 }
 
 #endif
