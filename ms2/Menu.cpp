@@ -19,6 +19,11 @@ that my professor provided to complete my workshops and assignments.
 using namespace std;
 namespace sdds
 {
+   Menu::Menu()
+   {
+      m_options = nullptr;
+      m_numOptions = 0;
+   }
    Menu::Menu(unsigned int numOptions, const char* options)
    {
       if (numOptions > 15 || options == nullptr)

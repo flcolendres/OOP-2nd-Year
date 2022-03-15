@@ -22,6 +22,7 @@ namespace sdds {
       char* m_options;
       unsigned int m_numOptions;
    public:
+      Menu();
       Menu(unsigned int numOptions, const char* options);
       Menu(const Menu& M);
       Menu& operator=(const Menu& M);

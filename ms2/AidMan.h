@@ -21,7 +21,7 @@ namespace sdds
    class Aidman
    {
       char* m_fileName;
-      Menu m_Menu;
+      Menu m_mainMenu;
       unsigned int menu();
    public:
       Aidman(unsigned int numOptions, const char* options);
