@@ -23,8 +23,10 @@ namespace sdds
       int size();
       Pack& clear(int packSize, int unitSize, const char* content);
       std::ostream& print(std::ostream& ostr);
-
+      std::istream& read(std::istream& istr);
    };
+   std::ostream& operator<<(std::ostream& ostr, Pack& p);
+   std::istream& operator>>(std::istream& istr, Pack& p);
 
 }
 

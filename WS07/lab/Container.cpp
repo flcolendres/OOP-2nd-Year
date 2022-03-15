@@ -13,6 +13,7 @@ namespace sdds
 {
    Container::Container()
    {
+      strcpy(m_content, "\0");
       m_capacity = 0;
       m_containerVol = 0;
    }
@@ -20,6 +21,7 @@ namespace sdds
    {
       if (!strcmp(content, "\0") || containerVol > capacity)
       {
+         strcpy(m_content, "\0");
          m_capacity = 0;
          m_containerVol = 0;
       }
@@ -32,11 +34,12 @@ namespace sdds
    }
    int Container::operator+=(int val)
    {
-      int addedVol = val;
-      while (m_containerVol < m_capacity && addedVol > 0)
+      int addedVol = 0;
+      while (m_containerVol < m_capacity && val > 0)
       {
          m_containerVol++;
-         addedVol--;
+         val--;
+         addedVol++;
       }
       return addedVol;
    }
@@ -52,7 +55,7 @@ namespace sdds
    }
    Container::operator bool()
    {
-      return m_containerVol < m_capacity&& m_capacity > 0;
+      return m_containerVol <= m_capacity && m_capacity > 0;
    }
    Container& Container::clear(int capacity, const char* content)
    {
@@ -65,20 +68,25 @@ namespace sdds
    }
    ostream& Container::print(ostream& ostr) const
    {
+      if (m_containerVol <= m_capacity && m_capacity > 0)
+      {
       ostr << m_content << ": " << "(" <<
          m_containerVol << "cc/" << m_capacity << ")";
+      }
+      else
+      {
+         ostr << "****: (**cc/***)";
+      }
       return ostr;
    }
    istream& Container::read(istream& istr)
    {
+      bool invalid = true;
       int val = 0;
       if (*this)
       {
-         cout << "Broken Container, adding aborted! Press <ENTER> to continue....";
-         cin.get();
-      }
-      else
-      {
+         cout << "Add to ";
+         print(cout);
          cout << "\n> ";
          do
          {
@@ -87,12 +95,22 @@ namespace sdds
             {
                cout << "Invalid Integer, retry: ";
             }
+            else if(val < 0 || val > m_capacity)
+            {
+               cout << "Value out of range[1<=val<=" << m_capacity - m_containerVol << "]: ";
+            }
             else
             {
-               cout << "Value out of range[1<=val<=999]: ";
+               invalid = false;
             }
-         } while (val > 0 && val < 999);
-         cout << "Added " << (*this += val) << "CCs" << endl;
+         } while (invalid);
+         cout << "Added " << (*this += val) << " CCs" << endl;
+      }
+      else
+      {
+         cout << "Broken Container, adding aborted! Press <ENTER> to continue....";
+         istr.ignore();
+         istr.get();
       }
       return istr;
    }

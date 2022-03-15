@@ -7,7 +7,7 @@
 */
 #include <cstring>
 #include "Pack.h"
-
+using namespace std;
 namespace sdds
 {
    Pack::Pack(const char* content, int size, int unitSize, int numUnits) : Container(content, size* unitSize, numUnits* unitSize)
@@ -37,7 +37,7 @@ namespace sdds
 
    int Pack::noOfUnits()
    {
-      return Container::volume() / m_unitSize;
+      return volume() / m_unitSize;
    }
 
    int Pack::size()
@@ -49,20 +49,71 @@ namespace sdds
    {
       if (unitSize > 0)
       {
-         Container::clear(packSize, content);
+         Container::clear(packSize * unitSize, content);
          m_unitSize = unitSize;
       }
       return *this;
    }
 
-   std::ostream& Pack::print(std::ostream& ostr)
+   ostream& Pack::print(ostream& ostr)
    {
       Container::print(ostr);
+      ostr << ", " << noOfUnits() << " in a pack of " << size();
+      return ostr;
+   }
+
+   istream& Pack::read(istream& istr)
+   {
+      int val = 0;
+      bool invalid = true;
       if (*this)
       {
-         ostr << ", " << Container::capacity() << " in a pack of " << m_unitSize;
+         if (volume() < capacity())
+         {
+            print(cout);
+            cout << "\n> ";
+            do
+            {
+               istr >> val;
+               if (!istr)
+               {
+                  cout << "Invalid Integer, retry: ";
+               }
+               else if (val < 0 || val > size() - noOfUnits())
+               {
+                  cout << "Value out of range[1<=val<=" << size() - noOfUnits() << "]: ";
+               }
+               else
+               {
+                  invalid = false;
+               }
+            } while (invalid);
+            cout << "Added " << (*this += val) << endl;
+         }
+         else
+         {
+            cout << "Pack is full!, press <ENTER> to continue...";
+            istr.ignore();
+            istr.get();
+         }
       }
-      return ostr;
+      else
+      {
+         cout << "Broken Container, adding aborted! Press <ENTER> to continue....";
+         istr.get();
+      }
+      return istr;
+   }
+
+
+   std::ostream& operator<<(std::ostream& ostr, Pack& p)
+   {
+      return p.print(ostr);
+   }
+
+   std::istream& operator>>(std::istream& istr, Pack& p)
+   {
+      return p.read(istr);
    }
 
 }
