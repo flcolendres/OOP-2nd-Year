@@ -26,7 +26,7 @@ namespace sdds {
       Menu(const Menu& M);
       Menu& operator=(const Menu& M);
       virtual ~Menu();
-
+      unsigned int run() const;
    };
 }
 
