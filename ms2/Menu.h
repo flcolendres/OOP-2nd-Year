@@ -23,6 +23,9 @@ namespace sdds {
       unsigned int m_numOptions;
    public:
       Menu(unsigned int numOptions, const char* options);
+      Menu(const Menu& M);
+      Menu& operator=(const Menu& M);
+      virtual ~Menu();
 
    };
 }

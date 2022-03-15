@@ -26,10 +26,14 @@ namespace sdds {
 
    Status::Status(const Status& s)
    {
+      m_errCode = s.m_errCode;
       if (s.m_errDesc != nullptr)
       {
          ut.alocpy(m_errDesc, s.m_errDesc);
-         m_errCode = s.m_errCode;
+      }
+      else
+      {
+         m_errDesc = nullptr;
       }
    }
 
@@ -37,10 +41,10 @@ namespace sdds {
    {
       if (this != &s)
       {
+         m_errCode = s.m_errCode;
          if (s.m_errDesc != nullptr)
          {
             ut.alocpy(m_errDesc, s.m_errDesc);
-            m_errCode = s.m_errCode;
          }
       }
       return *this;

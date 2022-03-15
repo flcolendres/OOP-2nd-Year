@@ -31,4 +31,26 @@ namespace sdds
       }
    }
 
+   Menu::Menu(const Menu& M)
+   {
+      m_numOptions = M.m_numOptions;
+      if (M.m_numOptions < 15 || M.m_options != nullptr)
+         m_options = new char(ut.strlen(M.m_options) + 1);
+      else
+         m_options = nullptr;
+   }
+
+   Menu& Menu::operator=(const Menu& M)
+   {
+      if (this != &M)
+      {
+         m_numOptions = M.m_numOptions;
+         if (M.m_numOptions < 15 || M.m_options != nullptr)
+            m_options = new char(ut.strlen(M.m_options) + 1);
+         else
+            m_options = nullptr;
+      }
+      return *this;
+   }
+
 }
