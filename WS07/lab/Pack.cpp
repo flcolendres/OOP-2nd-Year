@@ -2,7 +2,7 @@
 * Francis Lloyd Colendres
 * flcolendres@myseneca.ca
 * 145498200
-* Feb. 27, 2022
+* Mar. 14, 2022
 * I have done all the coding by myself and only copied the code that my professor provided to complete my workshops and assignments.
 */
 #include <cstring>
@@ -70,6 +70,7 @@ namespace sdds
       {
          if (volume() < capacity())
          {
+            cout << "Add to ";
             print(cout);
             cout << "\n> ";
             do
@@ -81,7 +82,7 @@ namespace sdds
                }
                else if (val < 0 || val > size() - noOfUnits())
                {
-                  cout << "Value out of range[1<=val<=" << size() - noOfUnits() << "]: ";
+                  cout << "Value out of range [1<=val<=" << size() - noOfUnits() << "]: ";
                }
                else
                {
