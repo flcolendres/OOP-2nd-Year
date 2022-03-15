@@ -13,8 +13,10 @@ I have done all the coding by myself and only copied the code
 that my professor provided to complete my workshops and assignments.
 -----------------------------------------------------------*/
 
+#include <iostream>
 #include "Menu.h"
 #include "Utils.h"
+using namespace std;
 namespace sdds
 {
    Menu::Menu(unsigned int numOptions, const char* options)
@@ -60,8 +62,25 @@ namespace sdds
 
    unsigned int Menu::run() const
    {
-
-      return 0;
+      bool invalid = true;
+      int val = 0;
+      cout << m_options << "0- Exit" << endl;
+      cout << "> ";
+      do
+      {
+         cin >> val;
+         if (!cin)
+         {
+            cout << "Invalid Integer, retry: ";
+         }
+         else if (val < 0 || val > m_numOptions)
+         {
+            cout << "Value out of range [0<=val<=" << m_numOptions << "]: ";
+         }
+         else
+            invalid = false;
+      } while (invalid);
+      return val;
    }
 
 }
