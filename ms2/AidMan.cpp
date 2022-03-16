@@ -32,7 +32,8 @@ namespace sdds
 
    AidMan::AidMan()
    {
-
+      m_mainMenu.set(7, "1- List Items\n2- Add Item\n3- Remove Item\n4- Update Quantity\n5- Sort\n6- Ship Items\n7- New/Open Aid Database\n---------------------------------\n");
+      m_fileName = nullptr;
    }
 
    AidMan::~AidMan()

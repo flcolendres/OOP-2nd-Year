@@ -19,13 +19,14 @@ that my professor provided to complete my workshops and assignments.
 
 namespace sdds {
    class Menu {
-      char* m_options;
+      char* m_options{};
       unsigned int m_numOptions;
    public:
       Menu();
       Menu(unsigned int numOptions, const char* options);
-      Menu(const Menu& M);
-      Menu& operator=(const Menu& M);
+      Menu(const Menu& M) = delete;
+      Menu& operator=(const Menu& M) = delete;
+      Menu& set(unsigned int numOptions, const char* options);
       virtual ~Menu();
       unsigned int run() const;
    };

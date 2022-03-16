@@ -26,6 +26,11 @@ namespace sdds
    }
    Menu::Menu(unsigned int numOptions, const char* options)
    {
+      set(numOptions, options);
+   }
+
+   Menu& Menu::set(unsigned int numOptions, const char* options)
+   {
       if (numOptions > 15 || options == nullptr)
       {
          m_options = nullptr;
@@ -37,33 +42,7 @@ namespace sdds
          ut.strcpy(m_options, options);
          m_numOptions = numOptions;
       }
-   }
 
-   Menu::Menu(const Menu& M)
-   {
-      m_numOptions = M.m_numOptions;
-      if (M.m_numOptions <= 15 || M.m_options != nullptr)
-      {
-         m_options = new char(ut.strlen(M.m_options) + 1);
-         ut.strcpy(m_options, M.m_options);
-      }
-      else
-         m_options = nullptr;
-   }
-
-   Menu& Menu::operator=(const Menu& M)
-   {
-      if (this != &M)
-      {
-         m_numOptions = M.m_numOptions;
-         if (M.m_numOptions < 15 || M.m_options != nullptr)
-         {
-            m_options = new char(ut.strlen(M.m_options) + 1);
-            ut.strcpy(m_options, M.m_options);
-         }
-         else
-            m_options = nullptr;
-      }
       return *this;
    }
 

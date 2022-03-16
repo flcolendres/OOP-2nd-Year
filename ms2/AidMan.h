@@ -20,7 +20,7 @@ namespace sdds
 {
    class AidMan
    {
-      char* m_fileName;
+      char* m_fileName{};
       Menu m_mainMenu;
       unsigned int menu() const;
    public:
