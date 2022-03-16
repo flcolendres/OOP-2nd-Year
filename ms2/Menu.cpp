@@ -34,29 +34,36 @@ namespace sdds
       else
       {
          m_options = new char(ut.strlen(options) + 1);
+         ut.strcpy(m_options, options);
          m_numOptions = numOptions;
       }
    }
 
    Menu::Menu(const Menu& M)
    {
-      //m_numOptions = M.m_numOptions;
-      //if (M.m_numOptions <= 15 || M.m_options != nullptr)
-      //   m_options = new char(ut.strlen(M.m_options) + 1);
-      //else
-      //   m_options = nullptr;
+      m_numOptions = M.m_numOptions;
+      if (M.m_numOptions <= 15 || M.m_options != nullptr)
+      {
+         m_options = new char(ut.strlen(M.m_options) + 1);
+         ut.strcpy(m_options, M.m_options);
+      }
+      else
+         m_options = nullptr;
    }
 
    Menu& Menu::operator=(const Menu& M)
    {
-      //if (this != &M)
-      //{
-      //   m_numOptions = M.m_numOptions;
-      //   if (M.m_numOptions < 15 || M.m_options != nullptr)
-      //      m_options = new char(ut.strlen(M.m_options) + 1);
-      //   else
-      //      m_options = nullptr;
-      //}
+      if (this != &M)
+      {
+         m_numOptions = M.m_numOptions;
+         if (M.m_numOptions < 15 || M.m_options != nullptr)
+         {
+            m_options = new char(ut.strlen(M.m_options) + 1);
+            ut.strcpy(m_options, M.m_options);
+         }
+         else
+            m_options = nullptr;
+      }
       return *this;
    }
 
@@ -78,7 +85,7 @@ namespace sdds
          {
             cout << "Invalid Integer, retry: ";
          }
-         else if (val < 0 || val > m_numOptions)
+         else if (val < 0 || (unsigned int)val > m_numOptions)
          {
             cout << "Value out of range [0<=val<=" << m_numOptions << "]: ";
          }
