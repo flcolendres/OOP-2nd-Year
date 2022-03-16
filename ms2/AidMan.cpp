@@ -24,7 +24,7 @@ namespace sdds
    {
       cout << "Aid Management System Version 0.1" << endl <<
          "Date: " << Date() << endl <<
-         "Data file:  " << (m_fileName == nullptr ? "No file" : m_fileName) << endl <<
+         "Data file: " << (m_fileName == nullptr ? "No file" : m_fileName) << endl <<
          "---------------------------------\n";
       return m_mainMenu.run();
    }
