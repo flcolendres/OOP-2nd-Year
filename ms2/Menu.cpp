@@ -21,7 +21,6 @@ namespace sdds
 {
    Menu::Menu()
    {
-      m_options = nullptr;
       m_numOptions = 0;
    }
    Menu::Menu(unsigned int numOptions, const char* options)
@@ -32,14 +31,10 @@ namespace sdds
    Menu& Menu::set(unsigned int numOptions, const char* options)
    {
       if (numOptions > 15 || options == nullptr)
-      {
-         m_options = nullptr;
          m_numOptions = 0;
-      }
       else
       {
-         m_options = new char(ut.strlen(options) + 1);
-         ut.strcpy(m_options, options);
+         ut.alocpy(m_options, options);
          m_numOptions = numOptions;
       }
 
@@ -62,6 +57,8 @@ namespace sdds
          cin >> val;
          if (!cin)
          {
+            cin.clear();
+            cin.ignore(1000, '\n');
             cout << "Invalid Integer, retry: ";
          }
          else if (val < 0 || (unsigned int)val > m_numOptions)

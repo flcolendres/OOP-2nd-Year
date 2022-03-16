@@ -26,7 +26,6 @@ namespace sdds
          "Date: " << Date() << endl <<
          "Data file:  " << (m_fileName == nullptr ? "No file" : m_fileName) << endl <<
          "---------------------------------\n";
-
       return m_mainMenu.run();
    }
 
