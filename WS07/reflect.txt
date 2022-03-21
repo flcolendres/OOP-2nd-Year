@@ -1,0 +1,21 @@
+/**
+* Francis Lloyd Colendres
+* flcolendres@myseneca.ca
+* 145498200
+* March 16, 2022
+* I have done all the coding by myself and only copied the code that my professor provided to complete my workshops and assignments.
+*/
+
+In this workshop, I learned the concept of inheritance in between classes. The workshop was easy to understand because the concept was pretty straightforward.
+My professor provided analogies in his lecture which allowed me to understand inheritance. The workshop also gave me a better understanding of shadowing.
+If an identical function exists in both the derived and base class, the derived class overrides the functions of its base class. Virtual functions were not 
+applicable in this workshop; however, I still applied it to the destructor as good practice. Essentially, virtual function are functions that guarantees that
+the latest version of the function is called in the hierarchy of inheritance. I made my destructors virtual so that if I were to create a parent object pointing to a child class,
+it will ensure that the proper destructor is invoked and prevent memory leak. For some reason, I still earned a mark of 50%. No matter how much
+I try to prepare for the quiz, I would still get a low mark. I am not sure whether it is the imbalance distribution of points per question or I might not be studying enough.
+Hopefully at some point in the course, I can have a positive mindset in the course and not be discouraged towards a low mark.
+The 2nd milestone of the project was definitely a stressful assignment. I forgot the idea of prohibiting copy constructors and copy assignment. As a result, I had to spend hours thinking
+about properly implementing the copy constructor and copy assignment of the two modules. I also struggled in the initialization of main menu in AidMan module because I was getting segmentation faults. 
+I was writing the steps to dynamically allocate a member variable, but I realized that there is a function in Utils that does it for me. 
+I learned that I should always check the Utils module and see if I have any functions that I can reuse for my program and avoid
+developing a set of statements that would repeat throughout my application.
