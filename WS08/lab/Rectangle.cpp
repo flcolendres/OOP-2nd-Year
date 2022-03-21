@@ -22,7 +22,7 @@ namespace sdds
    {
       m_width = width;
       m_height = height;
-      if (m_height < 3 || m_width < ((int)strlen(label()) + 1))
+      if (m_height < 3 || m_width < strlen(label()) + 2 )
       {
          m_width = 0;
          m_height = 0;
@@ -48,15 +48,17 @@ namespace sdds
          for (i = 0; i <= m_width - 2; i++) ostr << "-";
          ostr << "+" << endl;
          // second line
-         ostr << "| ";
+         ostr << "|";
          ostr << label();
-         for (i = 0; i <= m_width - 2; i++) ostr << " ";
+         cout.width(m_width - 2);
+         cout.fill(' ');
          ostr << "|" << endl;
          // third line
          for (i = 0; i <= m_height - 3; i++)
          {
             ostr << "|";
-            for (i = 0; i <= m_width - 2; i++) ostr << " ";
+            cout.width(m_width - 2);
+            cout.fill(' ');
             ostr << "|" << endl;
          }
          // last line

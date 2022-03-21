@@ -20,7 +20,6 @@ namespace sdds
       Rectangle(const char* cstr, int width, int height);
       void getSpecs(std::istream& istr);
       void draw(std::ostream& ostr) const;
-
    };
 }
 #endif

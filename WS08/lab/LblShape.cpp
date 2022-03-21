@@ -21,6 +21,7 @@ namespace sdds
    }
    LblShape::LblShape(const char* cstr)
    {
+      delete[] m_label;
       m_label = new char(strlen(cstr) + 1);
       strcpy(m_label, cstr);
    }
