@@ -15,12 +15,10 @@ namespace sdds
    {
       char* m_label{};
    protected:
-      const char* label() const;
+      char* label() const;
    public:
       LblShape();
       LblShape(const char* cstr);
-      LblShape(const Shape& s) = delete;
-      LblShape& operator=(const Shape& s) = delete;
       void getSpecs(std::istream& istr);
       virtual ~LblShape();
    };

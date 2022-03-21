@@ -12,16 +12,16 @@
 using namespace std;
 namespace sdds
 {
-   const char* LblShape::label() const
+   char* LblShape::label() const
    {
       return m_label;
    }
    LblShape::LblShape()
    {
+
    }
    LblShape::LblShape(const char* cstr)
    {
-      delete[] m_label;
       m_label = new char(strlen(cstr) + 1);
       strcpy(m_label, cstr);
    }
