@@ -15,7 +15,7 @@ namespace sdds
    {
       char* m_label{};
    protected:
-      char label() const;
+      const char* label() const;
    public:
       LblShape();
       LblShape(const char* cstr);

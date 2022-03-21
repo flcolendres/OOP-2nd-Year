@@ -12,6 +12,13 @@
 using namespace std;
 namespace sdds
 {
+   const char* LblShape::label() const
+   {
+      return m_label;
+   }
+   LblShape::LblShape()
+   {
+   }
    LblShape::LblShape(const char* cstr)
    {
       m_label = new char(strlen(cstr) + 1);
@@ -24,5 +31,9 @@ namespace sdds
       istr.ignore(',');
       m_label = new char(strlen(input) + 1);
       strcpy(m_label, input);
+   }
+   LblShape::~LblShape()
+   {
+      delete[] m_label;
    }
 }

@@ -13,7 +13,14 @@ namespace sdds
 {
    class Rectangle : public LblShape 
    {
-       
+      int m_width;
+      int m_height;
+   public:
+      Rectangle();
+      Rectangle(const char* cstr, int width, int height);
+      void getSpecs(std::istream& istr);
+      void draw(std::ostream& ostr) const;
+
    };
 }
 #endif

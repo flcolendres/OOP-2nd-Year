@@ -12,10 +12,15 @@ namespace sdds
 {
    ostream& operator<<(ostream& ostr, Shape& s)
    {
-      return s.draw(ostr);
+      s.draw(ostr);
+      return ostr;
    }
    istream& operator>>(istream& istr, Shape& s)
    {
-      return s.getSpecs(istr);
+      s.getSpecs(istr);
+      return istr;
+   }
+   Shape::~Shape()
+   {
    }
 }
