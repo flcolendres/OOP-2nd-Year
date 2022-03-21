@@ -18,7 +18,6 @@ namespace sdds
    }
    LblShape::LblShape()
    {
-
    }
    LblShape::LblShape(const char* cstr)
    {
