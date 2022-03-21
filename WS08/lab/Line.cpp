@@ -7,20 +7,30 @@
 */
 #include <iostream>
 #include "Line.h"
-
+using namespace std;
 namespace sdds
 {
-   Shape::Shape() : LblShape()
+   Line::Line() : LblShape()
    {
       m_length = 0;
    }
-   Shape::Shape(const char* cstr, int length)
+   Line::Line(const char* cstr, int length) : LblShape(cstr)
    {
+      m_length = length;
    }
-   void Shape::getSpecs(std::istream& istr)
+   void Line::getSpecs(istream& istr)
    {
+      LblShape::getSpecs(istr);
+      istr >> m_length;
+      istr.ignore('\n');
    }
-   void Shape::draw(std::ostream& ostr) const
+   void Line::draw(ostream& ostr) const
    {
+      int i;
+      if (m_length > 0 && label())
+      {
+         ostr << label() << endl;
+         for (i = 0; i <= m_length; i++) ostr << "=";
+      }
    }
 }

@@ -11,12 +11,12 @@
 #include "LblShape.h"
 namespace sdds
 {
-   class Shape : public LblShape
+   class Line : public LblShape
    {
-      char* m_length;
+      int m_length;
    public:
-      Shape();
-      Shape(const char* cstr, int length);
+      Line();
+      Line(const char* cstr, int length);
       void getSpecs(std::istream& istr);
       void draw(std::ostream& ostr) const;
    };
