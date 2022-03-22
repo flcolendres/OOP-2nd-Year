@@ -21,7 +21,7 @@ namespace sdds
    }
    LblShape::LblShape(const char* cstr)
    {
-      m_label = new char(strlen(cstr) + 1);
+      m_label = new char[strlen(cstr) + 1];
       strcpy(m_label, cstr);
    }
    void LblShape::getSpecs(istream& istr)
@@ -29,11 +29,12 @@ namespace sdds
       char input[1000];
       istr >> input;
       istr.ignore(',');
-      m_label = new char(strlen(input) + 1);
+      m_label = new char[strlen(input) + 1];
       strcpy(m_label, input);
    }
    LblShape::~LblShape()
    {
       delete[] m_label;
+      m_label = nullptr;
    }
 }

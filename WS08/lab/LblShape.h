@@ -19,6 +19,8 @@ namespace sdds
    public:
       LblShape();
       LblShape(const char* cstr);
+      LblShape(const LblShape& s) = delete;
+      LblShape& operator=(const LblShape& s) = delete;
       void getSpecs(std::istream& istr);
       virtual ~LblShape();
    };
