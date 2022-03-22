@@ -44,25 +44,25 @@ namespace sdds
       {
          // first line
          ostr << "+";
-         for (i = 0; i <= m_width - 2; i++) ostr << "-";
+         for (i = 1; i <= m_width - 2; i++) ostr << "-";
          ostr << "+" << endl;
          // second line
          ostr << "|";
          ostr << label();
-         ostr.width(m_width - (int)strlen(label()));
+         ostr.width(m_width - (int)strlen(label()) - 1);
          ostr.fill(' ');
          ostr << "|" << endl;
          // third line
          for (i = 0; i < m_height - 3; i++)
          {
             ostr << "|";
-            ostr.width(m_width);
+            ostr.width(m_width - 1);
             ostr.fill(' ');
             ostr << "|" << endl;
          }
          // last line
          ostr << "+";
-         for (i = 0; i <= m_width - 2; i++) ostr << "-";
+         for (i = 1; i <= m_width - 2; i++) ostr << "-";
          ostr << "+";
       }
 
