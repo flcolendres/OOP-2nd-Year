@@ -27,8 +27,8 @@ namespace sdds
    void LblShape::getSpecs(istream& istr)
    {
       char input[1000];
-      istr >> input;
-      istr.ignore(',');
+      istr.getline(input, 1000, ',');
+      delete[] m_label;
       m_label = new char[strlen(input) + 1];
       strcpy(m_label, input);
    }

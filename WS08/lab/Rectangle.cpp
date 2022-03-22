@@ -32,9 +32,9 @@ namespace sdds
    {
       LblShape::getSpecs(istr);
       istr >> m_width;
-      istr.ignore('\n');
+      istr.get();
       istr >> m_height;
-      istr.ignore('\n');
+      istr.ignore(1000, '\n');
    }
 
    void Rectangle::draw(std::ostream& ostr) const
@@ -49,21 +49,21 @@ namespace sdds
          // second line
          ostr << "|";
          ostr << label();
-         ostr.width(m_width - 2);
+         ostr.width(m_width - (int)strlen(label()));
          ostr.fill(' ');
          ostr << "|" << endl;
          // third line
-         for (i = 0; i <= m_height - 3; i++)
+         for (i = 0; i < m_height - 3; i++)
          {
             ostr << "|";
-            ostr.width(m_width - 2);
+            ostr.width(m_width);
             ostr.fill(' ');
             ostr << "|" << endl;
          }
          // last line
          ostr << "+";
          for (i = 0; i <= m_width - 2; i++) ostr << "-";
-         ostr << "+" << endl;
+         ostr << "+";
       }
 
    }

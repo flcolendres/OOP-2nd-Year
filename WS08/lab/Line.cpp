@@ -22,7 +22,7 @@ namespace sdds
    {
       LblShape::getSpecs(istr);
       istr >> m_length;
-      istr.ignore('\n');
+      istr.ignore(1000,'\n');
    }
    void Line::draw(ostream& ostr) const
    {
@@ -30,7 +30,7 @@ namespace sdds
       if (m_length > 0 && label())
       {
          ostr << label() << endl;
-         for (i = 0; i <= m_length; i++) ostr << "=";
+         for (i = 0; i < m_length; i++) ostr << "=";
       }
    }
 }
