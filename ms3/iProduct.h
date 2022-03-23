@@ -19,34 +19,34 @@ namespace sdds
 {
    class iProduct
    {
-      virtual int readSku(std::istream& istr) = 0;
+      int readSku(std::istream& istr);
       // to reduce the quantity on hand
-      virtual int operator-=(int qty) = 0;
+      int operator-=(int qty);
       // to increase the quantity on hand
-      virtual int operator+=(int qty) = 0;
+      int operator+=(int qty);
       // returns the price of the produce
-      virtual operator double()const = 0;
+      operator double()const;
       // returns if the iProduct is in a good state
-      virtual operator bool()const = 0;
+      operator bool()const;
       // returns the number of products needed
-      virtual int qtyNeeded()const = 0;
+      int qtyNeeded()const;
       // retuns the quantity on hand
-      virtual int qty()const = 0;
+      int qty()const;
       // determines if the iProduct is displayed in a linear format or 
       // descriptive format
-      virtual void Linear(bool isLinear) = 0;
+      void Linear(bool isLinear);
       // saves the iProduct into a file
-      virtual std::ofstream& save(std::ofstream& ofstr)const = 0;
+      std::ofstream& save(std::ofstream& ofstr)const;
       // loads an iProduct from a file
-      virtual std::ifstream& load(std::ifstream& ifstr) = 0;
+      std::ifstream& load(std::ifstream& ifstr);
       // displays the iProduct on the screen
-      virtual std::ostream& display(std::ostream& ostr)const = 0;
+      std::ostream& display(std::ostream& ostr)const;
       // reads the iProduct from the console
-      virtual std::istream& read(std::istream& istr) = 0;
+      std::istream& read(std::istream& istr);
       // return true if the sku is a match to the iProduct's sku
-      virtual bool operator==(int sku)const = 0;
+      bool operator==(int sku)const;
       // rtrns true if the description is found in the iPorduct's description
-      virtual bool operator==(const char* description)const = 0;
+      bool operator==(const char* description)const;
 
    };
 }
