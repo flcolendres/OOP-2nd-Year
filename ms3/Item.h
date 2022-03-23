@@ -36,6 +36,21 @@ namespace sdds
       Item(const Item& I);
       Item& operator=(const Item& I);
       ~Item();
+      int qtyNeeded()const;
+      int qty()const;
+      operator double()const;
+      operator bool()const;
+      int operator-=(int qty);
+      int operator+=(int qty);
+      void linear(bool islinear);
+      Item& clear();
+      bool operator==(int sku)const;
+      bool operator==(const char* description)const;
+      std::ofstream& save(std::ofstream& ofstr)const;
+      std::ifstream& load(std::ifstream& ifstr);
+      std::ostream& display(std::ostream& ostr)const;
+      std::istream& read(std::istream& istr);
+      int readSku(std::istream& istr);
    };
 
 }

@@ -26,10 +26,13 @@ namespace sdds {
       int daysOfMon(int mon, int year)const;
       void testMode(bool testmode = true);
       void alocpy(char*& destination, const char* source);
-      int getint(const char* prompt = nullptr);
+      int getint(const char* prompt = nullptr, std::istream& istr = std::cin);
       int getint(int min, int max, const char* prompt = nullptr, const char* errMes = nullptr);
+      double getdouble(double min, double max, const char* prompt = nullptr);
       void strcpy(char* des, const char* src);
       int strlen(const char* str);
+      const char* strstr(const char* str, const char* find);
+      int strncmp(const char* s1, const char* s2, int len);
    };
    extern Utils ut;
 }

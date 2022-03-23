@@ -26,4 +26,8 @@ namespace sdds
       ip.read(istr);
       return istr;
    }
+   iProduct::~iProduct() 
+   {
+
+   }
 }
