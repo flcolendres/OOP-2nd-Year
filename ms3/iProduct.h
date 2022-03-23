@@ -19,6 +19,7 @@ namespace sdds
 {
    class iProduct
    {
+   public:
       int readSku(std::istream& istr);
       // to reduce the quantity on hand
       int operator-=(int qty);
@@ -47,7 +48,10 @@ namespace sdds
       bool operator==(int sku)const;
       // rtrns true if the description is found in the iPorduct's description
       bool operator==(const char* description)const;
+      virtual ~iProduct();
 
    };
+   std::ostream& operator<<(std::ostream& ostr, iProduct& ip);
+   std::istream& operator>>(std::istream& istr, iProduct& ip);
 }
 #endif
