@@ -5,7 +5,7 @@
 * Mar. 27, 2022
 * I have done all the coding by myself and only copied the code that my professor provided to complete my workshops and assignments.
 */
-#define CRT_SECURE_NO_WARNINGS
+#define _CRT_SECURE_NO_WARNINGS
 #include "Text.h"
 #include <iostream>
 #include <cstring>
@@ -27,6 +27,7 @@ namespace sdds
          m_content = new char[strlen(T.m_content) + 1];
          strcpy(m_content, T.m_content);
       }
+      return *this;
    }
    Text::~Text()
    {
@@ -66,16 +67,17 @@ namespace sdds
       }
       return ostr;
    }
-   const char& Text::operator[](int index) const
+   const char& Text::operator[](int index) const // fix later
    {
-      int i;
+      char c;
       if (m_content)
       {
-         if (index > (int)strlen(m_content) - 1)
+         if (index < (int)strlen(m_content) - 1)
          {
-            for (i = 0; i < index; i++) cout << m_content[i];
+            c = m_content[index];
          }
       }
+      return c;
    }
    std::ostream& operator<<(std::ostream& ostr, const Text& T)
    {
