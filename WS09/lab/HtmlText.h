@@ -7,6 +7,18 @@
 */
 #ifndef SDDS_HTMLTEXT_H
 #define SDDS_HTMLTEXT_H
-namespace sdds {
+#include "Text.h"
+namespace sdds 
+{
+   class HtmlText : public Text 
+   {
+      char* m_title;
+   public:
+      HtmlText(const char* title = nullptr);
+      HtmlText(const HtmlText& ht);
+      HtmlText& operator=(const HtmlText& ht);
+      virtual ~HtmlText();
+      std::ostream& write(std::ostream& ostr) const;
+   };
 }
 #endif
