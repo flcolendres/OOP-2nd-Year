@@ -20,9 +20,11 @@ namespace sdds
       virtual ~Text();
       std::istream& read(std::istream& istr);
       int getFileLength(std::istream& is);
-      virtual std::ostream& write(std::ostream& ostr);
+      virtual std::ostream& write(std::ostream& ostr) const;
    protected:
       const char& operator[](int index)const;
    };
+   std::ostream& operator<<(std::ostream& ostr, const Text& T);
+   std::istream& operator>>(std::istream& istr, Text& T);
 }
 #endif

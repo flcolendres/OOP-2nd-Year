@@ -58,6 +58,14 @@ namespace sdds
       }
       return len;
    }
+   std::ostream& Text::write(std::ostream& ostr) const
+   {
+      if (m_content) 
+      {
+         ostr << m_content;
+      }
+      return ostr;
+   }
    const char& Text::operator[](int index) const
    {
       int i;
@@ -68,5 +76,13 @@ namespace sdds
             for (i = 0; i < index; i++) cout << m_content[i];
          }
       }
+   }
+   std::ostream& operator<<(std::ostream& ostr, const Text& T)
+   {
+      return T.write(ostr);
+   }
+   std::istream& operator>>(std::istream& istr, Text& T)
+   {
+      return T.read(istr);
    }
 }
