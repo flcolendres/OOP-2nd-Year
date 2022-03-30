@@ -70,10 +70,10 @@ namespace sdds
       }
       return ostr;
    }
-   const char& Text::operator[](int index) const // fix later
+   const char& Text::operator[](int index) const
    {
       char c = '\0';
-      if (m_content[index])
+      if (m_content[index] > 0)
       {
          if (index <= (int)strlen(m_content) - 1)
          {
