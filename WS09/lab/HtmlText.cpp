@@ -58,7 +58,7 @@ namespace sdds
          ostr << "<h1>" << m_title << "</h1>\n";
       /*ostr << "&lt;h1&gt;" << m_title << "&lt;/h1&gt;";*/
 
-      for (i = 0; operator[](i); i++)
+      for (i = 0; operator[](i) > 0; i++)
       {
          if (operator[](i) == ' ')
          {

@@ -72,15 +72,7 @@ namespace sdds
    }
    const char& Text::operator[](int index) const
    {
-      char c = '\0';
-      if (m_content[index] > 0)
-      {
-         if (index <= (int)strlen(m_content) - 1)
-         {
-            c = m_content[index];
-         }
-      }
-      return c;
+      return m_content[index];
    }
    std::ostream& operator<<(std::ostream& ostr, const Text& T)
    {
