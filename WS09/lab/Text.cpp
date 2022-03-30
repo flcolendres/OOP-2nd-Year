@@ -14,7 +14,6 @@ namespace sdds
 {
    Text::Text()
    {
-      m_content = nullptr;
    }
    Text::Text(const Text& T)
    {
@@ -24,6 +23,7 @@ namespace sdds
    {
       if (this != &T)
       {
+         delete[] m_content;
          m_content = new char[strlen(T.m_content) + 1];
          strcpy(m_content, T.m_content);
       }
@@ -35,13 +35,16 @@ namespace sdds
    }
    std::istream& Text::read(std::istream& istr)
    {
+      int i;
+      int length = getFileLength(istr);
       delete[] m_content;
-      m_content = new char[getFileLength(istr) + 1];
-      istr >> m_content;
-      if (istr)
+      m_content = new char[length + 1];
+      for (i = 0; i < length - 1; i++)
       {
+         m_content[i] = istr.get();
          istr.clear();
       }
+      if (i) m_content[i] = '\0';
       return istr;
    }
    int Text::getFileLength(std::istream& is)
@@ -61,7 +64,7 @@ namespace sdds
    }
    std::ostream& Text::write(std::ostream& ostr) const
    {
-      if (m_content) 
+      if (m_content)
       {
          ostr << m_content;
       }
@@ -69,10 +72,10 @@ namespace sdds
    }
    const char& Text::operator[](int index) const // fix later
    {
-      char c;
-      if (m_content)
+      char c = '\0';
+      if (m_content[index])
       {
-         if (index < (int)strlen(m_content) - 1)
+         if (index <= (int)strlen(m_content) - 1)
          {
             c = m_content[index];
          }

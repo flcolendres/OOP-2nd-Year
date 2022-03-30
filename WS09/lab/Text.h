@@ -12,7 +12,7 @@ namespace sdds
 {
    class Text
    {
-      char* m_content;
+      char* m_content{};
    public:
       Text();
       Text(const Text& T);

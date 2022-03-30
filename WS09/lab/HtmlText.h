@@ -12,7 +12,7 @@ namespace sdds
 {
    class HtmlText : public Text 
    {
-      char* m_title;
+      char* m_title{};
    public:
       HtmlText(const char* title = nullptr);
       HtmlText(const HtmlText& ht);
