@@ -16,7 +16,7 @@ that my professor provided to complete my workshops and assignments.
 #include <fstream>
 #include "Perishable.h"
 #include "Utils.h"
-
+using namespace std;
 namespace sdds
 {
    Perishable::Perishable() : Item()
@@ -101,8 +101,10 @@ namespace sdds
       else if (linear())
       {
          Item::display(ostr);
-         if (m_instruction && m_instruction[0] != ' ') ostr << "*";
-         else ostr << " ";
+         if (m_instruction && m_instruction[0] != ' ')
+            ostr << "*";
+         else
+            ostr << " ";
          ostr << m_expiry;
       }
       else if (!linear())
@@ -122,6 +124,23 @@ namespace sdds
    }
    std::istream& Perishable::read(std::istream& istr)
    {
+      char temp[1000];
+      Item::read(istr);
+      delete[] m_instruction;
+      m_instruction = nullptr;
+      cout << "Expiry date (YYMMDD): ";
+      m_expiry.Date::read(istr);
+      istr.ignore(1000, '\n');
+      cout << "Handling Instructions, ENTER to skip: ";
+      if (istr.peek() != '\n')
+      {
+         istr >> temp;
+         ut.alocpy(m_instruction, temp);
+      }
+      if (istr.fail())
+      {
+         m_state = "Perishable console date entry failed!";
+      }
       return istr;
    }
 }
