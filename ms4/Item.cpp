@@ -7,7 +7,7 @@ Author: Francis Lloyd Colendres  2022-03-12
 Revision History
 -----------------------------------------------------------
 Date          Reason
-
+03-31         Updated copy constructor
 -----------------------------------------------------------
 I have done all the coding by myself and only copied the code
 that my professor provided to complete my workshops and assignments.
@@ -31,13 +31,7 @@ namespace sdds
    }
    Item::Item(const Item& I)
    {
-      m_price = I.m_price;
-      m_qty = I.m_qty;
-      m_qtyNeeded = I.m_qtyNeeded;
-      ut.alocpy(m_desc, I.m_desc);
-      m_linear = I.m_linear;
-      m_state = I.m_state;
-      m_sku = I.m_sku;
+      operator=(I);
    }
    Item& Item::operator=(const Item& I)
    {

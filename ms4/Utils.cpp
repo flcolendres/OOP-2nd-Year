@@ -7,6 +7,7 @@ Author: Francis Lloyd Colendres  2022-03-12
 Revision History
 -----------------------------------------------------------
 Date          Reason
+03-31         Removed cctype header file
 -----------------------------------------------------------
 I have done all the coding by myself and only copied the code
 that my professor provided to complete my workshops and assignments.
@@ -14,7 +15,6 @@ that my professor provided to complete my workshops and assignments.
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <ctime>
-#include <cctype>
 #include "Utils.h"
 using namespace std;
 namespace sdds {

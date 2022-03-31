@@ -8,6 +8,7 @@ Revision History
 -----------------------------------------------------------
 Date          Reason
 03/11         Redefined operator <<
+03/31         Updated copy constructor
 -----------------------------------------------------------
 I have done all the coding by myself and only copied the code
 that my professor provided to complete my workshops and assignments.
@@ -26,15 +27,7 @@ namespace sdds {
 
    Status::Status(const Status& s)
    {
-      m_errCode = s.m_errCode;
-      if (s.m_errDesc != nullptr)
-      {
-         ut.alocpy(m_errDesc, s.m_errDesc);
-      }
-      else
-      {
-         m_errDesc = nullptr;
-      }
+      operator=(s);
    }
 
    Status& Status::operator=(const Status& s)
