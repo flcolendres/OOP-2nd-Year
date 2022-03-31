@@ -65,7 +65,7 @@ namespace sdds
          //   writes a tab
          ofstr << "\t";
          //   writes the handling instructions, if handling instructions existand the attribute is not empty.
-         if (m_instruction) ofstr << m_instruction;
+         if (m_instruction && m_instruction[0] != ' ') ofstr << m_instruction;
          //   writes a tab
          ofstr << "\t";
          //   writes an unformatted copy of the expiry date
@@ -91,8 +91,37 @@ namespace sdds
       ifstr.ignore(1000, '\n');
       //if the ifstream object has failed, it will set the state of the Item 
       //to "Input file stream read (perishable) failed!"
-      if (ifstr.fail())
-         Item::m_state = "Input file stream read (perishable) failed!";
+      if (ifstr.fail()) Item::m_state = "Input file stream read (perishable) failed!";
       return ifstr;
+   }
+   std::ostream& Perishable::display(std::ostream& ostr) const
+   {
+      if (*this)
+         ostr << m_state;
+      else if (linear())
+      {
+         Item::display(ostr);
+         if (m_instruction && m_instruction[0] != ' ') ostr << "*";
+         else ostr << " ";
+         ostr << m_expiry;
+      }
+      else if (!linear())
+      {
+         ostr << "Perishable ";
+         Item::display(ostr);
+         ostr << "Expiry date: ";
+         ostr << m_expiry;
+         if (m_instruction && m_instruction[0] != ' ')
+         {
+            ostr << "Handling Instructions: ";
+            ostr << m_instruction;
+         }
+         ostr << "\n";
+      }
+      return ostr;
+   }
+   std::istream& Perishable::read(std::istream& istr)
+   {
+      return istr;
    }
 }
