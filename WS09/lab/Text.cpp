@@ -39,12 +39,12 @@ namespace sdds
       int length = getFileLength(istr);
       delete[] m_content;
       m_content = new char[length + 1];
-      for (i = 0; i < length - 1; i++)
+      for (i = 0; i < length; i++)
       {
          m_content[i] = istr.get();
-         istr.clear();
+         if (!istr) istr.clear();
       }
-      if (i) m_content[i] = '\0';
+      m_content[i] = '\0';
       return istr;
    }
    int Text::getFileLength(std::istream& is)

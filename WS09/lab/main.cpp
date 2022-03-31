@@ -35,7 +35,7 @@ int main() {
    Text Y;
    Text Z;
    ifstream test("test.txt");
-   ifstream dcwrLittle("dcwrLittle.txt");
+   ifstream dcwrLittle("dcwr.txt");
    test >> T;
    dcwrLittle >> Y;
    Y = T;
