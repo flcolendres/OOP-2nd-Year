@@ -21,8 +21,7 @@ namespace sdds
 {
    Perishable::Perishable() : Item()
    {
-      m_expiry = Date();
-      m_instruction = nullptr;
+
    }
 
    Perishable::Perishable(const Perishable& P)
@@ -34,8 +33,13 @@ namespace sdds
    {
       if (this != &P)
       {
+         Item:: operator=(P);
          m_expiry = P.m_expiry;
          ut.alocpy(m_instruction, P.m_instruction);
+         if (m_instruction == nullptr)
+         {
+            m_state = "Empty";
+         }
       }
       return *this;
    }
@@ -78,30 +82,27 @@ namespace sdds
    std::ifstream& Perishable::load(std::ifstream& ifstr)
    {
       char temp[1000];
-      //calls the load of the Base class.
       Item::load(ifstr);
-      //reads the handling instructions dynamically into the handling instructions attribute
       ifstr.getline(temp, 1000, '\t');
       ut.alocpy(m_instruction, temp);
-      //ignores the tab
-      ifstr.ignore(1000, '\t');
-      //reads the expiry date
       m_expiry.Date::read(ifstr);
-      //ignores the newline.
+      ifstr.clear();
       ifstr.ignore(1000, '\n');
-      //if the ifstream object has failed, it will set the state of the Item 
-      //to "Input file stream read (perishable) failed!"
-      if (ifstr.fail()) Item::m_state = "Input file stream read (perishable) failed!";
+      if (ifstr.fail() || !m_state)
+      {
+         m_state = "Input file stream read (perishable) failed!";
+         ifstr.setstate(ios::badbit);
+      }
       return ifstr;
    }
    std::ostream& Perishable::display(std::ostream& ostr) const
    {
-      if (*this)
+      if (!*this)
          ostr << m_state;
       else if (linear())
       {
          Item::display(ostr);
-         if (m_instruction && m_instruction[0] != ' ')
+         if (m_instruction && m_instruction[0] != '\0')
             ostr << "*";
          else
             ostr << " ";
@@ -113,9 +114,9 @@ namespace sdds
          Item::display(ostr);
          ostr << "Expiry date: ";
          ostr << m_expiry;
-         if (m_instruction && m_instruction[0] != ' ')
+         if (m_instruction && m_instruction[0] != '\0')
          {
-            ostr << "Handling Instructions: ";
+            ostr << endl << "Handling Instructions: ";
             ostr << m_instruction;
          }
          ostr << "\n";
@@ -134,10 +135,10 @@ namespace sdds
       cout << "Handling Instructions, ENTER to skip: ";
       if (istr.peek() != '\n')
       {
-         istr >> temp;
+         istr.getline(temp, 1000, '\n');
          ut.alocpy(m_instruction, temp);
       }
-      if (istr.fail())
+      if (!istr)
       {
          m_state = "Perishable console date entry failed!";
       }

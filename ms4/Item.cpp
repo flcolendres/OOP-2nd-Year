@@ -125,7 +125,7 @@ namespace sdds
       ifstr >> m_qtyNeeded;
       ifstr >> m_price;
       ifstr.get();
-      if (!ifstr)
+      if (ifstr.fail())
       {
          m_state = "Input file stream read failed!";
       }
@@ -139,14 +139,18 @@ namespace sdds
          if (m_linear)
          {
             ostr << m_sku << " | ";
-            if (ut.strlen(m_desc) <= 35)
+            ostr.fill(' ');
+            if (m_desc != nullptr)
             {
-               ostr.setf(ios::left);
-               ostr.width(35);
-               ostr << m_desc;
+               if (ut.strlen(m_desc) <= 35)
+               {
+                  ostr.setf(ios::left);
+                  ostr.width(35);
+                  ostr << m_desc;
+               }
+               else
+                  for (i = 0; m_desc[i] != '\0' && i < 35; i++) ostr << m_desc[i];
             }
-            else
-               for (i = 0; m_desc[i] != '\0' && i < 35; i++) ostr << m_desc[i];
             ostr << " | ";
             ostr.setf(ios::right);
             ostr.width(4);

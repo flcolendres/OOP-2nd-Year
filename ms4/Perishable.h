@@ -15,6 +15,8 @@ that my professor provided to complete my workshops and assignments.
 
 #ifndef SDDS_PERISHABLE_H
 #define SDDS_PERISHABLE_H
+#include <iostream>
+#include <fstream>
 #include "Item.h"
 #include "Date.h"
 namespace sdds
@@ -22,7 +24,7 @@ namespace sdds
    class Perishable : public Item
    {
       Date m_expiry;
-      char* m_instruction;
+      char* m_instruction{};
    public:
       Perishable();
       Perishable(const Perishable& P);

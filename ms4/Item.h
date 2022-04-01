@@ -46,11 +46,11 @@ namespace sdds
       Item& clear();
       bool operator==(int sku)const;
       bool operator==(const char* description)const;
-      std::ofstream& save(std::ofstream& ofstr)const;
-      std::ifstream& load(std::ifstream& ifstr);
-      std::ostream& display(std::ostream& ostr)const;
-      std::istream& read(std::istream& istr);
-      int readSku(std::istream& istr);
+      virtual std::ofstream& save(std::ofstream& ofstr)const;
+      virtual std::ifstream& load(std::ifstream& ifstr);
+      virtual std::ostream& display(std::ostream& ostr)const;
+      virtual std::istream& read(std::istream& istr);
+      virtual int readSku(std::istream& istr);
    };
 
 }
