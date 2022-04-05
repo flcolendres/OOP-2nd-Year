@@ -100,12 +100,13 @@ namespace sdds
 
    void AidMan::load()
    {
-
+      int input;
       int i = 0;
+      bool valid;
       save();
       deallocate();
       ifstream ifstr(m_fileName);
-      if (ifstr.fail())
+      if (!ifstr)
       {
          cout << "Failed to open " << m_fileName << " for reading!" << endl <<
            "Would you like to create a new data file?" << endl <<
@@ -117,13 +118,52 @@ namespace sdds
       }
       else
       {
-         if (ifstr.peek())
+         while (ifstr.peek())
          {
-            if (Perishable::expiry() != nullptr)
+            input = ifstr.get();
+            if (input == 1)
             {
-
+               for (i = 0, valid = false; i < sdds_max_num_items; i++)
+               {
+                  if (m_iproduct[i] != 0)
+                  {
+                     Perishable P;
+                     *m_iproduct[i] = P;
+                     valid = true;
+                  }
+               }
             }
+            else if (input > 1)
+            {
+               for (i = 0, valid = false; i < sdds_max_num_items; i++)
+               {
+                  if (m_iproduct[i] != 0)
+                  {
+                     Item I;
+                     *m_iproduct[i] = I;
+                     valid = true;
+                  }
+               }
+            }
+            else
+            {
+               ifstr.setstate(ios::badbit);
+            }
+            if (*m_iproduct[i - 1])
+            {
+               m_iproduct[i - 1]->load(ifstr);
+               if (m_iproduct[i-1]->operator bool())
+               {
+                  m_numOfIproduct++;
+               }
+               else
+               {
+                  deallocate();
+               }
+            }
+
          }
+
       }
    }
 
