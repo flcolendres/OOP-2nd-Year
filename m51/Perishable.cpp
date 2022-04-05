@@ -7,7 +7,7 @@ Author: Francis Lloyd Colendres  2022-03-31
 Revision History
 -----------------------------------------------------------
 Date          Reason
-
+04-05         Cleared istr in read.
 -----------------------------------------------------------
 I have done all the coding by myself and only copied the code
 that my professor provided to complete my workshops and assignments.
@@ -126,6 +126,7 @@ namespace sdds
    std::istream& Perishable::read(std::istream& istr)
    {
       char temp[1000];
+      istr.clear();
       Item::read(istr);
       delete[] m_instruction;
       m_instruction = nullptr;

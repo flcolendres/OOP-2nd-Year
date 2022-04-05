@@ -36,6 +36,7 @@ namespace sdds
       void save();
       void deallocate();
       void load();
+      int list(const char* sub_desc = nullptr);
    };
 }
 #endif

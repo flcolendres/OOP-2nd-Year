@@ -1,5 +1,5 @@
 /* ------------------------------------------------------
-Final project Milestone 51
+Final project Milestone 2
 Module: Utils
 Filename: Utils.cpp
 Version 1.0
@@ -7,6 +7,7 @@ Author: Francis Lloyd Colendres  2022-03-12
 Revision History
 -----------------------------------------------------------
 Date          Reason
+03-31         Removed cctype header file
 -----------------------------------------------------------
 I have done all the coding by myself and only copied the code
 that my professor provided to complete my workshops and assignments.
@@ -14,7 +15,6 @@ that my professor provided to complete my workshops and assignments.
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <ctime>
-#include <cctype>
 #include "Utils.h"
 using namespace std;
 namespace sdds {
@@ -32,23 +32,25 @@ namespace sdds {
          strcpy(destination, source);
       }
    }
-   int Utils::getint(const char* prompt) {
+   int Utils::getint(const char* prompt, istream& istr) {
       bool valid = false;
       int input = 0;
       if (prompt != nullptr)
       {
          cout << prompt;
-         while (!valid)
+      }
+      while (!valid)
+      {
+         istr >> input;
+         if (istr)
          {
-            input = cin.peek();
-            if (isdigit(input))
-            {
-               valid = true;
-            }
-            else
-            {
-               cout << "Invalid Integer, retry: ";
-            }
+            valid = true;
+         }
+         else
+         {
+            cin.clear();
+            cin.ignore(1000, '\n');
+            cout << "Invalid Integer, retry: ";
          }
       }
       return input;
@@ -57,24 +59,51 @@ namespace sdds {
    {
       bool valid = false;
       int val = 0;
-      if (prompt != nullptr)
+      val = getint(prompt);
+      while (!valid)
       {
-         val = getint(prompt);
-         while (!valid)
+         if (val >= min && val <= max)
          {
-            if (val > min && val < max)
-            {
-               valid = true;
-            }
+            valid = true;
+         }
+         else
+         {
+            if (errMes != nullptr)
+               cout << errMes << ", retry: ";
             else
             {
-               if (errMes != nullptr)
-                  cout << errMes << ", retry: ";
-               else
-                  cout << "Value out of range " << "[" << min << "<=val<=" << max << "]: ";
-               val = getint(prompt);
+               cout << "Value out of range " << "[" << min << "<=val<=" << max << "]: ";
+               val = getint();
             }
          }
+      }
+      return val;
+   }
+   double Utils::getdouble(double min, double max, const char* prompt)
+   {
+      bool valid = false;
+      double val = 0;
+      if (prompt != nullptr)
+      {
+         cout << prompt;
+      }
+      while (!valid)
+      {
+         cin >> val;
+         if (!cin)
+         {
+            cin.clear();
+            cin.ignore(1000, '\n');
+            cout << "Invalid number, retry: ";
+         }
+         else if (val < min || val > max)
+         {
+            cout.precision(2);
+            cout.setf(ios::fixed);
+            cout << "Value out of range [" << min << "<=val<=" << max << "]: ";
+         }
+         else
+            valid = true;
       }
       return val;
    }
@@ -106,6 +135,27 @@ namespace sdds {
       int len;
       for (len = 0; str[len]; len++);
       return len;
+   }
+
+   const char* Utils::strstr(const char* str, const char* find)
+   {
+      {
+         const char* faddress = nullptr;
+         int i, flen = strlen(find), slen = strlen(str);
+         for (i = 0; i <= slen - flen && strncmp(&str[i], find, flen); i++);
+         if (i <= slen - flen) faddress = &str[i];
+         return faddress;
+      }
+   }
+
+   int Utils::strncmp(const char* s1, const char* s2, int len)
+   {
+      int i = 0;
+      while (i < len - 1 && s1[i] && s2[i] && s1[i] == s2[i]) {
+         i++;
+      }
+      return s1[i] - s2[i];
+
    }
 
 }

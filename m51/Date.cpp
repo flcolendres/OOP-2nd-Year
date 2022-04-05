@@ -7,6 +7,7 @@ Author: Francis Lloyd Colendres  2022-03-12
 Revision History
 -----------------------------------------------------------
 Date          Reason
+04-05         Cleared istr in read.
 -----------------------------------------------------------
 I have done all the coding by myself and only copied the code
 that my professor provided to complete my workshops and assignments.
@@ -149,6 +150,7 @@ namespace sdds
    istream& Date::read(istream& istr)
    {
       int input;
+      istr.clear();
       istr >> input;
       if (istr)
       {

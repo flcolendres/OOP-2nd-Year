@@ -24,7 +24,7 @@ namespace sdds
 {
    unsigned int AidMan::menu() const
    {
-      cout << "Aid Management System Version 0.1" << endl <<
+      cout << "Aid Management System Version" << endl <<
          "Date: " << Date() << endl <<
          "Data file: " << (m_fileName == nullptr ? "No file" : m_fileName) << endl <<
          "---------------------------------\n";
@@ -45,18 +45,36 @@ namespace sdds
 
    void AidMan::run()
    {
+      int numList;
+      int input;
       int val = 999;
       do
       {
          val = menu();
-         if (val != 7 && m_fileName == nullptr) val = 7;
+         if (val != 0 && val != 7 && m_fileName == nullptr) val = 7;
          switch (val)
          {
          case 0:
             cout << "Exiting Program!" << endl;
             save();
+            break;
          case 1:
-            cout << endl << "****List Items****\n\n";
+            cout << endl << "****List Items****\n";
+            numList = list();
+            if (numList)
+            {
+               cout << "Enter row number to display details or <ENTER> to continue:" << endl << "> ";
+               cin.clear();
+               cin.get();
+               if (cin.peek() != '\n')
+               {
+                  input = ut.getint(1, numList);
+                  m_iproduct[input - 1]->linear(false);
+                  m_iproduct[input - 1]->display(cout);
+                  cout << endl;
+               }
+            }
+            cout << endl;
             break;
          case 2:
             cout << endl << "****Add Item****\n\n";
@@ -75,7 +93,8 @@ namespace sdds
             break;
          case 7:
             cout << endl << "****New/Open Aid Database****\n";
-            cout << "Enter file name: ";
+            load();
+            cout << m_numOfIproduct << " records loaded!\n" << endl;
             break;
          }
       } while (val);
@@ -87,72 +106,69 @@ namespace sdds
       {
          ofstream ofstr(m_fileName);
          for (int i = 0; m_iproduct[i] != 0; i++)
+         {
             m_iproduct[i]->save(ofstr);
+            ofstr << "\n";
+         }
+
       }
    }
 
    void AidMan::deallocate()
    {
 
-      delete[] *m_iproduct;
+      delete[] * m_iproduct;
       m_numOfIproduct = 0;
    }
 
    void AidMan::load()
    {
-      int input;
-      int i = 0;
+      char input, fileName[100];
+      unsigned int i = 0;
       bool valid;
       save();
       deallocate();
+      cout << "Enter file name: ";
+      cin >> fileName;
+      ut.alocpy(m_fileName, fileName);
       ifstream ifstr(m_fileName);
-      if (!ifstr)
+      if (ifstr.is_open())
       {
-         cout << "Failed to open " << m_fileName << " for reading!" << endl <<
-           "Would you like to create a new data file?" << endl <<
-            "1- Yes!" << endl << 
-            "0 - Exit" << endl << "> ";
-         cin >> i;
-         if (i)
-            ofstream ofstr(m_fileName);
-      }
-      else
-      {
-         while (ifstr.peek())
+         while (ifstr)
          {
-            input = ifstr.get();
-            if (input == 1)
+            input = ifstr.peek();
+            for (i = 0, valid = false; !valid; i++)
             {
-               for (i = 0, valid = false; i < sdds_max_num_items; i++)
+               if (input == '1')
                {
-                  if (m_iproduct[i] != 0)
+                  if (m_iproduct[i] == 0)
                   {
-                     Perishable P;
-                     *m_iproduct[i] = P;
+                     //Perishable P;
+                     //*m_iproduct[i] = P;
+                     m_iproduct[i] = new Perishable;
                      valid = true;
                   }
                }
-            }
-            else if (input > 1)
-            {
-               for (i = 0, valid = false; i < sdds_max_num_items; i++)
+               else if (input > '0' && input <= '9')
                {
-                  if (m_iproduct[i] != 0)
+                  if (m_iproduct[i] == 0)
                   {
-                     Item I;
-                     *m_iproduct[i] = I;
+                     //Item I;
+                     //*m_iproduct[i] = I;
+                     m_iproduct[i] = new Item;
                      valid = true;
                   }
                }
+               else
+               {
+                  ifstr.setstate(ios::badbit);
+                  valid = true;
+               }
             }
-            else
+            if (m_iproduct[m_numOfIproduct])
             {
-               ifstr.setstate(ios::badbit);
-            }
-            if (*m_iproduct[i - 1])
-            {
-               m_iproduct[i - 1]->load(ifstr);
-               if (m_iproduct[i-1]->operator bool())
+               m_iproduct[m_numOfIproduct]->load(ifstr);
+               if (m_iproduct[m_numOfIproduct]->operator bool())
                {
                   m_numOfIproduct++;
                }
@@ -161,10 +177,54 @@ namespace sdds
                   deallocate();
                }
             }
+         }
+      }
+      else
+      {
+         cout << "Failed to open " << m_fileName << " for reading!" << endl <<
+            "Would you like to create a new data file?" << endl <<
+            "1- Yes!" << endl <<
+            "0 - Exit" << endl << "> ";
+         cin >> i;
+         if (i)
+            ofstream ofstr(m_fileName);
+      }
+   }
 
+   int AidMan::list(const char* sub_desc)
+   {
+      unsigned int i = 0;
+      cout << " ROW |  SKU  | Description                         | Have | Need |  Price  | Expiry" << endl <<
+         "-----+-------+-------------------------------------+------+------+---------+-----------" << endl;
+      if (!sub_desc)
+      {
+         for (i = 0; m_iproduct[i] != 0; i++)
+         {
+            /*m_iproduct[i]->display(cout);*/
+            cout << "   " << i + 1;
+            cout << " | ";
+            m_iproduct[i]->linear(true);
+            cout << *m_iproduct[i] << endl;
+         }
+         cout << "-----+-------+-------------------------------------+------+------+---------+-----------" << endl;
+      }
+      else
+      {
+         for (i = 0; m_iproduct[i] != 0; i++)
+         {
+            cout << "   " << i + 1;
+            cout << " | ";
+            if (*m_iproduct[i] == sub_desc)
+               cout << *m_iproduct[i] << endl;
+            cout << "-----+-------+-------------------------------------+------+------+---------+-----------" << endl;
          }
 
       }
+      if (!i)
+      {
+         cout << "The list is emtpy!" << endl;
+      }
+      return i;
    }
 
 }

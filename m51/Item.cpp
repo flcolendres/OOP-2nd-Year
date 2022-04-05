@@ -160,6 +160,7 @@ namespace sdds
             ostr << m_qtyNeeded;
             ostr << " | ";
             ostr.width(7);
+            ostr.setf(ios::fixed);
             ostr.precision(2);
             ostr << m_price;
             ostr << " |";
