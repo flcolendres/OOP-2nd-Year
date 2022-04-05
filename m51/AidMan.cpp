@@ -14,6 +14,7 @@ that my professor provided to complete my workshops and assignments.
 -----------------------------------------------------------*/
 
 #include <iostream>
+#include <fstream>
 #include "AidMan.h"
 #include "Date.h"
 #include "Utils.h"
@@ -33,6 +34,7 @@ namespace sdds
    {
       m_mainMenu.set(7, "1- List Items\n2- Add Item\n3- Remove Item\n4- Update Quantity\n5- Sort\n6- Ship Items\n7- New/Open Aid Database\n---------------------------------\n");
       m_fileName = nullptr;
+      m_numOfIproduct = 0;
    }
 
    AidMan::~AidMan()
@@ -46,8 +48,12 @@ namespace sdds
       do
       {
          val = menu();
+         if (val != 7 && m_fileName == nullptr) val = 7;
          switch (val)
          {
+         case 0:
+            cout << "Exiting Program!" << endl;
+            save();
          case 1:
             cout << endl << "****List Items****\n\n";
             break;
@@ -67,12 +73,21 @@ namespace sdds
             cout << endl << "****Ship Items****\n\n";
             break;
          case 7:
-            cout << endl << "****New/Open Aid Database****\n\n";
+            cout << endl << "****New/Open Aid Database****\n";
+            cout << "Enter file name: ";
             break;
-         default:
-            cout << "Exiting Program!" << endl;
          }
       } while (val);
+   }
+
+   void AidMan::save()
+   {
+      if (m_fileName)
+      {
+         ofstream ofstr(m_fileName);
+         for (int i = 0; m_iproduct[i] != 0; i++)
+            m_iproduct[i]->save(ofstr);
+      }
    }
 
 }
