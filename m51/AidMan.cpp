@@ -18,6 +18,7 @@ that my professor provided to complete my workshops and assignments.
 #include "AidMan.h"
 #include "Date.h"
 #include "Utils.h"
+#include "Perishable.h"
 using namespace std;
 namespace sdds
 {
@@ -87,6 +88,42 @@ namespace sdds
          ofstream ofstr(m_fileName);
          for (int i = 0; m_iproduct[i] != 0; i++)
             m_iproduct[i]->save(ofstr);
+      }
+   }
+
+   void AidMan::deallocate()
+   {
+
+      delete[] *m_iproduct;
+      m_numOfIproduct = 0;
+   }
+
+   void AidMan::load()
+   {
+
+      int i = 0;
+      save();
+      deallocate();
+      ifstream ifstr(m_fileName);
+      if (ifstr.fail())
+      {
+         cout << "Failed to open " << m_fileName << " for reading!" << endl <<
+           "Would you like to create a new data file?" << endl <<
+            "1- Yes!" << endl << 
+            "0 - Exit" << endl << "> ";
+         cin >> i;
+         if (i)
+            ofstream ofstr(m_fileName);
+      }
+      else
+      {
+         if (ifstr.peek())
+         {
+            if (Perishable::expiry() != nullptr)
+            {
+
+            }
+         }
       }
    }
 

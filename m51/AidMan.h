@@ -34,6 +34,8 @@ namespace sdds
       virtual ~AidMan();
       void run();
       void save();
+      void deallocate();
+      void load();
    };
 }
 #endif
