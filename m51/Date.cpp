@@ -8,6 +8,7 @@ Revision History
 -----------------------------------------------------------
 Date          Reason
 04-05         Cleared istr in read.
+04-05         Set ostr to left-aligned
 -----------------------------------------------------------
 I have done all the coding by myself and only copied the code
 that my professor provided to complete my workshops and assignments.
@@ -129,9 +130,11 @@ namespace sdds
       {
          ostr.width(2);
          ostr << m_year << "/";
+         ostr.setf(ios::left);
          ostr.width(2);
          ostr.fill('0');
          ostr << m_month << "/";
+         ostr.unsetf(ios::left);
          ostr.width(2);
          ostr << m_day;
       }

@@ -24,7 +24,7 @@ namespace sdds
 {
    unsigned int AidMan::menu() const
    {
-      cout << "Aid Management System Version" << endl <<
+      cout << "Aid Management System" << endl <<
          "Date: " << Date() << endl <<
          "Data file: " << (m_fileName == nullptr ? "No file" : m_fileName) << endl <<
          "---------------------------------\n";
