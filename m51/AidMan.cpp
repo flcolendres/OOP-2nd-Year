@@ -41,6 +41,7 @@ namespace sdds
    AidMan::~AidMan()
    {
       delete[] m_fileName;
+      deallocate();
    }
 
    void AidMan::run()
@@ -116,8 +117,10 @@ namespace sdds
 
    void AidMan::deallocate()
    {
-
-      delete[] * m_iproduct;
+      for (int i = 0; i < sdds_max_num_items; i++)
+      {
+         delete m_iproduct[i];
+      }
       m_numOfIproduct = 0;
    }
 
