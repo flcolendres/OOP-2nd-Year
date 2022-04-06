@@ -281,7 +281,7 @@ namespace sdds
          }
          else
          {
-            cout << "Following item will be removed:" << endl;
+            cout << "Following item will be removed: " << endl;
             m_iproduct[index]->linear(false);
             m_iproduct[index]->display(cout);
             cout << endl << "Are you sure?" << endl <<
