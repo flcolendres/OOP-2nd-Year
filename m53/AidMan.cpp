@@ -302,13 +302,11 @@ namespace sdds
 
    void AidMan::remove(int index)
    {
-      bool valid = false;
       ut.dealoSingle(m_iproduct[index]);
       for (int j = index; j < sdds_max_num_items - 1; j++)
       {
          m_iproduct[j] = m_iproduct[j + 1];
       }
-      valid = true;
       m_numOfIproduct--;
    }
 
