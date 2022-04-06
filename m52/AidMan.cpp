@@ -79,6 +79,16 @@ namespace sdds
             break;
          case 2:
             cout << endl << "****Add Item****\n\n";
+            if (m_numOfIproduct >= sdds_max_num_items)
+               cout << "Database full!";
+            else
+            {
+               cout << "1- Perishable" << endl <<
+                  "2- Non-Perishable" << endl <<
+                  "------------------" << endl <<
+                  "0- Exit" << endl <<
+                  "> ";
+            }
             break;
          case 3:
             cout << endl << "****Remove Item****\n\n";
