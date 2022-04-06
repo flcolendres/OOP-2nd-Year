@@ -72,7 +72,8 @@ namespace sdds
             removeItem();
             break;
          case 4:
-            cout << endl << "****Update Quantity****\n\n";
+            cout << endl << "****Update Quantity****\n";
+            updateItem();
             break;
          case 5:
             cout << endl << "****Sort****\n\n";
@@ -300,6 +301,24 @@ namespace sdds
          }
       }
       cout << endl;
+   }
+
+   void AidMan::updateItem()
+   {
+      char input[1000]{};
+      int index;
+      cout << "Item description: ";
+      cin.clear();
+      cin.get();
+      cin.getline(input, 1000, '\n');
+      if (list(input))
+      {
+         index = search(ut.getint(10000, 99999, "Enter SKU: "));
+         if (index == -1)
+         {
+            cout << "SKU not found!" << endl;
+         }
+      }
    }
 
    void AidMan::remove(int index)

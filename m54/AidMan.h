@@ -39,6 +39,7 @@ namespace sdds
       void listItem();
       void addItem();
       void removeItem();
+      void updateItem();
       void remove(int index);
       int list(const char* sub_desc = nullptr);
       int search(int sku) const;
