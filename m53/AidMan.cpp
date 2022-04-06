@@ -7,7 +7,9 @@ Author: Francis Lloyd Colendres  2022-03-12
 Revision History
 -----------------------------------------------------------
 Date          Reason
-
+04-06         Fixed perishable load function
+              by changing the condition of if statement
+              (input =='1') -> (input >= '1' && input <= '3')
 -----------------------------------------------------------
 I have done all the coding by myself and only copied the code
 that my professor provided to complete my workshops and assignments.
@@ -128,7 +130,7 @@ namespace sdds
             input = ifstr.peek();
             for (i = 0, valid = false; !valid; i++)
             {
-               if (input == '1')
+               if (input >= '1' && input <= '3')
                {
                   if (m_iproduct[i] == 0)
                   {
@@ -136,7 +138,7 @@ namespace sdds
                      valid = true;
                   }
                }
-               else if (input > '0' && input <= '9')
+               else if (input > '3' && input <= '9')
                {
                   if (m_iproduct[i] == 0)
                   {
