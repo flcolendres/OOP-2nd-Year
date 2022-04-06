@@ -36,6 +36,7 @@ namespace sdds
       void save();
       void deallocate();
       void load();
+      void listItem();
       void addItem();
       void removeItem();
       void remove(int index);

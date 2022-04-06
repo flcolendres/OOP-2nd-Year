@@ -46,8 +46,6 @@ namespace sdds
 
    void AidMan::run()
    {
-      int numList;
-      int input;
       int val = 999;
       do
       {
@@ -61,21 +59,7 @@ namespace sdds
             break;
          case 1:
             cout << endl << "****List Items****\n";
-            numList = list();
-            if (numList)
-            {
-               cout << "Enter row number to display details or <ENTER> to continue:" << endl << "> ";
-               cin.clear();
-               cin.get();
-               if (cin.peek() != '\n')
-               {
-                  input = ut.getint(1, numList);
-                  m_iproduct[input - 1]->linear(false);
-                  m_iproduct[input - 1]->display(cout);
-                  cout << endl;
-               }
-            }
-            cout << endl;
+            listItem();
             break;
          case 2:
             cout << endl << "****Add Item****\n";
@@ -190,6 +174,27 @@ namespace sdds
          if (i)
             ofstream ofstr(m_fileName);
       }
+   }
+
+   void AidMan::listItem()
+   {
+      int numList;
+      int input;
+      numList = list();
+      if (numList)
+      {
+         cout << "Enter row number to display details or <ENTER> to continue:" << endl << "> ";
+         cin.clear();
+         cin.get();
+         if (cin.peek() != '\n')
+         {
+            input = ut.getint(1, numList);
+            m_iproduct[input - 1]->linear(false);
+            m_iproduct[input - 1]->display(cout);
+            cout << endl;
+         }
+      }
+      cout << endl;
    }
 
    void AidMan::addItem()
