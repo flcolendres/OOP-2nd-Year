@@ -108,7 +108,7 @@ namespace sdds
          ofstr << m_desc << '\t';
          ofstr << m_qty << '\t';
          ofstr << m_qtyNeeded << '\t';
-         ofstr << m_price << '\t';
+         ofstr << m_price;
          ofstr.clear();
       }
       return ofstr;

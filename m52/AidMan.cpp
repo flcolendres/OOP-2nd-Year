@@ -78,7 +78,7 @@ namespace sdds
             cout << endl;
             break;
          case 2:
-            cout << endl << "****Add Item****\n\n";
+            cout << endl << "****Add Item****\n";
             add();
             break;
          case 3:
@@ -200,7 +200,7 @@ namespace sdds
       {
          cout << "1- Perishable" << endl <<
             "2- Non-Perishable" << endl <<
-            "------------------" << endl <<
+            "-----------------" << endl <<
             "0- Exit" << endl <<
             "> ";
          switch (ut.getint(0, 2))
