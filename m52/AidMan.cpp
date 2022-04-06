@@ -230,4 +230,15 @@ namespace sdds
       return i;
    }
 
+   int AidMan::search(int sku) const
+   {
+      int index = -1;
+      for (int i = 0; i < sdds_max_num_items && index == -1; i++)
+      {
+         if (*m_iproduct[i] == sku)
+            index = i;
+      }
+      return index;
+   }
+
 }
