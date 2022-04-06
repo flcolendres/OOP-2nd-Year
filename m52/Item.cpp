@@ -1,5 +1,5 @@
 /* ------------------------------------------------------
-Final project Milestone 2
+Final project Milestone 52
 Module: Item
 Filename: item.cpp
 Version 1.0

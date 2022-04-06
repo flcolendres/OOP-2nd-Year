@@ -1,5 +1,5 @@
 /* ------------------------------------------------------
-Final project Milestone 2
+Final project Milestone 52
 Module: iProduct
 Filename: iProduct.h
 Version 1.0
