@@ -64,15 +64,10 @@ namespace sdds
       Date D;
       if (*this)
       {
-         //it will call the save of the Base class.
          Item::save(ofstr);
-         //   writes a tab
          ofstr << "\t";
-         //   writes the handling instructions, if handling instructions existand the attribute is not empty.
          if (m_instruction && m_instruction[0] != ' ') ofstr << m_instruction;
-         //   writes a tab
          ofstr << "\t";
-         //   writes an unformatted copy of the expiry date
          D = m_expiry;
          D.formatted(false);
          ofstr << D;

@@ -1,5 +1,5 @@
 /* ------------------------------------------------------
-Final project Milestone 52
+Final project Milestone 53
 Module: AidMan
 Filename: AidMan.h
 Version 1.0
@@ -36,7 +36,9 @@ namespace sdds
       void save();
       void deallocate();
       void load();
-      void add();
+      void addItem();
+      void removeItem();
+      void remove(int index);
       int list(const char* sub_desc = nullptr);
       int search(int sku) const;
    };

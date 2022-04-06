@@ -1,5 +1,5 @@
 /* ------------------------------------------------------
-Final project Milestone 52
+Final project Milestone 53
 Module: AidMan
 Filename: AidMan.cpp
 Version 1.0
@@ -79,10 +79,11 @@ namespace sdds
             break;
          case 2:
             cout << endl << "****Add Item****\n";
-            add();
+            addItem();
             break;
          case 3:
-            cout << endl << "****Remove Item****\n\n";
+            cout << endl << "****Remove Item****\n";
+            removeItem();
             break;
          case 4:
             cout << endl << "****Update Quantity****\n\n";
@@ -191,7 +192,7 @@ namespace sdds
       }
    }
 
-   void AidMan::add()
+   void AidMan::addItem()
    {
       int input;
       if (m_numOfIproduct >= sdds_max_num_items)
@@ -256,6 +257,56 @@ namespace sdds
       }
    }
 
+   void AidMan::removeItem()
+   {
+      char input[1000]{};
+      int index;
+      cout << "Item description: ";
+      cin.clear();
+      cin.get();
+      cin.getline(input, 1000, '\n');
+      if (list(input))
+      {
+         index = search(ut.getint(10000, 99999, "Enter SKU: "));
+         if (index == -1)
+         {
+            cout << "SKU not found!" << endl;
+         }
+         else
+         {
+            cout << "Following item will be removed:" << endl;
+            m_iproduct[index]->linear(false);
+            m_iproduct[index]->display(cout);
+            cout << endl << "Are you sure?" << endl <<
+               "1- Yes!" << endl <<
+               "0- Exit" << endl <<
+               "> ";
+            switch (ut.getint(0, 1))
+            {
+            case 1:
+               remove(index);
+               cout << "Item removed!" << endl;
+               break;
+            default:
+               cout << "Aborted!" << endl;
+            }
+         }
+      }
+      cout << endl;
+   }
+
+   void AidMan::remove(int index)
+   {
+      bool valid = false;
+      ut.dealoSingle(m_iproduct[index]);
+      for (int j = index; j < sdds_max_num_items - 1; j++)
+      {
+         m_iproduct[j] = m_iproduct[j + 1];
+      }
+      valid = true;
+      m_numOfIproduct--;
+   }
+
    int AidMan::list(const char* sub_desc)
    {
       unsigned int i = 0;
@@ -265,7 +316,6 @@ namespace sdds
       {
          for (i = 0; m_iproduct[i] != 0; i++)
          {
-            /*m_iproduct[i]->display(cout);*/
             cout << "   " << i + 1;
             cout << " | ";
             m_iproduct[i]->linear(true);
@@ -277,12 +327,15 @@ namespace sdds
       {
          for (i = 0; m_iproduct[i] != 0; i++)
          {
-            cout << "   " << i + 1;
-            cout << " | ";
             if (*m_iproduct[i] == sub_desc)
+            {
+               cout << "   " << i + 1;
+               cout << " | ";
+               m_iproduct[i]->linear(true);
                cout << *m_iproduct[i] << endl;
-            cout << "-----+-------+-------------------------------------+------+------+---------+-----------" << endl;
+            }
          }
+         cout << "-----+-------+-------------------------------------+------+------+---------+-----------" << endl;
       }
       if (!i)
       {
