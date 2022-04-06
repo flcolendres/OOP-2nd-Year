@@ -7,7 +7,7 @@ Author: Francis Lloyd Colendres  2022-03-12
 Revision History
 -----------------------------------------------------------
 Date          Reason
-
+04-06         Changed the way m_iproduct is initialized to safe empty state
 -----------------------------------------------------------
 I have done all the coding by myself and only copied the code
 that my professor provided to complete my workshops and assignments.
@@ -25,7 +25,7 @@ namespace sdds
       char* m_fileName;
       Menu m_mainMenu;
       unsigned int menu() const;
-      iProduct* m_iproduct[sdds_max_num_items] = { 0 };
+      iProduct* m_iproduct[sdds_max_num_items]{};
       int m_numOfIproduct;
    public:
       AidMan();
@@ -36,7 +36,9 @@ namespace sdds
       void save();
       void deallocate();
       void load();
+      void add();
       int list(const char* sub_desc = nullptr);
+      int search(int sku) const;
    };
 }
 #endif

@@ -7,7 +7,7 @@ Author: Francis Lloyd Colendres  2022-03-22
 Revision History
 -----------------------------------------------------------
 Date          Reason
-
+04-06         Added dealoSingle
 -----------------------------------------------------------
 I have done all the coding by myself and only copied the code
 that my professor provided to complete my workshops and assignments.
@@ -33,9 +33,14 @@ namespace sdds {
       int strlen(const char* str);
       const char* strstr(const char* str, const char* find);
       int strncmp(const char* s1, const char* s2, int len);
+      template <typename Type>
+      void dealoSingle(Type*& source)
+      {
+         delete source;
+         source = nullptr;
+      }
    };
    extern Utils ut;
 }
-
 
 #endif // !SDDS_UTILS_H

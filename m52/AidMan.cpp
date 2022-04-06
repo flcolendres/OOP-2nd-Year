@@ -79,16 +79,7 @@ namespace sdds
             break;
          case 2:
             cout << endl << "****Add Item****\n\n";
-            if (m_numOfIproduct >= sdds_max_num_items)
-               cout << "Database full!";
-            else
-            {
-               cout << "1- Perishable" << endl <<
-                  "2- Non-Perishable" << endl <<
-                  "------------------" << endl <<
-                  "0- Exit" << endl <<
-                  "> ";
-            }
+            add();
             break;
          case 3:
             cout << endl << "****Remove Item****\n\n";
@@ -156,8 +147,6 @@ namespace sdds
                {
                   if (m_iproduct[i] == 0)
                   {
-                     //Perishable P;
-                     //*m_iproduct[i] = P;
                      m_iproduct[i] = new Perishable;
                      valid = true;
                   }
@@ -166,8 +155,6 @@ namespace sdds
                {
                   if (m_iproduct[i] == 0)
                   {
-                     //Item I;
-                     //*m_iproduct[i] = I;
                      m_iproduct[i] = new Item;
                      valid = true;
                   }
@@ -187,7 +174,7 @@ namespace sdds
                }
                else
                {
-                  delete m_iproduct[m_numOfIproduct];
+                  ut.dealoSingle(m_iproduct[m_numOfIproduct]);
                }
             }
          }
@@ -201,6 +188,71 @@ namespace sdds
          cin >> i;
          if (i)
             ofstream ofstr(m_fileName);
+      }
+   }
+
+   void AidMan::add()
+   {
+      int input;
+      if (m_numOfIproduct >= sdds_max_num_items)
+         cout << "Database full!";
+      else
+      {
+         cout << "1- Perishable" << endl <<
+            "2- Non-Perishable" << endl <<
+            "------------------" << endl <<
+            "0- Exit" << endl <<
+            "> ";
+         switch (ut.getint(0, 2))
+         {
+         case 1:
+            m_iproduct[m_numOfIproduct] = new Perishable;
+            input = m_iproduct[m_numOfIproduct]->readSku(cin);
+            if (search(input) == -1)
+            {
+               m_iproduct[m_numOfIproduct]->read(cin);
+               if (m_iproduct[m_numOfIproduct]->operator bool())
+               {
+                  m_numOfIproduct++;
+               }
+               else
+               {
+                  m_iproduct[m_numOfIproduct]->display(cout);
+                  ut.dealoSingle(m_iproduct[m_numOfIproduct]);
+               }
+            }
+            else
+            {
+               ut.dealoSingle(m_iproduct[m_numOfIproduct]);
+               cout << "Sku: " << input << " is already in the system, try updating quantity instead.\n";
+            }
+            break;
+         case 2:
+            m_iproduct[m_numOfIproduct] = new Item;
+            input = m_iproduct[m_numOfIproduct]->readSku(cin);
+            if (search(input) == -1)
+            {
+               m_iproduct[m_numOfIproduct]->read(cin);
+               if (m_iproduct[m_numOfIproduct]->operator bool())
+               {
+                  m_numOfIproduct++;
+               }
+               else
+               {
+                  m_iproduct[m_numOfIproduct]->display(cout);
+                  ut.dealoSingle(m_iproduct[m_numOfIproduct]);
+               }
+            }
+            else
+            {
+               ut.dealoSingle(m_iproduct[m_numOfIproduct]);
+               cout << "Sku: " << input << " is already in the system, try updating quantity instead.\n";
+            }
+            break;
+         default:
+            cout << "Aborted\n";
+         }
+         cout << endl;
       }
    }
 
@@ -231,7 +283,6 @@ namespace sdds
                cout << *m_iproduct[i] << endl;
             cout << "-----+-------+-------------------------------------+------+------+---------+-----------" << endl;
          }
-
       }
       if (!i)
       {
@@ -243,7 +294,7 @@ namespace sdds
    int AidMan::search(int sku) const
    {
       int index = -1;
-      for (int i = 0; i < sdds_max_num_items && index == -1; i++)
+      for (int i = 0; m_iproduct[i] != 0 && i < sdds_max_num_items && index == -1; i++)
       {
          if (*m_iproduct[i] == sku)
             index = i;
