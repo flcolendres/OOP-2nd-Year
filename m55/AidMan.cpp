@@ -356,18 +356,17 @@ namespace sdds
 
    void AidMan::sortItem()
    {
-      // Sorts the items in the iProduct Pointers array, 
-      // based on difference between quantity needed and quantity on hand in descending order.
+      iProduct* ip;
       int qtyDiff_A, qtyDiff_B;
-      for (int i = 0; i < sdds_max_num_items; i++)
+      for (int i = 0; m_iproduct[i] != 0; i++)
       {
-         for (int j = i; j < sdds_max_num_items - i - 1; j++)
+         for (int j = 0; m_iproduct[j + 1] != 0; j++)
          {
             qtyDiff_A = m_iproduct[j]->qtyNeeded() - m_iproduct[j]->qty();
             qtyDiff_B = m_iproduct[j + 1]->qtyNeeded() - m_iproduct[j + 1]->qty();
             if (qtyDiff_A < qtyDiff_B)
             {
-               iProduct* ip = m_iproduct[j];
+               ip = m_iproduct[j];
                m_iproduct[j] = m_iproduct[j + 1];
                m_iproduct[j + 1] = ip;
             }
