@@ -10,6 +10,7 @@ Date          Reason
 04-06         Fixed perishable load function
               by changing the condition of if statement
               (input =='1') -> (input >= '1' && input <= '3')
+04-07         Reduced logic redundancy
 -----------------------------------------------------------
 I have done all the coding by myself and only copied the code
 that my professor provided to complete my workshops and assignments.
@@ -170,9 +171,9 @@ namespace sdds
       }
       else
       {
-         cout << "Failed to open " << m_fileName << " for reading!" << endl <<
-            "Would you like to create a new data file?" << endl <<
-            "1- Yes!" << endl <<
+         cout << "Failed to open " << m_fileName << " for reading!\n" <<
+            "Would you like to create a new data file?\n" <<
+            "1- Yes!\n" <<
             "0 - Exit" << endl << "> ";
          cin >> i;
          if (i)
@@ -204,7 +205,6 @@ namespace sdds
 
    void AidMan::addItem()
    {
-      int input;
       if (m_numOfIproduct >= sdds_max_num_items)
          cout << "Database full!";
       else
@@ -218,47 +218,11 @@ namespace sdds
          {
          case 1:
             m_iproduct[m_numOfIproduct] = new Perishable;
-            input = m_iproduct[m_numOfIproduct]->readSku(cin);
-            if (search(input) == -1)
-            {
-               m_iproduct[m_numOfIproduct]->read(cin);
-               if (m_iproduct[m_numOfIproduct]->operator bool())
-               {
-                  m_numOfIproduct++;
-               }
-               else
-               {
-                  m_iproduct[m_numOfIproduct]->display(cout);
-                  ut.dealoSingle(m_iproduct[m_numOfIproduct]);
-               }
-            }
-            else
-            {
-               ut.dealoSingle(m_iproduct[m_numOfIproduct]);
-               cout << "Sku: " << input << " is already in the system, try updating quantity instead.\n";
-            }
+            addInfoToItem();
             break;
          case 2:
             m_iproduct[m_numOfIproduct] = new Item;
-            input = m_iproduct[m_numOfIproduct]->readSku(cin);
-            if (search(input) == -1)
-            {
-               m_iproduct[m_numOfIproduct]->read(cin);
-               if (m_iproduct[m_numOfIproduct]->operator bool())
-               {
-                  m_numOfIproduct++;
-               }
-               else
-               {
-                  m_iproduct[m_numOfIproduct]->display(cout);
-                  ut.dealoSingle(m_iproduct[m_numOfIproduct]);
-               }
-            }
-            else
-            {
-               ut.dealoSingle(m_iproduct[m_numOfIproduct]);
-               cout << "Sku: " << input << " is already in the system, try updating quantity instead.\n";
-            }
+            addInfoToItem();
             break;
          default:
             cout << "Aborted\n";
@@ -324,9 +288,7 @@ namespace sdds
             {
             case 1:
                if (m_iproduct[index]->qtyNeeded() == m_iproduct[index]->qty())
-               {
                   cout << "Quantity Needed already fulfilled!\n";
-               }
                else
                {
                   val = ut.getint(1, m_iproduct[index]->qtyNeeded() - m_iproduct[index]->qty(), "Quantity to add: ");
@@ -336,15 +298,12 @@ namespace sdds
                break;
             case 2:
                if (!m_iproduct[index]->qty())
-               {
                   cout << "Quantity on hand is zero\n";
-               }
                else
                {
                   val = ut.getint(1, m_iproduct[index]->qty(), "Quantity to reduce: ");
                   *m_iproduct[index] -= val;
                   cout << val << " items removed!" << endl;
-
                }
                break;
             default:
@@ -386,24 +345,34 @@ namespace sdds
       {
          if (m_iproduct[i]->qtyNeeded() == m_iproduct[i]->qty())
          {
-            ofstr << "   " << i + 1;
-            ofstr << " | ";
-            m_iproduct[i]->linear(true);
-            ofstr << *m_iproduct[i] << endl;
+            displayIproductLinear(i, ofstr);
             remove(i);
             count++;
          }
       }
-      ofstr << "-----+-------+-------------------------------------+------+------+---------+-----------";
+      displayTableBorder(ofstr);
       cout << "Shipping Order for " << count <<" times saved!\n\n";
-
-
    }
 
    std::ostream& AidMan::displayTableTitle(std::ostream& ostr)
    {
-      ostr << " ROW |  SKU  | Description                         | Have | Need |  Price  | Expiry" << endl <<
-         "-----+-------+-------------------------------------+------+------+---------+-----------" << endl;
+      ostr << " ROW |  SKU  | Description                         | Have | Need |  Price  | Expiry" << endl;
+      displayTableBorder(ostr);
+      return ostr;
+   }
+
+   std::ostream& AidMan::displayTableBorder(std::ostream& ostr)
+   {
+     ostr << "-----+-------+-------------------------------------+------+------+---------+-----------" << endl;
+     return ostr;
+   }
+
+   std::ostream& AidMan::displayIproductLinear(int index, std::ostream& ostr)
+   {
+      ostr << "   " << index + 1;
+      ostr << " | ";
+      m_iproduct[index]->linear(true);
+      ostr << *m_iproduct[index] << endl;
       return ostr;
    }
 
@@ -415,13 +384,35 @@ namespace sdds
       cin.getline(input, 1000, '\n');
    }
 
+   void AidMan::addInfoToItem()
+   {
+      int input;
+      input = m_iproduct[m_numOfIproduct]->readSku(cin);
+      if (search(input) == -1)
+      {
+         m_iproduct[m_numOfIproduct]->read(cin);
+         if (m_iproduct[m_numOfIproduct]->operator bool())
+         {
+            m_numOfIproduct++;
+         }
+         else
+         {
+            m_iproduct[m_numOfIproduct]->display(cout);
+            ut.dealoSingle(m_iproduct[m_numOfIproduct]);
+         }
+      }
+      else
+      {
+         ut.dealoSingle(m_iproduct[m_numOfIproduct]);
+         cout << "Sku: " << input << " is already in the system, try updating quantity instead.\n";
+      }
+   }
+
    void AidMan::remove(int index)
    {
       ut.dealoSingle(m_iproduct[index]);
       for (int j = index; j < sdds_max_num_items - 1; j++)
-      {
          m_iproduct[j] = m_iproduct[j + 1];
-      }
       m_numOfIproduct--;
    }
 
@@ -431,33 +422,21 @@ namespace sdds
       displayTableTitle();
       if (!sub_desc)
       {
-         for (i = 0; m_iproduct[i] != 0; i++)
-         {
-            cout << "   " << i + 1;
-            cout << " | ";
-            m_iproduct[i]->linear(true);
-            cout << *m_iproduct[i] << endl;
-         }
-         cout << "-----+-------+-------------------------------------+------+------+---------+-----------" << endl;
+         for (i = 0; m_iproduct[i] != 0; i++) 
+            displayIproductLinear(i);
+         displayTableBorder();
       }
       else
       {
          for (i = 0; m_iproduct[i] != 0; i++)
          {
             if (*m_iproduct[i] == sub_desc)
-            {
-               cout << "   " << i + 1;
-               cout << " | ";
-               m_iproduct[i]->linear(true);
-               cout << *m_iproduct[i] << endl;
-            }
+               displayIproductLinear(i);
          }
-         cout << "-----+-------+-------------------------------------+------+------+---------+-----------" << endl;
+         displayTableBorder();
       }
       if (!i)
-      {
          cout << "The list is emtpy!" << endl;
-      }
       return i;
    }
 

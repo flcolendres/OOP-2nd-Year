@@ -35,7 +35,10 @@ namespace sdds
       void sortItem();
       void shipItem();
       std::ostream& displayTableTitle(std::ostream& ostr = std::cout);
+      std::ostream& displayTableBorder(std::ostream& ostr = std::cout);
+      std::ostream& displayIproductLinear(int index, std::ostream& ostr = std::cout);
       void itemDesc(char* input);
+      void addInfoToItem();
    public:
       AidMan();
       AidMan(const AidMan& a) = delete;
