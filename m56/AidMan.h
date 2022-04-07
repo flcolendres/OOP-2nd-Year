@@ -33,6 +33,7 @@ namespace sdds
       void removeItem();
       void updateItem();
       void sortItem();
+      void shipItem();
       void itemDesc(char* input);
    public:
       AidMan();

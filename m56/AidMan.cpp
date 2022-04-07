@@ -80,12 +80,12 @@ namespace sdds
             sortItem();
             break;
          case 6:
-            cout << endl << "****Ship Items****\n\n";
+            cout << endl << "****Ship Items****\n";
+            shipItem();
             break;
          case 7:
             cout << endl << "****New/Open Aid Database****\n";
             load();
-            cout << m_numOfIproduct << " records loaded!\n" << endl;
             break;
          }
       } while (val);
@@ -178,6 +178,7 @@ namespace sdds
          if (i)
             ofstream ofstr(m_fileName);
       }
+      cout << m_numOfIproduct << " records loaded!\n" << endl;
    }
 
    void AidMan::listItem()
@@ -373,6 +374,29 @@ namespace sdds
          }
       }
       cout << "Sort completed!\n\n";
+   }
+
+   void AidMan::shipItem()
+   {
+      int count = 0, i;
+      ofstream ofstr("shippingOrder.txt");
+      ofstr << "Shipping Order, Date: "<< Date() << endl;
+      ofstr << " ROW |  SKU  | Description                         | Have | Need |  Price  | Expiry" << endl <<
+         "-----+-------+-------------------------------------+------+------+---------+-----------" << endl;
+      for (int i = 0; m_iproduct[i] != 0; i++)
+      {
+         if (m_iproduct[i]->qtyNeeded() == m_iproduct[i]->qty())
+         {
+            m_iproduct[i]->linear(true);
+            m_iproduct[i]->display(ofstr);
+            remove(i);
+            count++;
+         }
+      }
+      ofstr << "-----+-------+-------------------------------------+------+------+---------+-----------";
+      cout << "Shipping Order for " << count <<" times saved!\n\n";
+
+
    }
 
    void AidMan::itemDesc(char* input)
