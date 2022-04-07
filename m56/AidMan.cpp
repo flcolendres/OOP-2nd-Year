@@ -345,7 +345,7 @@ namespace sdds
       {
          if (m_iproduct[i]->qtyNeeded() == m_iproduct[i]->qty())
          {
-            displayIproductLinear(i, ofstr);
+            displayIproductLinear(count, ofstr);
             remove(i);
             count++;
          }
