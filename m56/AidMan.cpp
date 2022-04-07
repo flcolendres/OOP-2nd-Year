@@ -378,17 +378,18 @@ namespace sdds
 
    void AidMan::shipItem()
    {
-      int count = 0, i;
+      int count = 0;
       ofstream ofstr("shippingOrder.txt");
       ofstr << "Shipping Order, Date: "<< Date() << endl;
-      ofstr << " ROW |  SKU  | Description                         | Have | Need |  Price  | Expiry" << endl <<
-         "-----+-------+-------------------------------------+------+------+---------+-----------" << endl;
+      displayTableTitle(ofstr);
       for (int i = 0; m_iproduct[i] != 0; i++)
       {
          if (m_iproduct[i]->qtyNeeded() == m_iproduct[i]->qty())
          {
+            ofstr << "   " << i + 1;
+            ofstr << " | ";
             m_iproduct[i]->linear(true);
-            m_iproduct[i]->display(ofstr);
+            ofstr << *m_iproduct[i] << endl;
             remove(i);
             count++;
          }
@@ -397,6 +398,13 @@ namespace sdds
       cout << "Shipping Order for " << count <<" times saved!\n\n";
 
 
+   }
+
+   std::ostream& AidMan::displayTableTitle(std::ostream& ostr)
+   {
+      ostr << " ROW |  SKU  | Description                         | Have | Need |  Price  | Expiry" << endl <<
+         "-----+-------+-------------------------------------+------+------+---------+-----------" << endl;
+      return ostr;
    }
 
    void AidMan::itemDesc(char* input)
@@ -420,8 +428,7 @@ namespace sdds
    int AidMan::list(const char* sub_desc)
    {
       unsigned int i = 0;
-      cout << " ROW |  SKU  | Description                         | Have | Need |  Price  | Expiry" << endl <<
-         "-----+-------+-------------------------------------+------+------+---------+-----------" << endl;
+      displayTableTitle();
       if (!sub_desc)
       {
          for (i = 0; m_iproduct[i] != 0; i++)

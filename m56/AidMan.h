@@ -34,6 +34,7 @@ namespace sdds
       void updateItem();
       void sortItem();
       void shipItem();
+      std::ostream& displayTableTitle(std::ostream& ostr = std::cout);
       void itemDesc(char* input);
    public:
       AidMan();
