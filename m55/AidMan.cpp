@@ -76,7 +76,8 @@ namespace sdds
             updateItem();
             break;
          case 5:
-            cout << endl << "****Sort****\n\n";
+            cout << endl << "****Sort****\n";
+            sortItem();
             break;
          case 6:
             cout << endl << "****Ship Items****\n\n";
@@ -351,6 +352,28 @@ namespace sdds
          }
       }
       cout << endl;
+   }
+
+   void AidMan::sortItem()
+   {
+      // Sorts the items in the iProduct Pointers array, 
+      // based on difference between quantity needed and quantity on hand in descending order.
+      int qtyDiff_A, qtyDiff_B;
+      for (int i = 0; i < sdds_max_num_items; i++)
+      {
+         for (int j = i; j < sdds_max_num_items - i - 1; j++)
+         {
+            qtyDiff_A = m_iproduct[j]->qtyNeeded() - m_iproduct[j]->qty();
+            qtyDiff_B = m_iproduct[j + 1]->qtyNeeded() - m_iproduct[j + 1]->qty();
+            if (qtyDiff_A < qtyDiff_B)
+            {
+               iProduct* ip = m_iproduct[j];
+               m_iproduct[j] = m_iproduct[j + 1];
+               m_iproduct[j + 1] = ip;
+            }
+         }
+      }
+      cout << "Sort completed!\n\n";
    }
 
    void AidMan::itemDesc(char* input)
