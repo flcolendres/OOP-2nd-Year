@@ -269,7 +269,7 @@ namespace sdds
    void AidMan::updateItem()
    {
       char input[1000];
-      int index, val;   
+      int index, val;
       itemDesc(input);
       if (list(input))
       {
@@ -339,19 +339,19 @@ namespace sdds
    {
       int count = 0;
       ofstream ofstr("shippingOrder.txt");
-      ofstr << "Shipping Order, Date: "<< Date() << endl;
+      ofstr << "Shipping Order, Date: " << Date() << endl;
       displayTableTitle(ofstr);
       for (int i = 0; m_iproduct[i] != 0; i++)
       {
          if (m_iproduct[i]->qtyNeeded() == m_iproduct[i]->qty())
          {
-            displayIproductLinear(count, ofstr);
+            displayIproductLinear(i, ofstr, count, true);
             remove(i);
             count++;
          }
       }
       displayTableBorder(ofstr);
-      cout << "Shipping Order for " << count <<" times saved!\n\n";
+      cout << "Shipping Order for " << count << " times saved!\n\n";
    }
 
    std::ostream& AidMan::displayTableTitle(std::ostream& ostr)
@@ -363,16 +363,26 @@ namespace sdds
 
    std::ostream& AidMan::displayTableBorder(std::ostream& ostr)
    {
-     ostr << "-----+-------+-------------------------------------+------+------+---------+-----------" << endl;
-     return ostr;
+      ostr << "-----+-------+-------------------------------------+------+------+---------+-----------" << endl;
+      return ostr;
    }
 
-   std::ostream& AidMan::displayIproductLinear(int index, std::ostream& ostr)
+   std::ostream& AidMan::displayIproductLinear(int index, std::ostream& ostr, int count , bool shipItem)
    {
-      ostr << "   " << index + 1;
-      ostr << " | ";
-      m_iproduct[index]->linear(true);
-      ostr << *m_iproduct[index] << endl;
+      if (shipItem)
+      {
+         ostr << "   " << count + 1;
+         ostr << " | ";
+         m_iproduct[index]->linear(true);
+         ostr << *m_iproduct[index] << endl;
+      }
+      else
+      {
+         ostr << "   " << index + 1;
+         ostr << " | ";
+         m_iproduct[index]->linear(true);
+         ostr << *m_iproduct[index] << endl;
+      }
       return ostr;
    }
 
@@ -422,7 +432,7 @@ namespace sdds
       displayTableTitle();
       if (!sub_desc)
       {
-         for (i = 0; m_iproduct[i] != 0; i++) 
+         for (i = 0; m_iproduct[i] != 0; i++)
             displayIproductLinear(i);
          displayTableBorder();
       }

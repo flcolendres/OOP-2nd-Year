@@ -36,7 +36,7 @@ namespace sdds
       void shipItem();
       std::ostream& displayTableTitle(std::ostream& ostr = std::cout);
       std::ostream& displayTableBorder(std::ostream& ostr = std::cout);
-      std::ostream& displayIproductLinear(int index, std::ostream& ostr = std::cout);
+      std::ostream& displayIproductLinear(int index, std::ostream& ostr = std::cout, int count = 0, bool shipItem = false);
       void itemDesc(char* input);
       void addInfoToItem();
    public:
