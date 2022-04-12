@@ -79,9 +79,9 @@
     <ClInclude Include="Car.h" />
     <ClInclude Include="Displayable.h" />
     <ClInclude Include="Employee.h" />
-    <ClInclude Include="temps.h" />
     <ClInclude Include="Collection.h" />
     <ClInclude Include="Student.h" />
+    <ClInclude Include="temps.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Car.cpp" />
